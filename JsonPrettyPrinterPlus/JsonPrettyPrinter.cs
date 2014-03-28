@@ -5,14 +5,13 @@ using JsonPrettyPrinterPlus.JsonPrettyPrinterInternals.JsonPPStrategies;
 
 namespace JsonPrettyPrinterPlus
 {
-
     public static class PrettyPrinterExtensions
     {
         public static string PrettyPrintJson(this string unprettyJson)
         {
-                var pp = new JsonPrettyPrinter(new JsonPPStrategyContext());
+            var pp = new JsonPrettyPrinter(new JsonPPStrategyContext());
 
-                return pp.PrettyPrint(unprettyJson);
+            return pp.PrettyPrint(unprettyJson);
         }
     }
 

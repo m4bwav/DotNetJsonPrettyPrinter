@@ -14,17 +14,12 @@ namespace JsonPrettyPrinterPlus.JsonPrettyPrinterInternals
 
         public bool IsTopTypeArray
         {
-            get
-            {
-                return _jsonScopeStack.Count > 0 && _jsonScopeStack.Peek() == JsonScope.Array;
-            }
+            get { return _jsonScopeStack.Count > 0 && _jsonScopeStack.Peek() == JsonScope.Array; }
         }
 
         public int ScopeDepth
         {
-            get {
-                return _jsonScopeStack.Count;
-            }
+            get { return _jsonScopeStack.Count; }
         }
 
         public void PushObjectContextOntoStack()

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace JsonPrettyPrinterPlus.JsonPrettyPrinterInternals.JsonPPStrategies
+﻿namespace JsonPrettyPrinterPlus.JsonPrettyPrinterInternals.JsonPPStrategies
 {
     public class OpenBracketStrategy : ICharacterStrategy
     {
@@ -23,14 +18,14 @@ namespace JsonPrettyPrinterPlus.JsonPrettyPrinterInternals.JsonPPStrategies
             context.BuildContextIndents();
         }
 
-        private static bool IsBeginningOfNewLineAndIndentionLevel(JsonPPStrategyContext context)
-        {
-            return context.IsProcessingVariableAssignment || (!context.IsStart && !context.IsInArrayScope);
-        }
-
         public char ForWhichCharacter
         {
             get { return '{'; }
+        }
+
+        private static bool IsBeginningOfNewLineAndIndentionLevel(JsonPPStrategyContext context)
+        {
+            return context.IsProcessingVariableAssignment || (!context.IsStart && !context.IsInArrayScope);
         }
     }
 }

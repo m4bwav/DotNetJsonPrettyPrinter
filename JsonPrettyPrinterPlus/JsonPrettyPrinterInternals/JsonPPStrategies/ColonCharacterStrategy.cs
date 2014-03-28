@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace JsonPrettyPrinterPlus.JsonPrettyPrinterInternals.JsonPPStrategies
+﻿namespace JsonPrettyPrinterPlus.JsonPrettyPrinterInternals.JsonPPStrategies
 {
     public class ColonCharacterStrategy : ICharacterStrategy
     {

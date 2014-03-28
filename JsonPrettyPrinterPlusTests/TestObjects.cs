@@ -21,9 +21,7 @@ namespace JsonPrettyPrinterPlusTests
         public Guid Id { get; set; }
         public string[] Names { get; set; }
 
-#pragma warning disable 659
         public override bool Equals(object obj)
-#pragma warning restore 659
         {
             var otherDomainObject = obj as TestLeafObject;
 
@@ -33,7 +31,6 @@ namespace JsonPrettyPrinterPlusTests
             return otherDomainObject.Id.Equals(Id)
                    && otherDomainObject.Names.Length.Equals(Names.Length)
                    && AreStartDatesEqual(otherDomainObject);
-
         }
 
         private bool AreStartDatesEqual(TestLeafObject otherLeafObject)
@@ -55,8 +52,8 @@ namespace JsonPrettyPrinterPlusTests
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(TestRootObject)) return false;
-            return Equals((TestRootObject)obj);
+            if (obj.GetType() != typeof (TestRootObject)) return false;
+            return Equals((TestRootObject) obj);
         }
 
         public bool Equals(TestRootObject other)
@@ -67,9 +64,9 @@ namespace JsonPrettyPrinterPlusTests
             if (!MatchLeafNodes(other)) return false;
 
             return AreStartDatesEqual(other)
-                && other.Id.Equals(Id)
-                && Equals(other.Titles.Length, Titles.Length)
-                && Equals(other.Friend, Friend);
+                   && other.Id.Equals(Id)
+                   && Equals(other.Titles.Length, Titles.Length)
+                   && Equals(other.Friend, Friend);
         }
 
         private bool MatchLeafNodes(TestRootObject other)
@@ -86,11 +83,11 @@ namespace JsonPrettyPrinterPlusTests
         {
             unchecked
             {
-                int result = (Leaves != null ? Leaves.GetHashCode() : 0);
-                result = (result * 397) ^ CreatedDate.GetHashCode();
-                result = (result * 397) ^ Id.GetHashCode();
-                result = (result * 397) ^ (Titles != null ? Titles.GetHashCode() : 0);
-                result = (result * 397) ^ (Friend != null ? Friend.GetHashCode() : 0);
+                var result = (Leaves != null ? Leaves.GetHashCode() : 0);
+                result = (result*397) ^ CreatedDate.GetHashCode();
+                result = (result*397) ^ Id.GetHashCode();
+                result = (result*397) ^ (Titles != null ? Titles.GetHashCode() : 0);
+                result = (result*397) ^ (Friend != null ? Friend.GetHashCode() : 0);
                 return result;
             }
         }

@@ -11,16 +11,13 @@
 
         public void ExecutePrintyPrint(JsonPPStrategyContext context)
         {
-            if(context.IsProcessingString)
+            if (context.IsProcessingString)
                 context.AppendCurrentChar();
         }
 
         public char ForWhichCharacter
         {
-            get
-            {
-                return _selectionCharacter;
-            }
+            get { return _selectionCharacter; }
         }
     }
 }

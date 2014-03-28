@@ -7,11 +7,21 @@ namespace JsonPrettyPrinterPlus.JsonPrettyPrinterInternals
 {
     public class JsonPPStrategyContext
     {
-
         private const string Space = " ";
+        private readonly PPScopeState _scopeState = new PPScopeState();
+
+        private readonly IDictionary<char, ICharacterStrategy> _strategyCatalog =
+            new Dictionary<char, ICharacterStrategy>();
+
+        public bool IsProcessingVariableAssignment;
+
         public int SpacesPerIndent = 4;
+        private char _currentCharacter;
 
         private string _indent = string.Empty;
+        private StringBuilder _outputBuilder;
+        private char _previousChar;
+
         public string Indent
         {
             get
@@ -26,20 +36,33 @@ namespace JsonPrettyPrinterPlus.JsonPrettyPrinterInternals
             }
         }
 
-        private void InitializeIndent()
-        {
-            for (int iii = 0; iii < SpacesPerIndent; iii++)
-                _indent += Space;
-        }
-
-        private readonly PPScopeState _scopeState = new PPScopeState();
-
         public bool IsInArrayScope
         {
-            get
-            {
-                return _scopeState.IsTopTypeArray;
-            }
+            get { return _scopeState.IsTopTypeArray; }
+        }
+
+        public bool IsProcessingDoubleQuoteInitiatedString { get; set; }
+        public bool IsProcessingSingleQuoteInitiatedString { get; set; }
+
+        public bool IsProcessingString
+        {
+            get { return IsProcessingDoubleQuoteInitiatedString || IsProcessingSingleQuoteInitiatedString; }
+        }
+
+        public bool IsStart
+        {
+            get { return _outputBuilder.Length == 0; }
+        }
+
+        public bool WasLastCharacterABackSlash
+        {
+            get { return _previousChar == '\\'; }
+        }
+
+        private void InitializeIndent()
+        {
+            for (var iii = 0; iii < SpacesPerIndent; iii++)
+                _indent += Space;
         }
 
         private void AppendIndents(int indents)
@@ -48,47 +71,13 @@ namespace JsonPrettyPrinterPlus.JsonPrettyPrinterInternals
                 _outputBuilder.Append(Indent);
         }
 
-        public bool IsProcessingVariableAssignment;
-        private char _previousChar;
-        public bool IsProcessingDoubleQuoteInitiatedString { get; set; }
-        public bool IsProcessingSingleQuoteInitiatedString { get; set; }
-
-        public bool IsProcessingString
-        {
-            get
-            {
-                return IsProcessingDoubleQuoteInitiatedString || IsProcessingSingleQuoteInitiatedString;
-            }
-        }
-
-        public bool IsStart
-        {
-            get
-            {
-                return _outputBuilder.Length == 0;
-            }
-        }
-
-        public bool WasLastCharacterABackSlash
-        {
-            get
-            {
-                return _previousChar == '\\';
-            }
-        }
-
-        private readonly IDictionary<char, ICharacterStrategy> _strategyCatalog = new Dictionary<char, ICharacterStrategy>();
-
-        private StringBuilder _outputBuilder;
-        private char _currentCharacter;
-
         public void PrettyPrintCharacter(char curChar, StringBuilder output)
         {
             _currentCharacter = curChar;
 
             var strategy = _strategyCatalog.ContainsKey(curChar)
-                                ? _strategyCatalog[curChar]
-                                : new DefaultCharacterStrategy();
+                ? _strategyCatalog[curChar]
+                : new DefaultCharacterStrategy();
 
             _outputBuilder = output;
 

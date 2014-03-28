@@ -13,16 +13,16 @@
             PeformNonStringPrint(context);
         }
 
+        public char ForWhichCharacter
+        {
+            get { return '}'; }
+        }
+
         private static void PeformNonStringPrint(JsonPPStrategyContext context)
         {
             context.CloseCurrentScope();
             context.BuildContextIndents();
             context.AppendCurrentChar();
-        }
-
-        public char ForWhichCharacter
-        {
-            get { return '}'; }
         }
     }
 }

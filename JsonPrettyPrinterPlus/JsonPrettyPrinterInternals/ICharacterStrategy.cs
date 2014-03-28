@@ -2,7 +2,7 @@
 {
     public interface ICharacterStrategy
     {
-        void ExecutePrintyPrint(JsonPPStrategyContext context);
         char ForWhichCharacter { get; }
+        void ExecutePrintyPrint(JsonPPStrategyContext context);
     }
 }

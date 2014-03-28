@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonPrettyPrinterPlus", "JsonPrettyPrinterPlus\JsonPrettyPrinterPlus.csproj", "{6DDF6CD7-5C09-4609-A587-D5284587AB8D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonPrettyPrinterPlusTests", "JsonPrettyPrinterPlusTests\JsonPrettyPrinterPlusTests.csproj", "{740F0020-E4DC-4053-AFC5-34E8527C7215}"

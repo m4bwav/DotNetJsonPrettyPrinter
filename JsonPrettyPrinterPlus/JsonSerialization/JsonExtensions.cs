@@ -23,6 +23,5 @@ namespace JsonPrettyPrinterPlus.JsonSerialization
         {
             return new JavaScriptSerializer().Deserialize<T>(json);
         }
-
     }
 }
