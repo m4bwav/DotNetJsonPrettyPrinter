@@ -10,18 +10,21 @@ This library is a simple and light weight json pretty printer.  There are few ot
 You can use the pretty printer object or just the extension methods I've provided. I've included json and/or beautifing extension methods, for ease of use.
 
 Example:
+```
 "{"Lorem":"ipsum","dolor":{ "sit":"amet"},"consectetur":{"adipisicing":{"sed":"do"}}}".PrettyPrintJson()
-
+```
 becomes:
 
-{  
-    "Lorem": "ipsum",  
-    "dolor": {  
-        "sit": "amet"  
-    },  
-    "consectetur": {  
-        "adipisicing": {  
-            "sed": "do"  
-        }  
-    }  
-}  
+```
+{
+    "Lorem": "ipsum",
+    "dolor": {
+        "sit": "amet"
+    },
+    "consectetur": {
+        "adipisicing": {
+            "sed": "do"
+        }
+    }
+}
+```
