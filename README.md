@@ -14,14 +14,14 @@ Example:
 
 becomes:
 
-{
-    "Lorem": "ipsum",
-    "dolor": {
-        "sit": "amet"
-    },
-    "consectetur": {
-        "adipisicing": {
-            "sed": "do"
-        }
-    }
-}
+{  
+    "Lorem": "ipsum",  
+    "dolor": {  
+        "sit": "amet"  
+    },  
+    "consectetur": {  
+        "adipisicing": {  
+            "sed": "do"  
+        }  
+    }  
+}  
