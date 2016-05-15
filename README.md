@@ -1,9 +1,9 @@
 DotNetJsonPrettyPrinter
 =======================
 
-[![Join the chat at https://gitter.im/m4bwav/DotNetJsonPrettyPrinter](https://badges.gitter.im/m4bwav/DotNetJsonPrettyPrinter.svg)](https://gitter.im/m4bwav/DotNetJsonPrettyPrinter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 Json Pretty Printer/Beautifier Library For .Net
+
+[![Join the chat at https://gitter.im/m4bwav/DotNetJsonPrettyPrinter](https://badges.gitter.im/m4bwav/DotNetJsonPrettyPrinter.svg)](https://gitter.im/m4bwav/DotNetJsonPrettyPrinter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Background article: http://www.markdavidrogers.com/oxitesample/Blog/json-pretty-printerbeautifier-library-for-net  
 nuget package: https://www.nuget.org/packages/JsonPrettyPrinter/
