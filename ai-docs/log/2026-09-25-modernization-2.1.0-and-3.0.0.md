@@ -72,6 +72,8 @@ The v3.0.0 tag (commit `d431ed6`) built green on both OSes but its publish job f
 
 Package versions were checked with `dotnet list package --outdated` on 2026-09-25: every package in the three projects is at its latest (System.Text.Json 10.0.12, System.Memory 4.6.3, NUnit 4.6.1, NUnit3TestAdapter 6.3.0, Microsoft.NET.Test.Sdk 18.10.1, coverlet.collector 10.0.1, BenchmarkDotNet 0.15.8, Microsoft.NETFramework.ReferenceAssemblies 1.0.3).
 
+Branch `release-2.1.0` (tip `3e49d65`) is `c7373bd` plus the publish fix, so `v2.1.0` can be moved there; `v3.0.0` goes to master `2568ccd` or later. Tag moves are `git tag -f <tag> <commit>` then `git push -f origin <tag>`; this session could not force-push.
+
 Lesson for this harness: bash heredocs mangled `\\n` inside Python string literals twice in this session; the Edit tool was reliable for every replacement that contained backslashes.
 
 ## Release procedure followed
