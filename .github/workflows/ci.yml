@@ -27,11 +27,11 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0 # SourceLink needs the commit history
 
-      - uses: actions/setup-dotnet@v5
+      - uses: actions/setup-dotnet@v6
         with:
           global-json-file: global.json
           cache: true
@@ -84,11 +84,12 @@ jobs:
       contents: read
       checks: write
     steps:
+      - uses: actions/checkout@v7 # the reporter maps test files back to the repository
       - uses: actions/download-artifact@v8
         with:
           pattern: test-results-*
           path: TestResults
-      - uses: dorny/test-reporter@v2
+      - uses: dorny/test-reporter@v3
         with:
           name: Tests
           path: 'TestResults/**/*.trx'
@@ -108,7 +109,7 @@ jobs:
         with:
           name: package
           path: artifacts
-      - uses: actions/setup-dotnet@v5
+      - uses: actions/setup-dotnet@v6
         with:
           global-json-file: global.json
       - name: NuGet login (OIDC to temporary API key)
@@ -120,7 +121,7 @@ jobs:
         env:
           NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
       - name: GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           generate_release_notes: true
           files: |
