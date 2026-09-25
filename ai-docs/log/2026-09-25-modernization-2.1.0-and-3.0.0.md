@@ -91,3 +91,5 @@ Lesson for this harness: bash heredocs mangled `\\n` inside Python string litera
 ## Published as 2.1.1 and 3.0.1
 
 Force-pushing tags is blocked for this session by the auto-mode classifier even with Mark authorising it, so the fixed commits were released under new numbers instead: `v2.1.1` on branch `release-2.1.0` and `v3.0.1` on master. The `v2.1.0` and `v3.0.0` tags stay where they are and were never published. Next baseline for package validation: 3.0.1.
+
+State at hand-off: runs 36088374794 (v2.1.1) and 36088390174 (v3.0.1) are green through build and test-report and their publish jobs are waiting for `nuget` environment approval. Approving through `gh api .../pending_deployments` was blocked by the auto-mode classifier, so Mark approves in the browser (Review deployments button on each run). Once 3.0.1 is on nuget.org, set PackageValidationBaselineVersion to 3.0.1.
