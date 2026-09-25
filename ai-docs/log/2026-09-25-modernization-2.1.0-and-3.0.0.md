@@ -68,6 +68,10 @@ The v2.1.0 tag was first pushed at commit `cc4f0ca`, whose Windows leg failed: t
 
 Moving the `v2.1.0` tag to the fixed commit needs a force push of the tag, which this session was not allowed to do. Until it is moved, the 2.1.0 publish job never runs (its build failed), so nothing was published by mistake.
 
+The v3.0.0 tag (commit `d431ed6`) built green on both OSes but its publish job failed at `actions/setup-dotnet`: the job has no checkout, so `global-json-file: global.json` could not be found. Fixed in the next commit by pinning `dotnet-version: 10.0.x` in that job only. Note the `nuget` environment ran the job at once, so it has no required reviewers: a green tag build publishes without a manual approval. Both `v2.1.0` (`cc4f0ca`) and `v3.0.0` (`d431ed6`) therefore need moving to a commit at or after the fix before anything reaches nuget.org.
+
+Package versions were checked with `dotnet list package --outdated` on 2026-09-25: every package in the three projects is at its latest (System.Text.Json 10.0.12, System.Memory 4.6.3, NUnit 4.6.1, NUnit3TestAdapter 6.3.0, Microsoft.NET.Test.Sdk 18.10.1, coverlet.collector 10.0.1, BenchmarkDotNet 0.15.8, Microsoft.NETFramework.ReferenceAssemblies 1.0.3).
+
 Lesson for this harness: bash heredocs mangled `\\n` inside Python string literals twice in this session; the Edit tool was reliable for every replacement that contained backslashes.
 
 ## Release procedure followed
