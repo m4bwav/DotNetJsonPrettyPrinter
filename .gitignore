@@ -36,3 +36,8 @@
 /JsonPrettyPrinterPlusTests/obj/Release/JsonPrettyPrinterPlusTests.csprojResolveAssemblyReference.cache
 /JsonPrettyPrinterPlusTests/obj/Release/JsonPrettyPrinterPlusTests.dll
 /JsonPrettyPrinterPlusTests/obj/Release/JsonPrettyPrinterPlusTests.pdb
+
+# SDK build output
+bin/
+obj/
+artifacts/
