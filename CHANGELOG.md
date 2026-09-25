@@ -4,7 +4,11 @@ All notable changes to the `JsonPrettyPrinter` package. The format follows [Keep
 
 ## [Unreleased]
 
-## [2.1.0] - 2026-09-25
+## [2.1.1] - 2026-09-25
+
+Identical to 2.1.0, whose tag pointed at a commit with a broken CI publish step and so never reached nuget.org.
+
+## [2.1.0] - 2026-09-25 (never published)
 
 Output is unchanged for well-formed input, except that empty objects and arrays now print on one line.
 
@@ -43,6 +47,7 @@ Output is unchanged for well-formed input, except that empty objects and arrays 
 - Original `net35` release.
 
 [Unreleased]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v2.1.0...HEAD
+[2.1.1]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v2.0.0...v2.1.1
 [2.1.0]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/1.0...v2.0.0
 [1.0.1.1]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/releases/tag/1.0

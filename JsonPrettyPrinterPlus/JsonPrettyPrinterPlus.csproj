@@ -22,7 +22,7 @@
 
   <PropertyGroup Label="Package">
     <PackageId>JsonPrettyPrinter</PackageId>
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
     <Authors>Mark Rogers</Authors>
     <Copyright>Copyright (c) 2014-2026 Mark Rogers</Copyright>
     <Title>Json Pretty Printer</Title>
