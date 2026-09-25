@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using JsonPrettyPrinterPlus;
@@ -11,11 +11,11 @@ namespace JsonPrettyPrinterPlusTests
     public class JsonPrettyPrinterBehavior
     {
         private static readonly string NewLine = Environment.NewLine;
-        private const string ComplexJsonLintExamplePath = "..\\..\\TestFiles\\jsonLintBeautifyExample.json";
+        private static readonly string ComplexJsonLintExamplePath = Path.Combine(AppContext.BaseDirectory, "TestFiles", "jsonLintBeautifyExample.json");
 
         private readonly string _basicPrettyPrintArrayInObjectExample =
             "{" + NewLine +
-            "    \"CreatedDate\": \"\\/Date(1262325600000)\\/\"," + NewLine +
+            "    \"CreatedDate\": \"2010-01-01T00:00:00\"," + NewLine +
             "    \"Id\": \"7df51e04-ca58-4804-82f6-e0af2f1d5265\"," + NewLine +
             "    \"Names\": [" + NewLine +
             "        \"One\"," + NewLine +
@@ -105,7 +105,8 @@ namespace JsonPrettyPrinterPlusTests
         {
             var testComplexObject = GenerateComplexTestObject();
 
-            var complexTestString = File.ReadAllText(ComplexJsonLintExamplePath);
+            // The example file is stored with LF; the printer writes Environment.NewLine.
+            var complexTestString = File.ReadAllText(ComplexJsonLintExamplePath).Replace("\r\n", "\n").Replace("\n", NewLine).TrimEnd();
 
             SerializeAndCompareTheTwoStrings(testComplexObject, complexTestString);
         }

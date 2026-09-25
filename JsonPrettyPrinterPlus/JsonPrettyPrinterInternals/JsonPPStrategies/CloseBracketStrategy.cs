@@ -1,4 +1,4 @@
-﻿namespace JsonPrettyPrinterPlus.JsonPrettyPrinterInternals.JsonPPStrategies
+namespace JsonPrettyPrinterPlus.JsonPrettyPrinterInternals.JsonPPStrategies
 {
     public class CloseBracketStrategy : ICharacterStrategy
     {
@@ -21,7 +21,10 @@
         private static void PeformNonStringPrint(JsonPPStrategyContext context)
         {
             context.CloseCurrentScope();
-            context.BuildContextIndents();
+            if (context.WasLastCharacterAnOpenBracket)
+                context.RemoveTrailingIndent();
+            else
+                context.BuildContextIndents();
             context.AppendCurrentChar();
         }
     }

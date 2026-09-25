@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using JsonPrettyPrinterPlus.JsonPrettyPrinterInternals.JsonPPStrategies;
@@ -52,6 +52,19 @@ namespace JsonPrettyPrinterPlus.JsonPrettyPrinterInternals
         public bool IsStart
         {
             get { return _outputBuilder.Length == 0; }
+        }
+
+        public bool WasLastCharacterAnOpenBracket
+        {
+            get { return _previousChar == '{' || _previousChar == '['; }
+        }
+
+        /// <summary>Removes the indent written after an opening bracket when the scope turns out to be empty, so {} prints as an open and close line with nothing between.</summary>
+        public void RemoveTrailingIndent()
+        {
+            var length = _outputBuilder.Length;
+            while (length > 0 && _outputBuilder[length - 1] == ' ') length--;
+            _outputBuilder.Length = length;
         }
 
         public bool WasLastCharacterABackSlash
