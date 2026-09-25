@@ -1,0 +1,44 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[*.{json,yml,yaml,slnx,csproj,props,targets}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.cs]
+# Style the code already follows; enforced in build through EnforceCodeStyleInBuild.
+dotnet_sort_system_directives_first = true
+dotnet_style_qualification_for_field = false:suggestion
+dotnet_style_predefined_type_for_locals_parameters_members = true:suggestion
+csharp_style_var_for_built_in_types = true:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = true:suggestion
+csharp_new_line_before_open_brace = all
+csharp_prefer_braces = when_multiline:suggestion
+csharp_style_namespace_declarations = block_scoped:suggestion
+
+# Naming: private fields are _camelCase, thread-static fields t_camelCase.
+dotnet_naming_rule.private_fields_underscore.symbols = private_fields
+dotnet_naming_rule.private_fields_underscore.style = underscore_camel
+dotnet_naming_rule.private_fields_underscore.severity = suggestion
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_symbols.private_fields.required_modifiers =
+dotnet_naming_style.underscore_camel.capitalization = camel_case
+dotnet_naming_style.underscore_camel.required_prefix = _
+
+# CA1510: ArgumentNullException.ThrowIfNull does not exist on netstandard2.0, which the library multi-targets.
+dotnet_diagnostic.CA1510.severity = none
+
+# CA1707: test names use underscores on purpose.
+[*Tests/**.cs]
+dotnet_diagnostic.CA1707.severity = none

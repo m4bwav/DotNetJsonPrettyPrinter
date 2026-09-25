@@ -1,94 +1,96 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace JsonPrettyPrinterPlusTests
 {
-    public class SimpleObject
+    public sealed class SimpleObject : IEquatable<SimpleObject>
     {
-        public string Hammer { get; set; }
+        public string? Hammer { get; set; }
 
-        public override bool Equals(object obj)
+        public bool Equals(SimpleObject? other)
         {
-            var otherObject = obj as SimpleObject;
+            return other != null && other.Hammer == Hammer;
+        }
 
-            return otherObject != null && otherObject.Hammer == Hammer;
+        public override bool Equals(object? obj)
+        {
+            return Equals(obj as SimpleObject);
+        }
+
+        public override int GetHashCode()
+        {
+            return Hammer == null ? 0 : StringComparer.Ordinal.GetHashCode(Hammer);
         }
     }
 
-    public class TestLeafObject
+    public sealed class TestLeafObject : IEquatable<TestLeafObject>
     {
         public DateTime CreatedDate { get; set; }
         public Guid Id { get; set; }
-        public string[] Names { get; set; }
+        public string[]? Names { get; set; }
 
-        public override bool Equals(object obj)
+        public bool Equals(TestLeafObject? other)
         {
-            var otherDomainObject = obj as TestLeafObject;
-
-            if (otherDomainObject == null)
-                return false;
-
-            return otherDomainObject.Id.Equals(Id)
-                   && otherDomainObject.Names.Length.Equals(Names.Length)
-                   && AreStartDatesEqual(otherDomainObject);
+            return other != null
+                   && other.Id == Id
+                   && other.CreatedDate == CreatedDate
+                   && SequenceEquals(other.Names, Names);
         }
 
-        private bool AreStartDatesEqual(TestLeafObject otherLeafObject)
+        public override bool Equals(object? obj)
         {
-            return otherLeafObject.CreatedDate.Year.Equals(CreatedDate.Year);
-        }
-    }
-
-
-    public class TestRootObject
-    {
-        public IList<TestLeafObject> Leaves { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public Guid Id { get; set; }
-        public string[] Titles { get; set; }
-        public TestLeafObject Friend { get; set; }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (TestRootObject)) return false;
-            return Equals((TestRootObject) obj);
-        }
-
-        public bool Equals(TestRootObject other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-
-            if (!MatchLeafNodes(other)) return false;
-
-            return AreStartDatesEqual(other)
-                   && other.Id.Equals(Id)
-                   && Equals(other.Titles.Length, Titles.Length)
-                   && Equals(other.Friend, Friend);
-        }
-
-        private bool MatchLeafNodes(TestRootObject other)
-        {
-            return other.Leaves.Count == Leaves.Count;
-        }
-
-        private bool AreStartDatesEqual(TestRootObject otherRootObject)
-        {
-            return otherRootObject.CreatedDate.Year.Equals(CreatedDate.Year);
+            return Equals(obj as TestLeafObject);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                var result = (Leaves != null ? Leaves.GetHashCode() : 0);
-                result = (result*397) ^ CreatedDate.GetHashCode();
-                result = (result*397) ^ Id.GetHashCode();
-                result = (result*397) ^ (Titles != null ? Titles.GetHashCode() : 0);
-                result = (result*397) ^ (Friend != null ? Friend.GetHashCode() : 0);
-                return result;
+                return (CreatedDate.GetHashCode() * 397 ^ Id.GetHashCode()) * 397 ^ (Names?.Length ?? 0);
+            }
+        }
+
+        internal static bool SequenceEquals<T>(IEnumerable<T>? left, IEnumerable<T>? right)
+        {
+            if (left == null || right == null)
+                return left == null && right == null;
+
+            return left.SequenceEqual(right);
+        }
+    }
+
+    public sealed class TestRootObject : IEquatable<TestRootObject>
+    {
+        public IList<TestLeafObject>? Leaves { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public Guid Id { get; set; }
+        public string[]? Titles { get; set; }
+        public TestLeafObject? Friend { get; set; }
+
+        public bool Equals(TestRootObject? other)
+        {
+            return other != null
+                   && other.Id == Id
+                   && other.CreatedDate == CreatedDate
+                   && TestLeafObject.SequenceEquals(other.Leaves, Leaves)
+                   && TestLeafObject.SequenceEquals(other.Titles, Titles)
+                   && Equals(other.Friend, Friend);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return Equals(obj as TestRootObject);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hash = CreatedDate.GetHashCode() * 397 ^ Id.GetHashCode();
+                hash = hash * 397 ^ (Leaves?.Count ?? 0);
+                hash = hash * 397 ^ (Titles?.Length ?? 0);
+                return hash * 397 ^ (Friend?.GetHashCode() ?? 0);
             }
         }
     }

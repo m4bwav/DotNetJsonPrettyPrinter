@@ -1,7 +1,9 @@
-# Build, test and pack on every push and pull request; the .nupkg and .snupkg are kept as a run artifact.
-# Publishing to NuGet happens only from a v* tag (see README "Releasing") through nuget.org Trusted Publishing:
-# the job trades GitHub's OIDC token for a one-hour NuGet key, so no long-lived API key is stored anywhere.
-# It needs a NUGET_USER secret (the nuget.org profile name) in the repository's "nuget" environment.
+# Build, test (Ubuntu + Windows; the net48 leg runs on Windows only) and pack on every push and pull request;
+# the .nupkg and .snupkg, coverage and test results are kept as run artifacts.
+# Publishing to NuGet happens only from a v* tag (see README "Building and releasing") through nuget.org
+# Trusted Publishing: the job trades GitHub's OIDC token for a one-hour NuGet key, so no long-lived API key is
+# stored anywhere. It needs a NUGET_USER secret (the nuget.org profile name) in the repository's "nuget"
+# environment, and it fails if the tag does not match <Version> in the csproj.
 name: CI
 
 on:
@@ -13,9 +15,17 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -23,18 +33,67 @@ jobs:
 
       - uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 10.0.x
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
 
-      - run: dotnet restore
+      - run: dotnet restore --locked-mode
+      - run: dotnet format --no-restore --verify-no-changes
       - run: dotnet build --no-restore -c Release
-      - run: dotnet test --no-build -c Release
-      - run: dotnet pack JsonPrettyPrinterPlus --no-build -c Release -o artifacts
+
+      - name: Test (net10.0)
+        run: dotnet test --no-build -c Release -f net10.0 --logger trx --results-directory TestResults --collect:"XPlat Code Coverage"
+
+      - name: Test (net48, Windows only)
+        if: runner.os == 'Windows'
+        run: dotnet test --no-build -c Release -f net48 --logger trx --results-directory TestResults
 
       - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: test-results-${{ matrix.os }}
+          path: TestResults
+          retention-days: 30
+
+      - name: Check the tag matches the packed version
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        run: |
+          csproj_version=$(sed -n 's/.*<Version>\(.*\)<\/Version>.*/\1/p' JsonPrettyPrinterPlus/JsonPrettyPrinterPlus.csproj)
+          tag_version="${GITHUB_REF_NAME#v}"
+          if [ "$csproj_version" != "$tag_version" ]; then
+            echo "::error::Tag v$tag_version does not match <Version>$csproj_version</Version> in JsonPrettyPrinterPlus.csproj"
+            exit 1
+          fi
+
+      - run: dotnet pack JsonPrettyPrinterPlus --no-build -c Release -o artifacts
+        if: runner.os == 'Linux'
+
+      - uses: actions/upload-artifact@v7
+        if: runner.os == 'Linux'
         with:
           name: package
           path: artifacts/*nupkg
           retention-days: 30
+
+  test-report:
+    needs: build
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: test-results-*
+          path: TestResults
+      - uses: dorny/test-reporter@v2
+        with:
+          name: Tests
+          path: 'TestResults/**/*.trx'
+          reporter: dotnet-trx
+          fail-on-error: false
 
   publish:
     if: startsWith(github.ref, 'refs/tags/v')
@@ -43,7 +102,7 @@ jobs:
     environment: nuget
     permissions:
       id-token: write   # lets the job request the GitHub OIDC token that nuget.org exchanges for a temporary key
-      contents: read
+      contents: write   # to create the GitHub Release
     steps:
       - uses: actions/download-artifact@v8
         with:
@@ -51,7 +110,7 @@ jobs:
           path: artifacts
       - uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 10.0.x
+          global-json-file: global.json
       - name: NuGet login (OIDC to temporary API key)
         uses: NuGet/login@v1
         id: login
@@ -60,3 +119,10 @@ jobs:
       - run: dotnet nuget push "artifacts/*.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate
         env:
           NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+      - name: GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            artifacts/*.nupkg
+            artifacts/*.snupkg

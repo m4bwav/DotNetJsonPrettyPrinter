@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="JsonPrettyPrinterPlus/JsonPrettyPrinterPlus.csproj" />
   <Project Path="JsonPrettyPrinterPlusTests/JsonPrettyPrinterPlusTests.csproj" />
+  <Project Path="benchmarks/JsonPrettyPrinterPlus.Benchmarks/JsonPrettyPrinterPlus.Benchmarks.csproj" />
 </Solution>

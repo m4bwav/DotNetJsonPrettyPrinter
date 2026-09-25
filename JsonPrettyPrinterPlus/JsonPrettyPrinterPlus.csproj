@@ -3,40 +3,55 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net10.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
     <RootNamespace>JsonPrettyPrinterPlus</RootNamespace>
     <AssemblyName>JsonPrettyPrinterPlus</AssemblyName>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0'">
+    <IsTrimmable>true</IsTrimmable>
+    <IsAotCompatible>true</IsAotCompatible>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
     <PackageId>JsonPrettyPrinter</PackageId>
-    <Version>2.0.0</Version>
+    <Version>2.1.0</Version>
     <Authors>Mark Rogers</Authors>
+    <Copyright>Copyright (c) 2014-2026 Mark Rogers</Copyright>
     <Title>Json Pretty Printer</Title>
-    <Description>A small, dependency-light JSON pretty printer and beautifier for .NET: PrettyPrintJson() on any JSON string, plus ToJSON()/DeserializeFromJson() helpers over System.Text.Json.</Description>
+    <Description>A small, dependency-light JSON pretty printer and beautifier for .NET: PrettyPrintJson() on any JSON string, plus ToJson()/DeserializeFromJson() helpers over System.Text.Json.</Description>
     <PackageTags>json;pretty-print;beautify;format;indent</PackageTags>
     <PackageProjectUrl>https://github.com/m4bwav/DotNetJsonPrettyPrinter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/m4bwav/DotNetJsonPrettyPrinter</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>2.0.0: rebuilt for netstandard2.0 and net10.0 (net35 dropped). PrettyPrintJson() is unchanged. ToJSON() and DeserializeFromJson() now use System.Text.Json instead of JavaScriptSerializer, so dates serialise as ISO 8601 rather than \/Date(ms)\/. SourceLink, deterministic build, README in the package.</PackageReleaseNotes>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReleaseNotes>See https://github.com/m4bwav/DotNetJsonPrettyPrinter/blob/master/CHANGELOG.md</PackageReleaseNotes>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <Deterministic>true</Deterministic>
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+    <EnablePackageValidation>true</EnablePackageValidation>
+    <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="../README.md" Pack="true" PackagePath="/" />
+    <None Include="../icon.png" Pack="true" PackagePath="/" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Memory" Version="4.6.3" />
     <PackageReference Include="System.Text.Json" Version="10.0.12" />
   </ItemGroup>
 
