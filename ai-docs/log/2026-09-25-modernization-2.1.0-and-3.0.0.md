@@ -55,7 +55,20 @@ Most of the allocation win is not copying the input into a `StringBuilder` and n
 
 ## 3.0.0 (stage 6)
 
-See the second half of this note, written after the 3.0.0 work.
+- The whole `JsonPrettyPrinterInternals` namespace was deleted and replaced by `JsonPrettyPrinterPlus/PrettyPrintEngine.cs`: an internal sealed class with a `switch` per character, a `bool[]` scope stack (true = array) and the same deferred-break rule as 2.1. `JsonPrettyPrinter` is sealed and owns one engine, reset at the start of every `Print`.
+- Benchmark on the same 1 MB document: 4.49 ms and 10.35 MB (2.1.0: 11.09 ms and 10.75 MB). The allocation floor is the output `StringBuilder` plus `ToString()`; the `TextWriter` overloads avoid it.
+- `NewLine` default is `"\n"`. The tests now use a `const NewLine = "\n"` and one test asks for `Environment.NewLine` explicitly.
+- `ToJSON` removed; the CA1708 suppression went with it. The `System.Diagnostics.CodeAnalysis` using is inside `#if NET5_0_OR_GREATER` because nothing else in that file needs it on netstandard2.0.
+- System.Text.Json on netstandard2.0: kept. Reasoning: dropping it removes `ToJson`/`DeserializeFromJson` for exactly the consumers most likely to want a one-liner (Unity, old Framework apps), and a second package for three extension methods is more maintenance than it saves. README says it is the only dependency.
+- `PackageValidationBaselineVersion` removed for 3.0.0 (no compatible baseline exists). `EnablePackageValidation` stays on so the TFM compatibility checks still run. Re-add the baseline as 3.0.0 after it is published.
+
+## CI fix after the first 2.1.0 push
+
+The v2.1.0 tag was first pushed at commit `cc4f0ca`, whose Windows leg failed: the net48 section of the test project's lock file listed `Microsoft.NETFramework.ReferenceAssemblies` (this machine has no .NET Framework targeting pack, so the SDK adds the package implicitly) while the Windows runner, which has the pack, did not. Fix in `c7373bd`: an explicit `PackageReference` for net48 with `PrivateAssets=all`, so every machine restores the same graph. The same commit gave the `test-report` job a checkout (dorny/test-reporter runs `git ls-files`) and folded in the five dependabot PRs (checkout 7, setup-dotnet 6, test-reporter 3, action-gh-release 3, coverlet.collector 10.0.1), which were then closed.
+
+Moving the `v2.1.0` tag to the fixed commit needs a force push of the tag, which this session was not allowed to do. Until it is moved, the 2.1.0 publish job never runs (its build failed), so nothing was published by mistake.
+
+Lesson for this harness: bash heredocs mangled `\\n` inside Python string literals twice in this session; the Edit tool was reliable for every replacement that contained backslashes.
 
 ## Release procedure followed
 

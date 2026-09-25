@@ -1,5 +1,7 @@
 using System;
+#if NET5_0_OR_GREATER
 using System.Diagnostics.CodeAnalysis;
+#endif
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 
@@ -10,7 +12,6 @@ namespace JsonPrettyPrinterPlus.JsonSerialization
     /// .NET Framework). Dates come out as ISO 8601 and property names keep their C# casing. The overloads that
     /// take a <see cref="JsonTypeInfo{T}"/> are safe for trimming and native AOT; the others use reflection.
     /// </summary>
-    [SuppressMessage("Naming", "CA1708:Identifiers should differ by more than case", Justification = "ToJSON is the 2.x name kept beside the correctly cased ToJson until 3.0.")]
     public static class JsonExtensions
     {
         private const string ReflectionWarning =
@@ -69,26 +70,6 @@ namespace JsonPrettyPrinterPlus.JsonSerialization
             var json = JsonSerializer.Serialize(graph, typeInfo);
 
             return prettyPrint ? json.PrettyPrintJson() : json;
-        }
-
-        /// <summary>Same as <see cref="ToJson(object)"/>. Kept for 2.x callers; removed in 3.0.</summary>
-#if NET5_0_OR_GREATER
-        [RequiresUnreferencedCode(ReflectionWarning)]
-        [RequiresDynamicCode(ReflectionWarning)]
-#endif
-        public static string ToJSON(this object? graph)
-        {
-            return graph.ToJson();
-        }
-
-        /// <summary>Same as <see cref="ToJson(object, bool)"/>. Kept for 2.x callers; removed in 3.0.</summary>
-#if NET5_0_OR_GREATER
-        [RequiresUnreferencedCode(ReflectionWarning)]
-        [RequiresDynamicCode(ReflectionWarning)]
-#endif
-        public static string ToJSON(this object? graph, bool prettyPrint)
-        {
-            return graph.ToJson(prettyPrint);
         }
 
         /// <summary>Deserialises <paramref name="json"/> as a <typeparamref name="T"/>.</summary>

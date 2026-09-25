@@ -11,7 +11,7 @@ namespace JsonPrettyPrinterPlusTests
     [TestFixture]
     public class JsonPrettyPrinterBehavior
     {
-        private static readonly string NewLine = Environment.NewLine;
+        private const string NewLine = "\n"; // the 3.0 default; 2.x wrote Environment.NewLine
         private static readonly string ComplexJsonLintExamplePath = Path.Combine(AppContext.BaseDirectory, "TestFiles", "jsonLintBeautifyExample.json");
 
         private static readonly string BasicPrettyPrintArrayInObjectExample =
@@ -27,7 +27,7 @@ namespace JsonPrettyPrinterPlusTests
 
         private static readonly string JsonLintVersionOfSimpleObject = "{" + NewLine + "    \"Hammer\": \"throw\"" + NewLine + "}";
 
-        /// <summary>Joins lines with the OS newline, the printer's default.</summary>
+        /// <summary>Joins lines with the printer's default newline.</summary>
         private static string Lines(params string[] lines)
         {
             return string.Join(NewLine, lines);
@@ -94,8 +94,8 @@ namespace JsonPrettyPrinterPlusTests
         {
             var testComplexObject = GenerateComplexTestObject();
 
-            // The example file is stored with LF; the printer writes Environment.NewLine.
-            var complexTestString = File.ReadAllText(ComplexJsonLintExamplePath).Replace("\r\n", "\n").Replace("\n", NewLine).TrimEnd();
+            // The example file is stored with LF, the printer's default newline; the Replace guards against a CRLF checkout.
+            var complexTestString = File.ReadAllText(ComplexJsonLintExamplePath).Replace("\r\n", "\n").TrimEnd();
 
             SerializeAndCompareTheTwoStrings(testComplexObject, complexTestString);
         }
@@ -299,6 +299,14 @@ namespace JsonPrettyPrinterPlusTests
         }
 
         [Test]
+        public void environment_newline_can_be_requested()
+        {
+            var options = new JsonPrettyPrintOptions { NewLine = Environment.NewLine };
+
+            Assert.That("{\"a\":1}".PrettyPrintJson(options), Is.EqualTo("{" + Environment.NewLine + "    \"a\": 1" + Environment.NewLine + "}"));
+        }
+
+        [Test]
         public void options_can_use_tabs()
         {
             var options = new JsonPrettyPrintOptions { UseTabs = true, NewLine = "\n" };
@@ -319,7 +327,7 @@ namespace JsonPrettyPrinterPlusTests
         {
             Assert.That(JsonPrettyPrintOptions.Default.IndentSize, Is.EqualTo(4));
             Assert.That(JsonPrettyPrintOptions.Default.UseTabs, Is.False);
-            Assert.That(JsonPrettyPrintOptions.Default.NewLine, Is.EqualTo(Environment.NewLine));
+            Assert.That(JsonPrettyPrintOptions.Default.NewLine, Is.EqualTo("\n"));
             Assert.That(new JsonPrettyPrinter().Options, Is.EqualTo(JsonPrettyPrintOptions.Default));
         }
 
@@ -351,11 +359,11 @@ namespace JsonPrettyPrinterPlusTests
         }
 
         [Test]
-        public void serializer_helpers_have_matching_casing_and_option_overloads()
+        public void serializer_helpers_have_option_overloads()
         {
             var obj = new SimpleObject { Hammer = "throw" };
 
-            Assert.That(obj.ToJson(), Is.EqualTo(obj.ToJSON()));
+            Assert.That(obj.ToJson(), Is.EqualTo("{\"Hammer\":\"throw\"}"));
             Assert.That(obj.ToJson(prettyPrint: true), Is.EqualTo(JsonLintVersionOfSimpleObject));
             Assert.That(obj.ToJson(new System.Text.Json.JsonSerializerOptions { PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase }),
                 Is.EqualTo("{\"hammer\":\"throw\"}"));

@@ -3,8 +3,8 @@ using System;
 namespace JsonPrettyPrinterPlus
 {
     /// <summary>
-    /// Controls how <see cref="JsonPrettyPrinter"/> lays out its output. The default instance reproduces the
-    /// library's historical output: four spaces per level and <see cref="Environment.NewLine"/> between lines.
+    /// Controls how <see cref="JsonPrettyPrinter"/> lays out its output. The default instance writes four spaces
+    /// per level and <c>"\n"</c> between lines (2.x wrote <see cref="Environment.NewLine"/>).
     /// </summary>
     /// <example>
     /// <code>
@@ -15,9 +15,9 @@ namespace JsonPrettyPrinterPlus
     public sealed record JsonPrettyPrintOptions
     {
         private readonly int _indentSize = 4;
-        private readonly string _newLine = Environment.NewLine;
+        private readonly string _newLine = "\n";
 
-        /// <summary>The options used when none are given: four spaces, <see cref="Environment.NewLine"/>.</summary>
+        /// <summary>The options used when none are given: four spaces, <c>"\n"</c>.</summary>
         public static JsonPrettyPrintOptions Default { get; } = new JsonPrettyPrintOptions();
 
         /// <summary>Spaces written per nesting level. Zero means no indentation. Ignored when <see cref="UseTabs"/> is set.</summary>
@@ -37,8 +37,8 @@ namespace JsonPrettyPrinterPlus
         public bool UseTabs { get; init; }
 
         /// <summary>
-        /// The line terminator. Defaults to <see cref="Environment.NewLine"/> so 2.x output is unchanged;
-        /// pass <c>"\n"</c> for output that is the same on every OS.
+        /// The line terminator. Defaults to <c>"\n"</c> since 3.0, so output is the same on every OS; pass
+        /// <see cref="Environment.NewLine"/> for the 2.x behaviour.
         /// </summary>
         /// <exception cref="ArgumentNullException">The value is null.</exception>
         public string NewLine

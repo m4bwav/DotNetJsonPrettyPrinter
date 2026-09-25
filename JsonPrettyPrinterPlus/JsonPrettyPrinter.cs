@@ -1,9 +1,6 @@
 using System;
-using System.ComponentModel;
 using System.IO;
 using System.Text;
-using JsonPrettyPrinterPlus.JsonPrettyPrinterInternals;
-using JsonPrettyPrinterPlus.JsonPrettyPrinterInternals.JsonPPStrategies;
 
 namespace JsonPrettyPrinterPlus
 {
@@ -39,11 +36,11 @@ namespace JsonPrettyPrinterPlus
     /// Indents JSON text one value per line. It is a formatter, not a validator: it tracks strings, escapes and
     /// bracket nesting and leaves everything else as it finds it, so trailing commas, comments or single-quoted
     /// strings pass through untouched. Instances are not thread-safe; create one per thread or use the
-    /// <see cref="PrettyPrinterExtensions"/> methods.
+    /// <see cref="PrettyPrinterExtensions"/> methods, which keep one per thread.
     /// </summary>
-    public class JsonPrettyPrinter
+    public sealed class JsonPrettyPrinter
     {
-        private readonly JsonPPStrategyContext _context;
+        private readonly PrettyPrintEngine _engine;
 
         /// <summary>Creates a printer with <see cref="JsonPrettyPrintOptions.Default"/>.</summary>
         public JsonPrettyPrinter() : this(JsonPrettyPrintOptions.Default)
@@ -52,34 +49,14 @@ namespace JsonPrettyPrinterPlus
 
         /// <summary>Creates a printer with the given layout options.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="options"/> is null.</exception>
-        public JsonPrettyPrinter(JsonPrettyPrintOptions options) : this(new JsonPPStrategyContext(options))
+        public JsonPrettyPrinter(JsonPrettyPrintOptions options)
         {
-        }
-
-        /// <summary>Creates a printer over a caller-supplied strategy context. Kept for 2.x compatibility; the strategy machinery becomes internal in 3.0.</summary>
-        /// <exception cref="ArgumentNullException"><paramref name="context"/> is null.</exception>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public JsonPrettyPrinter(JsonPPStrategyContext context)
-        {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-
-            _context.ClearStrategies();
-            _context.AddCharacterStrategy(new OpenBracketStrategy());
-            _context.AddCharacterStrategy(new CloseBracketStrategy());
-            _context.AddCharacterStrategy(new OpenSquareBracketStrategy());
-            _context.AddCharacterStrategy(new CloseSquareBracketStrategy());
-            _context.AddCharacterStrategy(new SingleQuoteStrategy());
-            _context.AddCharacterStrategy(new DoubleQuoteStrategy());
-            _context.AddCharacterStrategy(new CommaStrategy());
-            _context.AddCharacterStrategy(new ColonCharacterStrategy());
-            _context.AddCharacterStrategy(new SkipWhileNotInStringStrategy('\n'));
-            _context.AddCharacterStrategy(new SkipWhileNotInStringStrategy('\r'));
-            _context.AddCharacterStrategy(new SkipWhileNotInStringStrategy('\t'));
-            _context.AddCharacterStrategy(new SkipWhileNotInStringStrategy(' '));
+            Options = options ?? throw new ArgumentNullException(nameof(options));
+            _engine = new PrettyPrintEngine(options);
         }
 
         /// <summary>The layout options this printer writes with.</summary>
-        public JsonPrettyPrintOptions Options => _context.Options;
+        public JsonPrettyPrintOptions Options { get; }
 
         /// <summary>Pretty prints <paramref name="inputString"/>.</summary>
         /// <returns>The indented text, or an empty string when the input is blank.</returns>
@@ -104,7 +81,7 @@ namespace JsonPrettyPrinterPlus
             var output = new StringBuilder(input.Length + input.Length / 2);
             using (var writer = new StringWriter(output))
             {
-                Run(input, writer);
+                _engine.Print(input, writer);
             }
 
             return output.ToString();
@@ -132,15 +109,7 @@ namespace JsonPrettyPrinterPlus
             if (input.Trim().IsEmpty)
                 return;
 
-            Run(input, output);
-        }
-
-        private void Run(ReadOnlySpan<char> input, TextWriter output)
-        {
-            _context.Reset();
-
-            foreach (var c in input)
-                _context.PrettyPrintCharacter(c, output);
+            _engine.Print(input, output);
         }
     }
 }

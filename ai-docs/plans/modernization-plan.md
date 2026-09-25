@@ -66,6 +66,8 @@ Reproduced 2026-09-25 with `PrettyPrintJson()`:
 
 ## Stage 6: 3.0 (L, breaking)
 
+Done 2026-09-25 as 3.0.0 (all three bullets below; the System.Text.Json decision was to keep the helpers and say so in the README). `PackageValidationBaselineVersion` is unset for 3.0.0; set it to 3.0.0 once that package is on nuget.org.
+
 - Make the strategy machinery internal: `JsonPPStrategyContext`, `PPScopeState`, `ICharacterStrategy`, the ten strategy classes and the public fields `IsProcessingVariableAssignment` and `SpacesPerIndent`. Then replace dictionary plus interface dispatch with a `switch` on the character.
 - Default `NewLine` to `"\n"`. Remove `ToJSON`.
 - Decide the fate of the System.Text.Json helpers on netstandard2.0: STJ 10.0.12 pulls a sizeable dependency tree into a package sold as dependency-light. Options: drop the helpers, move them to a second package, or keep them and say so.

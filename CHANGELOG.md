@@ -4,6 +4,24 @@ All notable changes to the `JsonPrettyPrinter` package. The format follows [Keep
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-09-25
+
+Breaking release. Output for well-formed input is unchanged apart from the line terminator.
+
+### Changed
+
+- `JsonPrettyPrintOptions.NewLine` defaults to `"\n"` instead of `Environment.NewLine`, so output is the same on every OS. Pass `new JsonPrettyPrintOptions { NewLine = Environment.NewLine }` for the 2.x behaviour.
+- The strategy machinery is gone from the public API and replaced by one internal engine with a `switch` per character: `JsonPPStrategyContext`, `PPScopeState`, `ICharacterStrategy`, the ten strategy classes, the `JsonPrettyPrinter(JsonPPStrategyContext)` constructor and the fields `IsProcessingVariableAssignment` and `SpacesPerIndent` no longer exist. Use `JsonPrettyPrintOptions` for indentation. `JsonPrettyPrinter` is now `sealed`.
+- The `netstandard2.0` build keeps its `System.Text.Json` dependency for the serialisation helpers. This is deliberate and documented in the README; the alternative (a second package) was judged not worth it for a library this small.
+
+### Removed
+
+- `ToJSON()`; use `ToJson()`, which has been there since 2.1.0.
+
+### Performance
+
+- 1 MB document: 11.1 ms and 10.8 MB allocated in 2.1.0, 4.5 ms and 10.4 MB in 3.0.0 (same benchmark project and machine). The switch replaces a dictionary lookup and an interface call per character.
+
 ## [2.1.0] - 2026-09-25
 
 Output is unchanged for well-formed input, except that empty objects and arrays now print on one line.
@@ -42,7 +60,8 @@ Output is unchanged for well-formed input, except that empty objects and arrays 
 
 - Original `net35` release.
 
-[Unreleased]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v2.1.0...v3.0.0
 [2.1.0]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/1.0...v2.0.0
 [1.0.1.1]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/releases/tag/1.0

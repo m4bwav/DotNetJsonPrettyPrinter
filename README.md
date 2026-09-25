@@ -42,12 +42,12 @@ becomes:
 }
 ```
 
-Every value goes on its own line, indented four spaces per level, with one space after each colon. Empty objects and arrays print as `{}` and `[]`. Lines end with `Environment.NewLine`, so the output differs between Windows and other systems unless you set `NewLine` (below).
+Every value goes on its own line, indented four spaces per level, with one space after each colon. Empty objects and arrays print as `{}` and `[]`. Lines end with `"\n"` on every OS (2.x used `Environment.NewLine`; set `NewLine` below to get that back).
 
 ## Options
 
 ```csharp
-var options = new JsonPrettyPrintOptions { IndentSize = 2, NewLine = "\n" }; // or UseTabs = true
+var options = new JsonPrettyPrintOptions { IndentSize = 2, NewLine = Environment.NewLine }; // or UseTabs = true
 var pretty = json.PrettyPrintJson(options);
 
 // The same printer can be reused (it is not thread-safe; PrettyPrintJson() keeps one per thread for you).
@@ -56,7 +56,7 @@ printer.PrettyPrint(json, Console.Out);          // straight into any TextWriter
 printer.PrettyPrint(json.AsSpan());              // ReadOnlySpan<char> input
 ```
 
-Defaults are `IndentSize = 4`, `UseTabs = false` and `NewLine = Environment.NewLine`. In 3.0 the default `NewLine` becomes `"\n"`.
+Defaults are `IndentSize = 4`, `UseTabs = false` and `NewLine = "\n"`.
 
 ## Not a validator
 
@@ -77,7 +77,13 @@ var camel = thing.ToJson(new JsonSerializerOptions { PropertyNamingPolicy = Json
 var aot = thing.ToJson(MyContext.Default.MyType, prettyPrint: true);
 ```
 
-`ToJSON()` (upper case) still works and is removed in 3.0. The helpers use `System.Text.Json`, which the `netstandard2.0` build references as a package; the `net10.0` build uses the one in the framework.
+The helpers use `System.Text.Json`, which the `netstandard2.0` build references as a package (its only dependency); the `net10.0` build uses the one in the framework.
+
+## Upgrading from 2.x to 3.0
+
+- Output lines end with `"\n"`. If you compared against `Environment.NewLine`, pass `new JsonPrettyPrintOptions { NewLine = Environment.NewLine }`.
+- `ToJSON()` is now `ToJson()`.
+- The `JsonPrettyPrinterInternals` namespace (strategy classes, `JsonPPStrategyContext`, `PPScopeState`, `SpacesPerIndent`) is gone; use `JsonPrettyPrintOptions`. If you customised a strategy, open an issue describing what it did.
 
 ## Building and releasing
 
