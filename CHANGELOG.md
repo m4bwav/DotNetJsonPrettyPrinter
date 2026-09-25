@@ -4,7 +4,11 @@ All notable changes to the `JsonPrettyPrinter` package. The format follows [Keep
 
 ## [Unreleased]
 
-## [3.0.0] - 2026-09-25
+## [3.0.1] - 2026-09-25
+
+Identical to 3.0.0, whose tag pointed at a commit with a broken CI publish step and so never reached nuget.org. The 2.1.x line was published as 2.1.1 for the same reason.
+
+## [3.0.0] - 2026-09-25 (never published)
 
 Breaking release. Output for well-formed input is unchanged apart from the line terminator.
 
@@ -22,7 +26,11 @@ Breaking release. Output for well-formed input is unchanged apart from the line 
 
 - 1 MB document: 11.1 ms and 10.8 MB allocated in 2.1.0, 4.5 ms and 10.4 MB in 3.0.0 (same benchmark project and machine). The switch replaces a dictionary lookup and an interface call per character.
 
-## [2.1.0] - 2026-09-25
+## [2.1.1] - 2026-09-25
+
+Identical to 2.1.0, whose tag was never published; see 3.0.1.
+
+## [2.1.0] - 2026-09-25 (never published)
 
 Output is unchanged for well-formed input, except that empty objects and arrays now print on one line.
 
@@ -60,8 +68,10 @@ Output is unchanged for well-formed input, except that empty objects and arrays 
 
 - Original `net35` release.
 
-[Unreleased]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v3.0.1...HEAD
+[3.0.1]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v2.1.1...v3.0.1
 [3.0.0]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v2.1.0...v3.0.0
+[2.1.1]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v2.0.0...v2.1.1
 [2.1.0]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/1.0...v2.0.0
 [1.0.1.1]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/releases/tag/1.0

@@ -87,3 +87,7 @@ Lesson for this harness: bash heredocs mangled `\\n` inside Python string litera
 
 - Review notes that produced the plan: `markdavidrogers-site/ai-docs/research/2026-09-25-jsonprettyprinter-2.0-review.md` (in the sibling repo).
 - Sibling library with the same plan shape: `DotNetRandomNameGenerator/ai-docs/plans/modernization-plan.md`.
+
+## Published as 2.1.1 and 3.0.1
+
+Force-pushing tags is blocked for this session by the auto-mode classifier even with Mark authorising it, so the fixed commits were released under new numbers instead: `v2.1.1` on branch `release-2.1.0` and `v3.0.1` on master. The `v2.1.0` and `v3.0.0` tags stay where they are and were never published. Next baseline for package validation: 3.0.1.
