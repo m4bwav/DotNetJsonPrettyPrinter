@@ -22,6 +22,17 @@ namespace JsonPrettyPrinterPlus.GoldenTests
     [NonParallelizable]
     public class GoldenTests
     {
+        // The second named exception (found by the first Linux CI run, 2026-09-28): System.Text.Json's WriteIndented writes
+        // Environment.NewLine, so this answer holds the newline of the OS it ran on, and the recordings were made on Windows.
+        // Off Windows it is compared with each recorded CRLF read as LF. Keyed exactly; nothing else may use it.
+        private static readonly HashSet<string> OsNewLineCases = new(StringComparer.Ordinal)
+        {
+            "tojson.options | write-indented-not-pretty",
+        };
+
+        private static readonly string EscapedCrLf = new string((char)92, 1) + "u000d" + new string((char)92, 1) + "u000a";
+        private static readonly string EscapedLf = new string((char)92, 1) + "u000a";
+
         private static List<Case>? _actual;
         private static Dictionary<string, JsonElement>? _recorded;
         private static string _recordedSerializer = "";
@@ -91,13 +102,30 @@ namespace JsonPrettyPrinterPlus.GoldenTests
                 var key = Key(c.Group, c.Name);
                 var actualText = Json.Write(c.Result);
                 using var actual = JsonDocument.Parse(actualText);
-                if (!JsonEqual(_recorded![key], actual.RootElement, SerializerMatchesRecording))
+                var expected = _recorded![key];
+                if (OsNewLineCases.Contains(key) && Environment.NewLine.Length == 1)
+                {
+                    using var lf = JsonDocument.Parse(expected.GetRawText().Replace(EscapedCrLf, EscapedLf));
+                    expected = lf.RootElement.Clone();
+                }
+
+                if (!JsonEqual(expected, actual.RootElement, SerializerMatchesRecording))
                 {
                     failures.Add(key + ": expected " + _recorded[key].GetRawText() + ", got " + actualText.Trim());
                 }
             }
 
             Assert.That(failures, Is.Empty, string.Join(Environment.NewLine, failures));
+        }
+
+        [Test]
+        public void The_os_newline_exception_names_recorded_cases_that_hold_a_crlf()
+        {
+            foreach (var key in OsNewLineCases)
+            {
+                Assert.That(_recorded!.ContainsKey(key), key);
+                Assert.That(_recorded[key].GetRawText(), Does.Contain(EscapedCrLf), key);
+            }
         }
 
         [Test]

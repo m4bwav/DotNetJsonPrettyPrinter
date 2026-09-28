@@ -37,3 +37,15 @@ Append-only. One line per operation: `## [YYYY-MM-DD] op | title` where op is on
 - Local, CI commands as written: locked restore, format, build 0 warnings, audit restore, tests net10.0 43 and net48 43 (37 unit, 6 golden), pack. Content check extracted from ci.yml under bash -e -o pipefail: exit 0; with a wrong floor and a wrong file list: exit 1 with its error line. Consumers: packed 3.0.2-beta.1 on net10.0 and net48 green; nuget.org 3.0.1 green; a wrong expected line exit 1.
 - actionlint 1.7.12 with shellcheck 0.11.0 (release zips in the scratchpad): SC2034 in the template's verify-published loop (unused variable), fixed; then clean. zizmor 1.30.1 offline: no findings. check-workflow-shell.py: clean. Every pinned SHA equals its tag, each the latest release.
 - check-readme-images.mjs README.md --registry nuget: 3 images ok, exit 0. tests/Golden untouched since 08b777a.
+
+## [2026-09-28] add | Phase 2 pushed, pull request #8, GitHub settings applied before the review stop
+- Fresh clone of v3-retrofit (613cc69): locked restore, build 0 warnings, 43 tests on net10.0 and 43 on net48; run.sh executable.
+- Pull request https://github.com/m4bwav/DotNetJsonPrettyPrinter/pull/8 opened with a For review list. Independent review started in the background (prompts/review-subagent.md, with a differential against the published 3.0.1 on both runtimes).
+- Rulesets: 24143846 master (deletion, non-fast-forward, required check ci, admin bypass; copied from DotNetRandomNameGenerator) and 24143848 Tags only by admins (templates/rulesets). Read back: both active.
+- Read back: secret scanning and push protection enabled, private vulnerability reporting enabled, Dependabot security updates enabled, default workflow permissions read with no pull-request approvals, delete branch on merge true, homepage https://www.nuget.org/packages/JsonPrettyPrinter.
+
+## [2026-09-28] add | GitHub Release v2.0.0 created (plan question 5)
+- gh release create v2.0.0 with the corrected CHANGELOG section and a note, the nupkg and snupkg downloaded from nuget.org attached, not marked latest: https://github.com/m4bwav/DotNetJsonPrettyPrinter/releases/tag/v2.0.0 (read back with gh release list: v3.0.1 still Latest).
+
+## [2026-09-28] update | CI run 36489418546 on pull request #8: Windows green, Ubuntu red in one golden case
+- tojson.options | write-indented-not-pretty: System.Text.Json WriteIndented writes Environment.NewLine; recorded CRLF on Windows, LF on Linux. Not a library change. Fixed with a second named exception keyed to that one case (off Windows, the recorded CRLF read as LF) and a test that the key exists and holds a CRLF. Local: 7 golden tests pass on net10.0 and net48, format clean. Listed on the pull request for the maintainer's review, since the ruled plan named only the message exception.
