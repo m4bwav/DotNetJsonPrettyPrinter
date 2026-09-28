@@ -1,5 +1,8 @@
 <Solution>
   <Project Path="JsonPrettyPrinterPlus/JsonPrettyPrinterPlus.csproj" />
   <Project Path="JsonPrettyPrinterPlusTests/JsonPrettyPrinterPlusTests.csproj" />
+  <Folder Name="/tests/">
+    <Project Path="tests/JsonPrettyPrinterPlus.GoldenTests/JsonPrettyPrinterPlus.GoldenTests.csproj" />
+  </Folder>
   <Project Path="benchmarks/JsonPrettyPrinterPlus.Benchmarks/JsonPrettyPrinterPlus.Benchmarks.csproj" />
 </Solution>

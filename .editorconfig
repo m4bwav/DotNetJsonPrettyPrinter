@@ -42,3 +42,11 @@ dotnet_diagnostic.CA1510.severity = none
 # CA1707: test names use underscores on purpose.
 [*Tests/**.cs]
 dotnet_diagnostic.CA1707.severity = none
+
+# The golden tests live under tests/; the old pattern above does not reach them.
+[tests/**.cs]
+dotnet_diagnostic.CA1707.severity = none
+
+# The frozen capture files (tests/Golden/Capture) are compiled by the golden tests but never edited to satisfy analyzers.
+[tests/Golden/**.cs]
+generated_code = true

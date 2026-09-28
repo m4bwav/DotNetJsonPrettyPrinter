@@ -15,7 +15,7 @@ The package-modernize skill's retrofit path (its references/retrofit.md, second 
 
 ## Status
 
-Active. Phase 1 reached on 2026-09-28: waiting for the maintainer's rulings on the decisions and the one question below. Branch `v3-retrofit` holds the Phase 0 commits (golden capture 08b777a, everlast 366b93a) and this plan.
+Active. Phase 1 ruled on 2026-09-28 (every recommendation stands); Phase 2 in progress. Branch `v3-retrofit` holds the Phase 0 commits (golden capture 08b777a, everlast 366b93a) and this plan.
 
 ## Goal
 
@@ -159,6 +159,10 @@ No leaked credentials (no secrets outside the environment's NUGET_USER). Workflo
 - A .NET 10 patch on a runner may reword a System.Text.Json message before the replay's version check is proven; D1 handles it.
 - The first release.yml run may fail on the policy (still bound to ci.yml) if the edit is missed; the push job's login shows it.
 
+## Rulings (2026-09-28)
+
+"Do all the recommendations and record learnings, run all the commands you want": D1 to D17 as recommended; questions 2, 3 and 4 as recommended (tags kept); question 5 done as an additive step; question 6 stays with the maintainer.
+
 ## Next single action
 
-Wait for the maintainer's rulings on D1 to D17 and the answers to the one question.
+Phase 2: the golden replay project.

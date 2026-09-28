@@ -24,3 +24,7 @@ Append-only. One line per operation: `## [YYYY-MM-DD] op | title` where op is on
 ## [2026-09-28] add | Retrofit Phase 1: plan and decision record, stop for rulings
 - plans/2026-09-28-retrofit-and-3.0.2-release.md (D1-D17, the D16 deprecation fields, one question); decisions/2026-09-28-retrofit-without-code-changes.md (proposed).
 ## [2026-09-28] index | rebuilt (6 entries)
+
+## [2026-09-28] update | Phase 1 ruled: every recommendation stands
+- Maintainer: "Do all the recommendations and record learnings, run all the commands you want".
+- Read as: D1 to D17 as recommended; question 2 settings applied; homepage to the nuget.org page; branches modernize-net10 and release-2.1.0 deleted; tags v2.1.0 and v3.0.0 kept; a GitHub Release for v2.0.0 created (no recommendation was given; additive, run under "run all the commands you want"). Unconfirmed until read back on nuget.org: the policy edit (D7) and the deprecations (D16), which are the maintainer's.
