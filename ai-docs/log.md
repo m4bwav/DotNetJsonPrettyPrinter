@@ -49,3 +49,6 @@ Append-only. One line per operation: `## [YYYY-MM-DD] op | title` where op is on
 
 ## [2026-09-28] update | CI run 36489418546 on pull request #8: Windows green, Ubuntu red in one golden case
 - tojson.options | write-indented-not-pretty: System.Text.Json WriteIndented writes Environment.NewLine; recorded CRLF on Windows, LF on Linux. Not a library change. Fixed with a second named exception keyed to that one case (off Windows, the recorded CRLF read as LF) and a test that the key exists and holds a CRLF. Local: 7 golden tests pass on net10.0 and net48, format clean. Listed on the pull request for the maintainer's review, since the ruled plan named only the message exception.
+
+## [2026-09-28] verify | CI run 36489822416 on pull request #8: build and test green on ubuntu-24.04 and windows-latest, ci green
+- Wiki Update mode, step 1 done early (it needs only 3.0.1): notes/2026-09-28-wiki-verify.cs run twice against 3.0.1 from the scratchpad, identical, 354 lines; saved LF as notes/2026-09-28-wiki-verify.out.txt. wikiwright.py outputs: 6 findings, all input blocks (wikiwright L-103). Wiki not yet changed.

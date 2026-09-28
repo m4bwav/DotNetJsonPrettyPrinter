@@ -1,0 +1,354 @@
+=== readme default ===
+{
+    "Lorem": "ipsum",
+    "dolor": {
+        "sit": "amet"
+    },
+    "consectetur": {
+        "adipisicing": {
+            "sed": "do"
+        }
+    },
+    "empty": {}
+}
+--- end (172 chars)
+=== indent 2 ===
+{
+  "a": [
+    1,
+    {
+      "b": "c"
+    }
+  ]
+}
+--- end (50 chars)
+=== tabs ===
+{
+<TAB>"a": [
+<TAB><TAB>1,
+<TAB><TAB>{
+<TAB><TAB><TAB>"b": "c"
+<TAB><TAB>}
+<TAB>]
+}
+--- end (39 chars)
+=== indent 0 ===
+{
+"a": [
+1,
+{
+"b": "c"
+}
+]
+}
+--- end (28 chars)
+=== env newline ===
+{<CR>
+    "a": 1<CR>
+}
+--- end (16 chars)
+=== crlf newline ===
+{<CR>
+    "a": 1<CR>
+}
+--- end (16 chars)
+=== with expression ===
+{
+   "a": 1
+}
+--- end (13 chars)
+=== record equality ===
+True / JsonPrettyPrintOptions { IndentSize = 4, UseTabs = False, NewLine = <LF> }
+--- end (81 chars)
+=== tabs ignore indent size ===
+{
+<TAB>"a": 1
+}
+--- end (11 chars)
+=== odd spacing ===
+{
+    "a": 1,
+    "b": [
+        1,
+        2
+    ]
+}
+--- end (53 chars)
+=== crlf input ===
+{
+    "a": 1,
+    "b": 2
+}
+--- end (26 chars)
+=== idempotent ===
+True
+--- end (4 chars)
+=== whitespace in strings ===
+{
+    "a": "two  spaces and<TAB>a tab"
+}
+--- end (36 chars)
+=== blank input ===
+''
+--- end (2 chars)
+=== trailing comma ===
+{
+    "a": 1,
+}
+--- end (15 chars)
+=== comment ===
+{
+    "a": 1,
+    //anoteabouta"b": 2
+}
+--- end (39 chars)
+=== single quotes ===
+{
+    'a': 'b c'
+}
+--- end (18 chars)
+=== bare words ===
+{
+    a: 1,
+    b: [
+        x,
+        y
+    ]
+}
+--- end (49 chars)
+=== top-level number ===
+42
+--- end (2 chars)
+=== top-level string ===
+"hi there"
+--- end (10 chars)
+=== two documents ===
+{
+    "a": 1
+}{
+    "b": 2
+}
+--- end (28 chars)
+=== scalars ===
+[
+    1,
+    2.5,
+    -3e2,
+    true,
+    false,
+    null,
+    {}
+]
+--- end (67 chars)
+=== unclosed ===
+{
+    "a": 1
+--- end (12 chars)
+=== unterminated string ===
+{
+    "a": "oops
+--- end (16 chars)
+=== nested empties ===
+{
+    "a": {
+        "b": [],
+        "c": {}
+    },
+    "d": [
+        [],
+        {},
+        [
+            {}
+        ]
+    ]
+}
+--- end (130 chars)
+=== stray close ===
+FormatException: Unexpected '}' at index 7: there is no open object or array to close.
+--- end (86 chars)
+=== mismatch ===
+FormatException: Unexpected '}' at index 2: expected ']'.
+--- end (57 chars)
+=== mismatch 2 ===
+FormatException: Unexpected ']' at index 6: expected '}'.
+--- end (57 chars)
+=== close first ===
+FormatException: Unexpected ']' at index 0: there is no open object or array to close.
+--- end (86 chars)
+=== null input ===
+ArgumentNullException: Value cannot be null. (Parameter 'inputString')
+--- end (70 chars)
+=== null options ===
+ArgumentNullException: Value cannot be null. (Parameter 'options')
+--- end (66 chars)
+=== negative indent ===
+ArgumentOutOfRangeException: IndentSize cannot be negative. (Parameter 'value')<CR>
+Actual value was -1.
+--- end (101 chars)
+=== null newline ===
+ArgumentNullException: Value cannot be null. (Parameter 'value')
+--- end (64 chars)
+=== reuse after error 1 ===
+FormatException: Unexpected ']' at index 0: there is no open object or array to close.
+--- end (86 chars)
+=== reuse after error 2 ===
+{
+    "a": [
+        1
+    ]
+}
+--- end (30 chars)
+=== escaped backslash ===
+{
+    "a": "x\\",
+    "b": 1
+}
+--- end (30 chars)
+=== escaped quote ===
+{
+    "a": "say \"hi\", ok",
+    "b": {}
+}
+--- end (42 chars)
+=== unicode escape input ===
+{"a":"line\nbreak\t\u00e9\\\"","b":[1]}
+--- end (39 chars)
+=== unicode escape ===
+{
+    "a": "line\nbreak\t\u00e9\\\"",
+    "b": [
+        1
+    ]
+}
+--- end (66 chars)
+=== brackets in strings ===
+{
+    "a": "{[,]}:",
+    "url": "http://example.com/a?b=c"
+}
+--- end (60 chars)
+=== non-ascii ===
+{
+    "café": "naïve ☕ 😀 日本"
+}
+--- end (31 chars)
+=== bom ===
+length=3 startsWithBom=True
+--- end (27 chars)
+=== textwriter ===
+{
+  "Lorem": "ipsum",
+  "dolor": {
+    "sit": "amet"
+  },
+  "consectetur": {
+    "adipisicing": {
+      "sed": "do"
+    }
+  },
+  "empty": {}
+}
+--- end (142 chars)
+=== file ===
+{
+  "to": "disk"
+}
+--- end (18 chars)
+=== span slice ===
+{
+  "s": [
+    1
+  ]
+}
+--- end (22 chars)
+=== span+writer ===
+{
+  "into": "builder"
+}
+--- end (23 chars)
+=== printer options ===
+2
+--- end (1 chars)
+=== deep nesting ===
+lines=1999 last=]
+--- end (17 chars)
+=== parallel extension ===
+20000 identical
+--- end (15 chars)
+=== ToJson ===
+{"Name":"Mark","Tags":["a","b"],"When":"2010-01-01T00:00:00","Nothing":null,"Price":9.5}
+--- end (88 chars)
+=== ToJson pretty ===
+{
+    "Name": "Mark",
+    "Tags": [
+        "a",
+        "b"
+    ],
+    "When": "2010-01-01T00:00:00",
+    "Nothing": null,
+    "Price": 9.5
+}
+--- end (142 chars)
+=== ToJson camel ===
+{
+    "name": "Mark",
+    "tags": [
+        "a",
+        "b"
+    ],
+    "when": "2010-01-01T00:00:00",
+    "nothing": null,
+    "price": 9.5
+}
+--- end (142 chars)
+=== ToJson null ===
+null
+--- end (4 chars)
+=== ToJson string ===
+"he said \u0022hi\u0022"
+--- end (24 chars)
+=== ToJson typeinfo ===
+{
+    "Name": "Ada",
+    "Age": 36,
+    "Born": "1815-12-10T00:00:00",
+    "Tags": [
+        "math"
+    ]
+}
+--- end (107 chars)
+=== Deserialize ===
+Ada 36 1815 1
+--- end (13 chars)
+=== Deserialize case-insensitive ===
+Ada 36
+--- end (6 chars)
+=== Deserialize typeinfo ===
+Ada 36
+--- end (6 chars)
+=== Deserialize bad json ===
+JsonException: 'n' is an invalid start of a property name. Expected a '"'. Path: $ | LineNumber: 0 | BytePositionInLine: 1.
+--- end (123 chars)
+=== Deserialize null ===
+ArgumentNullException: Value cannot be null. (Parameter 'json')
+--- end (63 chars)
+=== Deserialize literal null ===
+True
+--- end (4 chars)
+=== STJ indented vs ours ===
+{<CR>
+  "a": [<CR>
+    1<CR>
+  ],<CR>
+  "e": {}<CR>
+}
+--- end (38 chars)
+=== ours same input ===
+{
+    "a": [
+        1
+    ],
+    "e": {}
+}
+--- end (43 chars)
