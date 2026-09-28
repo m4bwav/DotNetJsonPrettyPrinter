@@ -1,0 +1,2580 @@
+{
+  "package": "JsonPrettyPrinter@1.0.1.1",
+  "assembly": "JsonPrettyPrinterPlus 1.0.1.1",
+  "assemblySha256": "e6444819f699664c0fc411c25705d4b29a3b300bbcd1026466946c967a85fe08",
+  "runtime": ".NET 10.0.12",
+  "os": "windows",
+  "process": "64-bit",
+  "systemTextJson": "not used (1.x serializes with JavaScriptSerializer from System.Web.Extensions)",
+  "culture": "invariant",
+  "timeZone": "Central Standard Time (UTC-06:00)",
+  "captured": "2026-09-28",
+  "note": "Golden outputs of the published JsonPrettyPrinter, recorded by tests/Golden/Capture. Never edit; never regenerate from new code.",
+  "caseCount": 446,
+  "cases": [
+    {
+      "group": "print",
+      "name": "readme",
+      "result": "{\u000d\u000a    \"Lorem\": \"ipsum\",\u000d\u000a    \"dolor\": {\u000d\u000a        \"sit\": \"amet\"\u000d\u000a    },\u000d\u000a    \"consectetur\": {\u000d\u000a        \"adipisicing\": {\u000d\u000a            \"sed\": \"do\"\u000d\u000a        }\u000d\u000a    },\u000d\u000a    \"empty\": {\u000d\u000a        \u000d\u000a    }\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "empty-object",
+      "result": "{\u000d\u000a    \u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "empty-array",
+      "result": "[\u000d\u000a    \u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "empty-object-space",
+      "result": "{\u000d\u000a    \u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "empty-array-space",
+      "result": "[\u000d\u000a    \u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "empty-object-newline",
+      "result": "{\u000d\u000a    \u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "nested-empty-object",
+      "result": "{\u000d\u000a    \"a\": {\u000d\u000a        \u000d\u000a    }\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "nested-empty-array",
+      "result": "{\u000d\u000a    \"a\": [\u000d\u000a        \u000d\u000a    ]\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "empties-in-array",
+      "result": "[\u000d\u000a    {\u000d\u000a        \u000d\u000a    },\u000d\u000a    [\u000d\u000a        \u000d\u000a    ],\u000d\u000a    {\u000d\u000a        \u000d\u000a    },\u000d\u000a    [\u000d\u000a        \u000d\u000a    ]\u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "empties-deep",
+      "result": "[\u000d\u000a    [\u000d\u000a        [\u000d\u000a            {\u000d\u000a                \u000d\u000a            }\u000d\u000a        ]\u000d\u000a    ]\u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "empty-then-value",
+      "result": "{\u000d\u000a    \"a\": {\u000d\u000a        \u000d\u000a    },\u000d\u000a    \"b\": 1\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "flat-object",
+      "result": "{\u000d\u000a    \"a\": 1,\u000d\u000a    \"b\": \"two\",\u000d\u000a    \"c\": true,\u000d\u000a    \"d\": null\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "flat-array",
+      "result": "[\u000d\u000a    1,\u000d\u000a    2,\u000d\u000a    3\u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "array-of-objects",
+      "result": "[\u000d\u000a    {\u000d\u000a        \"a\": 1\u000d\u000a    },\u000d\u000a    {\u000d\u000a        \"b\": 2\u000d\u000a    }\u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "object-of-arrays",
+      "result": "{\u000d\u000a    \"a\": [\u000d\u000a        1,\u000d\u000a        2\u000d\u000a    ],\u000d\u000a    \"b\": [\u000d\u000a        [\u000d\u000a            3\u000d\u000a        ],\u000d\u000a        [\u000d\u000a            4,\u000d\u000a            5\u000d\u000a        ]\u000d\u000a    ]\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "mixed-deep",
+      "result": "{\u000d\u000a    \"a\": {\u000d\u000a        \"b\": {\u000d\u000a            \"c\": {\u000d\u000a                \"d\": [\u000d\u000a                    1,\u000d\u000a                    {\u000d\u000a                        \"e\": [\u000d\u000a                            \u000d\u000a                        ]\u000d\u000a                    }\u000d\u000a                ]\u000d\u000a            }\u000d\u000a        }\u000d\u000a    }\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "spaced",
+      "result": "{\u000d\u000a    \"a\": 1,\u000d\u000a    \"b\": [\u000d\u000a        1,\u000d\u000a        2\u000d\u000a    ]\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "tabs-crlf",
+      "result": "{\u000d\u000a    \"a\": [\u000d\u000a        1,\u000d\u000a        2\u000d\u000a    ]\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "already-pretty",
+      "result": "{\u000d\u000a    \"a\": 1,\u000d\u000a    \"b\": [\u000d\u000a        2\u000d\u000a    ]\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "already-pretty-crlf",
+      "result": "{\u000d\u000a    \"a\": 1,\u000d\u000a    \"b\": [\u000d\u000a        2\u000d\u000a    ]\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "pretty-two-space",
+      "result": "{\u000d\u000a    \"a\": {\u000d\u000a        \"b\": 1\u000d\u000a    }\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "string-spaces",
+      "result": "{\u000d\u000a    \"a\": \"b c  d\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "string-structure",
+      "result": "{\u000d\u000a    \"a\": \"{[,:]}\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "escaped-quote",
+      "result": "{\u000d\u000a    \"a\": \"x\\\"y\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "escaped-backslash-end",
+      "result": "{\u000d\u000a    \"a\": \"x\\\\\",\"b\":1}"
+    },
+    {
+      "group": "print",
+      "name": "escaped-backslash-only",
+      "result": "{\u000d\u000a    \"a\": \"\\\\\"}"
+    },
+    {
+      "group": "print",
+      "name": "escaped-backslash-then-quote",
+      "result": "{\u000d\u000a    \"a\": \"\\\\\\\"\",\u000d\u000a    \"b\": 1\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "escape-sequences",
+      "result": "{\u000d\u000a    \"a\": \"\\n\\t\\r\\b\\f\\/\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "unicode-escapes",
+      "result": "{\u000d\u000a    \"a\": \"\\u00e9\\u4e2d\\uD83D\\uDE00\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "single-quoted",
+      "result": "{\u000d\u000a    'a': 'b'\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "single-in-double",
+      "result": "{\u000d\u000a    \"a\": \"it's\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "double-in-single",
+      "result": "{\u000d\u000a    'a': 'say \"hi\"'\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "escaped-single",
+      "result": "{\u000d\u000a    'a': 'it\\'s'\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "single-with-structure",
+      "result": "{\u000d\u000a    'a': '{[,]}'\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "print",
+      "name": "negative-zero",
+      "result": "-0"
+    },
+    {
+      "group": "print",
+      "name": "decimal",
+      "result": "1.0"
+    },
+    {
+      "group": "print",
+      "name": "exponent",
+      "result": "1e3"
+    },
+    {
+      "group": "print",
+      "name": "leading-zeros",
+      "result": "007"
+    },
+    {
+      "group": "print",
+      "name": "string-scalar",
+      "result": "\"text\""
+    },
+    {
+      "group": "print",
+      "name": "true",
+      "result": "true"
+    },
+    {
+      "group": "print",
+      "name": "null",
+      "result": "null"
+    },
+    {
+      "group": "print",
+      "name": "padded-number",
+      "result": "42"
+    },
+    {
+      "group": "print",
+      "name": "numbers",
+      "result": "[\u000d\u000a    1.5e-10,\u000d\u000a    -0,\u000d\u000a    0.0,\u000d\u000a    1E+2\u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "non-ascii",
+      "result": "{\u000d\u000a    \"\u00e9\": \"\u4e2d\u6587\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "emoji",
+      "result": "{\u000d\u000a    \"a\": \"\ud83d\ude00\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "lone-high-in-string",
+      "result": "{\u000d\u000a    \"a\": \"\ud83d\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "lone-low-in-string",
+      "result": "[\u000d\u000a    \"\ude00\"\u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "lone-high-outside",
+      "result": "[\u000d\u000a    \ud83d\u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "nul-in-string",
+      "result": "{\u000d\u000a    \"a\": \"\u0000\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "nul-outside",
+      "result": "[\u000d\u000a    \u0000\u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "control-in-string",
+      "result": "{\u000d\u000a    \"a\": \"\u0001\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "line-separator-in-string",
+      "result": "{\u000d\u000a    \"a\": \"x\u2028y\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "raw-newline-in-string",
+      "result": "{\u000d\u000a    \"a\": \"line1\u000aline2\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "raw-crlf-in-string",
+      "result": "{\u000d\u000a    \"a\": \"x\u000d\u000ay\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "bom-start",
+      "result": "\ufeff{\u000d\u000a    \"a\": 1\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "nbsp-between",
+      "result": "{\u000d\u000a    \"a\": \u00a01\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "zero-width-between",
+      "result": "{\u000d\u000a    \"a\": \u200b1\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "ideographic-space-between",
+      "result": "{\u000d\u000a    \"a\": \u30001\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "rtl",
+      "result": "{\u000d\u000a    \"\u05d0\": \"\u202eabc\"\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "blank-empty",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-space",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-mixed",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-nbsp",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-bom",
+      "result": "\ufeff"
+    },
+    {
+      "group": "print",
+      "name": "blank-zero-width",
+      "result": "\u200b"
+    },
+    {
+      "group": "print",
+      "name": "blank-line-separator",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-ideographic",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-vertical-tab",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-form-feed",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-next-line",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "stray-close-brace",
+      "result": {
+        "$throws": "System.InvalidOperationException: Stack empty."
+      }
+    },
+    {
+      "group": "print",
+      "name": "stray-close-bracket",
+      "result": {
+        "$throws": "System.InvalidOperationException: Stack empty."
+      }
+    },
+    {
+      "group": "print",
+      "name": "extra-close",
+      "result": {
+        "$throws": "System.InvalidOperationException: Stack empty."
+      }
+    },
+    {
+      "group": "print",
+      "name": "wrong-close-object",
+      "result": "{\u000d\u000a    \"a\": [\u000d\u000a        1\u000d\u000a    }"
+    },
+    {
+      "group": "print",
+      "name": "wrong-close-array",
+      "result": "[\u000d\u000a    1,\u000d\u000a    2\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "close-first",
+      "result": {
+        "$throws": "System.InvalidOperationException: Stack empty."
+      }
+    },
+    {
+      "group": "print",
+      "name": "unclosed-object",
+      "result": "{\u000d\u000a    \"a\": 1"
+    },
+    {
+      "group": "print",
+      "name": "unclosed-nested",
+      "result": "{\u000d\u000a    {\u000d\u000a        {\u000d\u000a            "
+    },
+    {
+      "group": "print",
+      "name": "unclosed-array",
+      "result": "[\u000d\u000a    1,\u000d\u000a    [\u000d\u000a        2"
+    },
+    {
+      "group": "print",
+      "name": "unterminated-string",
+      "result": "{\u000d\u000a    \"a\": \"b"
+    },
+    {
+      "group": "print",
+      "name": "unbalanced-quotes",
+      "result": "{\u000d\u000a    \"a\": \"b,\"c\":1}"
+    },
+    {
+      "group": "print",
+      "name": "trailing-comma-object",
+      "result": "{\u000d\u000a    \"a\": 1,\u000d\u000a    \u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "trailing-comma-array",
+      "result": "[\u000d\u000a    1,\u000d\u000a    2,\u000d\u000a    \u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "line-comment",
+      "result": "{\u000d\u000a    \"a\": 1,\u000d\u000a    //anoteabouta\"b\": 2\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "block-comment",
+      "result": "{\u000d\u000a    \"a\": 1/*note*/,\u000d\u000a    \"b\": 2\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "bare-words",
+      "result": "{\u000d\u000a    a: b,\u000d\u000a    c: [\u000d\u000a        d\u000d\u000a    ]\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "two-documents",
+      "result": "{\u000d\u000a    \u000d\u000a}{\u000d\u000a    \u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "two-documents-values",
+      "result": "{\u000d\u000a    \"a\": 1\u000d\u000a}{\u000d\u000a    \"b\": 2\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "colon-in-array",
+      "result": "[\u000d\u000a    1: 2\u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "commas-only",
+      "result": ",\u000d\u000a,\u000d\u000a,\u000d\u000a"
+    },
+    {
+      "group": "print",
+      "name": "colons-only",
+      "result": ": : "
+    },
+    {
+      "group": "print",
+      "name": "lone-quote",
+      "result": "\""
+    },
+    {
+      "group": "print",
+      "name": "backslash-outside",
+      "result": "[\u000d\u000a    1,\u000d\u000a    \\2\u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "backslash-at-end",
+      "result": "\"abc\\"
+    },
+    {
+      "group": "print",
+      "name": "leading-text",
+      "result": "xyz{\u000d\u000a    \"a\": 1\u000d\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "js-literals",
+      "result": "[\u000d\u000a    NaN,\u000d\u000a    Infinity,\u000d\u000a    -Infinity,\u000d\u000a    undefined\u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "hex-number",
+      "result": "[\u000d\u000a    0x1F\u000d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "stray-close-after-document",
+      "result": {
+        "$throws": "System.InvalidOperationException: Stack empty."
+      }
+    },
+    {
+      "group": "print",
+      "name": "close-in-string-then-stray",
+      "result": {
+        "$throws": "System.InvalidOperationException: Stack empty."
+      }
+    },
+    {
+      "group": "printer.string",
+      "name": "readme",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empty-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empty-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empty-object-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empty-array-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empty-object-newline",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "nested-empty-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "nested-empty-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empties-in-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empties-deep",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empty-then-value",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "flat-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "flat-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "array-of-objects",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "object-of-arrays",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "mixed-deep",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "spaced",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "tabs-crlf",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "already-pretty",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "already-pretty-crlf",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "pretty-two-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "string-spaces",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "string-structure",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "escaped-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "escaped-backslash-end",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "escaped-backslash-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "escaped-backslash-then-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "escape-sequences",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "unicode-escapes",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "single-quoted",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "single-in-double",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "double-in-single",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "escaped-single",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "single-with-structure",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "negative-zero",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "decimal",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "exponent",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "leading-zeros",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "string-scalar",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "true",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "null",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "padded-number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "numbers",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "non-ascii",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "emoji",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "lone-high-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "lone-low-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "lone-high-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "nul-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "nul-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "control-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "line-separator-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "raw-newline-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "raw-crlf-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "bom-start",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "nbsp-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "zero-width-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "ideographic-space-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "rtl",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-empty",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-mixed",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-nbsp",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-bom",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-zero-width",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-line-separator",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-ideographic",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-vertical-tab",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-form-feed",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-next-line",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "stray-close-brace",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "stray-close-bracket",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "extra-close",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "wrong-close-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "wrong-close-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "close-first",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "unclosed-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "unclosed-nested",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "unclosed-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "unterminated-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "unbalanced-quotes",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "trailing-comma-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "trailing-comma-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "line-comment",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "block-comment",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "bare-words",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "two-documents",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "two-documents-values",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "colon-in-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "commas-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "colons-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "lone-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "backslash-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "backslash-at-end",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "leading-text",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "js-literals",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "hex-number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "stray-close-after-document",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "close-in-string-then-stray",
+      "result": "=print"
+    },
+    {
+      "group": "idempotent",
+      "name": "readme",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empty-object",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empty-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empty-object-space",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empty-array-space",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empty-object-newline",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "nested-empty-object",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "nested-empty-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empties-in-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empties-deep",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empty-then-value",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "flat-object",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "flat-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "array-of-objects",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "object-of-arrays",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "mixed-deep",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "spaced",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "tabs-crlf",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "already-pretty",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "already-pretty-crlf",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "pretty-two-space",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "string-spaces",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "string-structure",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "escaped-quote",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "escaped-backslash-end",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "escaped-backslash-only",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "escaped-backslash-then-quote",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "escape-sequences",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "unicode-escapes",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "single-quoted",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "single-in-double",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "double-in-single",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "escaped-single",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "single-with-structure",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "number",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "negative-zero",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "decimal",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "exponent",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "leading-zeros",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "string-scalar",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "true",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "null",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "padded-number",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "numbers",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "non-ascii",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "emoji",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "lone-high-in-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "lone-low-in-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "lone-high-outside",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "nul-in-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "nul-outside",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "control-in-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "line-separator-in-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "raw-newline-in-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "raw-crlf-in-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "bom-start",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "nbsp-between",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "zero-width-between",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "ideographic-space-between",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "rtl",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-empty",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-space",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-mixed",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-nbsp",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-bom",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-zero-width",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-line-separator",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-ideographic",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-vertical-tab",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-form-feed",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-next-line",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "wrong-close-object",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "wrong-close-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "unclosed-object",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "unclosed-nested",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "unclosed-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "unterminated-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "unbalanced-quotes",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "trailing-comma-object",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "trailing-comma-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "line-comment",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "block-comment",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "bare-words",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "two-documents",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "two-documents-values",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "colon-in-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "commas-only",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "colons-only",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "lone-quote",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "backslash-outside",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "backslash-at-end",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "leading-text",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "js-literals",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "hex-number",
+      "result": true
+    },
+    {
+      "group": "nulls",
+      "name": "extension",
+      "result": {
+        "$throws": "System.NullReferenceException: Object reference not set to an instance of an object."
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "printer-string",
+      "result": {
+        "$throws": "System.NullReferenceException: Object reference not set to an instance of an object."
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "printer-null-context",
+      "result": {
+        "$throws": "System.NullReferenceException: Object reference not set to an instance of an object."
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "tojson-null",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "tojson-null-pretty",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "fromjson-null-json",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "reuse",
+      "name": "printer-unterminated-string",
+      "result": [
+        "{\u000d\u000a    \"a\": \"b",
+        "{\"c\":1}"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "printer-stray-close",
+      "result": [
+        {
+          "$throws": "System.InvalidOperationException: Stack empty."
+        },
+        "{\u000d\u000a    \"c\": [\u000d\u000a        1\u000d\u000a    ]\u000d\u000a}"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "printer-unclosed",
+      "result": [
+        "{\u000d\u000a    {\u000d\u000a        {\u000d\u000a            ",
+        "[\u000d\u000a                1\u000d\u000a            ]"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "printer-pending-escape",
+      "result": [
+        "{\u000d\u000a    \"a\": \"x\\",
+        "{\"b\":\"y\"}"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "printer-single-quote",
+      "result": [
+        "{\u000d\u000a    'a': 'b",
+        "{'c':1}"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "printer-wrong-close",
+      "result": [
+        "[\u000d\u000a    1\u000d\u000a}",
+        "[\u000d\u000a    {\u000d\u000a        \u000d\u000a    }\u000d\u000a]"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "extension-after-unterminated",
+      "result": [
+        "{\u000d\u000a    \"a\": \"b",
+        "{\u000d\u000a    \"c\": 1\u000d\u000a}"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "extension-after-stray-close",
+      "result": [
+        {
+          "$throws": "System.InvalidOperationException: Stack empty."
+        },
+        "[\u000d\u000a    1,\u000d\u000a    {\u000d\u000a        \u000d\u000a    }\u000d\u000a]"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "extension-after-pending-escape",
+      "result": [
+        "[\u000d\u000a    \"\\",
+        "[\u000d\u000a    \"a\"\u000d\u000a]"
+      ]
+    },
+    {
+      "group": "big",
+      "name": "document-1mb",
+      "result": {
+        "length": 3041633,
+        "sha256": "227d305dfcb712b2fd8753ac4381a817a6603d6eaee8d4cc3a032cebfb1c024b",
+        "head": "[\u000d\u000a    {\u000d\u000a        \"id\": 0,\u000d\u000a        \"name\": \"item 0\",\u000d\u000a        \"tags\": [\u000d\u000a            \"a\",\u000d\u000a            \"b\",\u000d\u000a            \"c\"\u000d\u000a        ],\u000d\u000a        \"nested\": {\u000d\u000a            \"x\": 0,\u000d\u000a            \"y\": [\u000d",
+        "tail": "                \"z\": null\u000d\u000a                }\u000d\u000a            ],\u000d\u000a            \"empty\": {\u000d\u000a                \u000d\u000a            }\u000d\u000a        },\u000d\u000a        \"text\": \"lorem ipsum, dolor: {sit} [amet] \\\"6480\\\"\"\u000d\u000a    }\u000d\u000a]"
+      }
+    },
+    {
+      "group": "big",
+      "name": "document-4mb",
+      "result": {
+        "length": 12012701,
+        "sha256": "4c60b00b46650637cc35161bd2b0d8bfb160a9bce5f102d24a54c6a15d9174fd",
+        "head": "[\u000d\u000a    {\u000d\u000a        \"id\": 0,\u000d\u000a        \"name\": \"item 0\",\u000d\u000a        \"tags\": [\u000d\u000a            \"a\",\u000d\u000a            \"b\",\u000d\u000a            \"c\"\u000d\u000a        ],\u000d\u000a        \"nested\": {\u000d\u000a            \"x\": 0,\u000d\u000a            \"y\": [\u000d",
+        "tail": "               \"z\": null\u000d\u000a                }\u000d\u000a            ],\u000d\u000a            \"empty\": {\u000d\u000a                \u000d\u000a            }\u000d\u000a        },\u000d\u000a        \"text\": \"lorem ipsum, dolor: {sit} [amet] \\\"25436\\\"\"\u000d\u000a    }\u000d\u000a]"
+      }
+    },
+    {
+      "group": "big",
+      "name": "string-1m-chars",
+      "result": {
+        "length": 1000017,
+        "sha256": "1fcb7f6df9ceb4bd65e968145d49bf34395f8c055bb3b697fa984de7e7d0613b",
+        "head": "{\u000d\u000a    \"a\": \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "tail": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\u000d\u000a}"
+      }
+    },
+    {
+      "group": "big",
+      "name": "whitespace-1m",
+      "result": "{\u000d\u000a    \u000d\u000a}"
+    },
+    {
+      "group": "big",
+      "name": "array-1m-zeros",
+      "result": {
+        "length": 8000003,
+        "sha256": "d872deb29bc2acaec91ab8a91fd0adb7bc010d3fe7d3b791e1288dc1dbefefaa",
+        "head": "[\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0",
+        "tail": "    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0,\u000d\u000a    0\u000d\u000a]"
+      }
+    },
+    {
+      "group": "big",
+      "name": "deep-arrays-1000",
+      "result": {
+        "length": 4006000,
+        "sha256": "99a7023a6421d284918f8f0ef3434468cde9c2e51c52ea3b156aec4308cdb826",
+        "head": "[\u000d\u000a    [\u000d\u000a        [\u000d\u000a            [\u000d\u000a                [\u000d\u000a                    [\u000d\u000a                        [\u000d\u000a                            [\u000d\u000a                                [\u000d\u000a                             ",
+        "tail": "                            ]\u000d\u000a                                ]\u000d\u000a                            ]\u000d\u000a                        ]\u000d\u000a                    ]\u000d\u000a                ]\u000d\u000a            ]\u000d\u000a        ]\u000d\u000a    ]\u000d\u000a]"
+      }
+    },
+    {
+      "group": "big",
+      "name": "deep-objects-1000",
+      "result": {
+        "length": 4011001,
+        "sha256": "47be719557f2e1678577174ae720b7a99f7343cf3fc464cfaf85086d68652d82",
+        "head": "{\u000d\u000a    \"a\": {\u000d\u000a        \"a\": {\u000d\u000a            \"a\": {\u000d\u000a                \"a\": {\u000d\u000a                    \"a\": {\u000d\u000a                        \"a\": {\u000d\u000a                            \"a\": {\u000d\u000a                             ",
+        "tail": "                            }\u000d\u000a                                }\u000d\u000a                            }\u000d\u000a                        }\u000d\u000a                    }\u000d\u000a                }\u000d\u000a            }\u000d\u000a        }\u000d\u000a    }\u000d\u000a}"
+      }
+    },
+    {
+      "group": "big",
+      "name": "unclosed-2000",
+      "result": {
+        "length": 8010000,
+        "sha256": "079c082ae82fd81fbf1e60e88cc25193fc3b20e6a393a1e36322280ed5eb9d92",
+        "head": "[\u000d\u000a    [\u000d\u000a        [\u000d\u000a            [\u000d\u000a                [\u000d\u000a                    [\u000d\u000a                        [\u000d\u000a                            [\u000d\u000a                                [\u000d\u000a                             ",
+        "tail": "                                                                                                                                                                                                        "
+      }
+    },
+    {
+      "group": "threads",
+      "name": "eight-threads-same-answers",
+      "result": true
+    },
+    {
+      "group": "culture",
+      "name": "tr-TR.print-readme",
+      "result": true
+    },
+    {
+      "group": "culture",
+      "name": "tr-TR.print-numbers",
+      "result": "[\u000d\u000a    1.5e-10,\u000d\u000a    -0,\u000d\u000a    0.0,\u000d\u000a    1E+2\u000d\u000a]"
+    },
+    {
+      "group": "culture",
+      "name": "tr-TR.tojson-double",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "culture",
+      "name": "tr-TR.tojson-date",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "culture",
+      "name": "tr-TR.fromjson-double",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "culture",
+      "name": "de-DE.print-readme",
+      "result": true
+    },
+    {
+      "group": "culture",
+      "name": "de-DE.print-numbers",
+      "result": "[\u000d\u000a    1.5e-10,\u000d\u000a    -0,\u000d\u000a    0.0,\u000d\u000a    1E+2\u000d\u000a]"
+    },
+    {
+      "group": "culture",
+      "name": "de-DE.tojson-double",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "culture",
+      "name": "de-DE.tojson-date",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "culture",
+      "name": "de-DE.fromjson-double",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "culture",
+      "name": "ar-SA.print-readme",
+      "result": true
+    },
+    {
+      "group": "culture",
+      "name": "ar-SA.print-numbers",
+      "result": "[\u000d\u000a    1.5e-10,\u000d\u000a    -0,\u000d\u000a    0.0,\u000d\u000a    1E+2\u000d\u000a]"
+    },
+    {
+      "group": "culture",
+      "name": "ar-SA.tojson-double",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "culture",
+      "name": "ar-SA.tojson-date",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "culture",
+      "name": "ar-SA.fromjson-double",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "int",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "int",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "long-max",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "long-max",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "uint-max",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "uint-max",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "double-tenth",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "double-tenth",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "double-huge",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "double-huge",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "double-negative-zero",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "double-negative-zero",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "double-nan",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "double-nan",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "double-infinity",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "double-infinity",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "float-tenth",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "float-tenth",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "decimal",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "decimal",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "bool",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "bool",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "char",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "char",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "string",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "string",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "string-html",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "string-html",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "string-controls",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "string-controls",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "string-emoji",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "string-emoji",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "string-lone-surrogate",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "string-lone-surrogate",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "date-utc",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "date-utc",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "date-offset",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "date-offset",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "guid",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "guid",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "timespan",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "timespan",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "enum",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "enum",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "int-array",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "int-array",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "string-list",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "string-list",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "dictionary",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "dictionary",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "dictionary-int-keys",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "dictionary-int-keys",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "anonymous",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "anonymous",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "anonymous-nested",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "anonymous-nested",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "poco",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "poco",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "poco-defaults",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "poco-defaults",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "cycle",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "cycle",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "bytes",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "bytes",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "object-array",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "object-array",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "uri",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "uri",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "version",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "version",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-negative-zero",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-with-fraction",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-quoted",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-null",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-word",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-empty",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-blank",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-exponent",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-overflow",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "long-max",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "double",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "double-overflow",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "decimal",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "bool",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "string",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "string-null",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "string-from-number",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "string-single-quoted",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "object-from-object",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "object-from-array",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "object-from-number",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "dictionary",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-array",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "string-list",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-lowercase-keys",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-extra-property",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-wrong-type",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-comment",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-trailing-comma",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-single-quotes",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-unquoted-keys",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-truncated",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-empty-object",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "date-iso",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "date-iso-utc",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "date-microsoft-format",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "guid",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "enum-number",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "enum-name",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "two-documents",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "pretty-printed-poco",
+      "result": {
+        "$throws": "System.IO.FileNotFoundException: Could not load file or assembly 'System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified."
+      }
+    }
+  ]
+}

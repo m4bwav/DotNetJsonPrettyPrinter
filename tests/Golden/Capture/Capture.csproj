@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Golden capture of the PUBLISHED JsonPrettyPrinter (package-modernize retrofit, Phase 0, 2026-09-28), in the split shape
+    of RandomNameGeneratorLibrary's capture. The contract is 3.0.1: it ships lib/netstandard2.0 and lib/net10.0, so the
+    capture runs on both runtimes a caller can have, net48 (which loads the netstandard2.0 build) and net10.0.
+    The same program records the popular old versions for the upgrade story (skill L-094): OldVersion=2.1.1 compiles every
+    case unchanged, OldVersion=1.0.1.1 defines JPP_V1 and compiles only the cases 1.x's API allows (Cases.cs says which).
+    Run from this folder: dotnet run -c Release -f net48 (or net10.0) -p:OldVersion=3.0.1, with the output path as the
+    program's one argument, for example ../3.0.1.net48-windows.json (upgrade recordings go to ../upgrade/).
+    The Directory.Build.* and Directory.Packages.props files beside this one are empty on purpose: they stop MSBuild
+    from importing the repository's own props, so later changes to the repository cannot change this recording.
+    Never edit a recording; never regenerate one from new code.
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net10.0;net48</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <RootNamespace>GoldenCapture</RootNamespace>
+    <OldVersion Condition="'$(OldVersion)' == ''">3.0.1</OldVersion>
+    <DefineConstants Condition="$(OldVersion.StartsWith('1.'))">$(DefineConstants);JPP_V1</DefineConstants>
+    <!-- 1.x ships only lib/net35; on net10.0 it restores through the .NET Framework fallback, which is what a caller gets. -->
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonPrettyPrinter" Version="[$(OldVersion)]" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>

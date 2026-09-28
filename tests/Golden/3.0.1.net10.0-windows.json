@@ -1,0 +1,6342 @@
+{
+  "package": "JsonPrettyPrinter@3.0.1",
+  "assembly": "JsonPrettyPrinterPlus 3.0.1.0",
+  "assemblySha256": "e5925fa6576f34c959b31b7080cc55d1e9ced5811da62e7491bd2f00145478da",
+  "runtime": ".NET 10.0.12",
+  "os": "windows",
+  "process": "64-bit",
+  "systemTextJson": "System.Text.Json 10.0.12",
+  "culture": "invariant",
+  "timeZone": "Central Standard Time (UTC-06:00)",
+  "captured": "2026-09-28",
+  "note": "Golden outputs of the published JsonPrettyPrinter, recorded by tests/Golden/Capture. Never edit; never regenerate from new code.",
+  "caseCount": 1174,
+  "cases": [
+    {
+      "group": "print",
+      "name": "readme",
+      "result": "{\u000a    \"Lorem\": \"ipsum\",\u000a    \"dolor\": {\u000a        \"sit\": \"amet\"\u000a    },\u000a    \"consectetur\": {\u000a        \"adipisicing\": {\u000a            \"sed\": \"do\"\u000a        }\u000a    },\u000a    \"empty\": {}\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "print",
+      "name": "empty-array",
+      "result": "[]"
+    },
+    {
+      "group": "print",
+      "name": "empty-object-space",
+      "result": "{}"
+    },
+    {
+      "group": "print",
+      "name": "empty-array-space",
+      "result": "[]"
+    },
+    {
+      "group": "print",
+      "name": "empty-object-newline",
+      "result": "{}"
+    },
+    {
+      "group": "print",
+      "name": "nested-empty-object",
+      "result": "{\u000a    \"a\": {}\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "nested-empty-array",
+      "result": "{\u000a    \"a\": []\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "empties-in-array",
+      "result": "[\u000a    {},\u000a    [],\u000a    {},\u000a    []\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "empties-deep",
+      "result": "[\u000a    [\u000a        [\u000a            {}\u000a        ]\u000a    ]\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "empty-then-value",
+      "result": "{\u000a    \"a\": {},\u000a    \"b\": 1\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "flat-object",
+      "result": "{\u000a    \"a\": 1,\u000a    \"b\": \"two\",\u000a    \"c\": true,\u000a    \"d\": null\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "flat-array",
+      "result": "[\u000a    1,\u000a    2,\u000a    3\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "array-of-objects",
+      "result": "[\u000a    {\u000a        \"a\": 1\u000a    },\u000a    {\u000a        \"b\": 2\u000a    }\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "object-of-arrays",
+      "result": "{\u000a    \"a\": [\u000a        1,\u000a        2\u000a    ],\u000a    \"b\": [\u000a        [\u000a            3\u000a        ],\u000a        [\u000a            4,\u000a            5\u000a        ]\u000a    ]\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "mixed-deep",
+      "result": "{\u000a    \"a\": {\u000a        \"b\": {\u000a            \"c\": {\u000a                \"d\": [\u000a                    1,\u000a                    {\u000a                        \"e\": []\u000a                    }\u000a                ]\u000a            }\u000a        }\u000a    }\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "spaced",
+      "result": "{\u000a    \"a\": 1,\u000a    \"b\": [\u000a        1,\u000a        2\u000a    ]\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "tabs-crlf",
+      "result": "{\u000a    \"a\": [\u000a        1,\u000a        2\u000a    ]\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "already-pretty",
+      "result": "{\u000a    \"a\": 1,\u000a    \"b\": [\u000a        2\u000a    ]\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "already-pretty-crlf",
+      "result": "{\u000a    \"a\": 1,\u000a    \"b\": [\u000a        2\u000a    ]\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "pretty-two-space",
+      "result": "{\u000a    \"a\": {\u000a        \"b\": 1\u000a    }\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "string-spaces",
+      "result": "{\u000a    \"a\": \"b c  d\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "string-structure",
+      "result": "{\u000a    \"a\": \"{[,:]}\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "escaped-quote",
+      "result": "{\u000a    \"a\": \"x\\\"y\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "escaped-backslash-end",
+      "result": "{\u000a    \"a\": \"x\\\\\",\u000a    \"b\": 1\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "escaped-backslash-only",
+      "result": "{\u000a    \"a\": \"\\\\\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "escaped-backslash-then-quote",
+      "result": "{\u000a    \"a\": \"\\\\\\\"\",\u000a    \"b\": 1\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "escape-sequences",
+      "result": "{\u000a    \"a\": \"\\n\\t\\r\\b\\f\\/\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "unicode-escapes",
+      "result": "{\u000a    \"a\": \"\\u00e9\\u4e2d\\uD83D\\uDE00\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "single-quoted",
+      "result": "{\u000a    'a': 'b'\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "single-in-double",
+      "result": "{\u000a    \"a\": \"it's\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "double-in-single",
+      "result": "{\u000a    'a': 'say \"hi\"'\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "escaped-single",
+      "result": "{\u000a    'a': 'it\\'s'\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "single-with-structure",
+      "result": "{\u000a    'a': '{[,]}'\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "print",
+      "name": "negative-zero",
+      "result": "-0"
+    },
+    {
+      "group": "print",
+      "name": "decimal",
+      "result": "1.0"
+    },
+    {
+      "group": "print",
+      "name": "exponent",
+      "result": "1e3"
+    },
+    {
+      "group": "print",
+      "name": "leading-zeros",
+      "result": "007"
+    },
+    {
+      "group": "print",
+      "name": "string-scalar",
+      "result": "\"text\""
+    },
+    {
+      "group": "print",
+      "name": "true",
+      "result": "true"
+    },
+    {
+      "group": "print",
+      "name": "null",
+      "result": "null"
+    },
+    {
+      "group": "print",
+      "name": "padded-number",
+      "result": "42"
+    },
+    {
+      "group": "print",
+      "name": "numbers",
+      "result": "[\u000a    1.5e-10,\u000a    -0,\u000a    0.0,\u000a    1E+2\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "non-ascii",
+      "result": "{\u000a    \"\u00e9\": \"\u4e2d\u6587\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "emoji",
+      "result": "{\u000a    \"a\": \"\ud83d\ude00\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "lone-high-in-string",
+      "result": "{\u000a    \"a\": \"\ud83d\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "lone-low-in-string",
+      "result": "[\u000a    \"\ude00\"\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "lone-high-outside",
+      "result": "[\u000a    \ud83d\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "nul-in-string",
+      "result": "{\u000a    \"a\": \"\u0000\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "nul-outside",
+      "result": "[\u000a    \u0000\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "control-in-string",
+      "result": "{\u000a    \"a\": \"\u0001\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "line-separator-in-string",
+      "result": "{\u000a    \"a\": \"x\u2028y\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "raw-newline-in-string",
+      "result": "{\u000a    \"a\": \"line1\u000aline2\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "raw-crlf-in-string",
+      "result": "{\u000a    \"a\": \"x\u000d\u000ay\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "bom-start",
+      "result": "\ufeff{\u000a    \"a\": 1\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "nbsp-between",
+      "result": "{\u000a    \"a\": \u00a01\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "zero-width-between",
+      "result": "{\u000a    \"a\": \u200b1\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "ideographic-space-between",
+      "result": "{\u000a    \"a\": \u30001\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "rtl",
+      "result": "{\u000a    \"\u05d0\": \"\u202eabc\"\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "blank-empty",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-space",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-mixed",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-nbsp",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-bom",
+      "result": "\ufeff"
+    },
+    {
+      "group": "print",
+      "name": "blank-zero-width",
+      "result": "\u200b"
+    },
+    {
+      "group": "print",
+      "name": "blank-line-separator",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-ideographic",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-vertical-tab",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-form-feed",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "blank-next-line",
+      "result": ""
+    },
+    {
+      "group": "print",
+      "name": "stray-close-brace",
+      "result": {
+        "$throws": "System.FormatException: Unexpected '}' at index 0: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "print",
+      "name": "stray-close-bracket",
+      "result": {
+        "$throws": "System.FormatException: Unexpected ']' at index 0: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "print",
+      "name": "extra-close",
+      "result": {
+        "$throws": "System.FormatException: Unexpected '}' at index 7: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "print",
+      "name": "wrong-close-object",
+      "result": {
+        "$throws": "System.FormatException: Unexpected '}' at index 7: expected ']'."
+      }
+    },
+    {
+      "group": "print",
+      "name": "wrong-close-array",
+      "result": {
+        "$throws": "System.FormatException: Unexpected '}' at index 4: expected ']'."
+      }
+    },
+    {
+      "group": "print",
+      "name": "close-first",
+      "result": {
+        "$throws": "System.FormatException: Unexpected '}' at index 0: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "print",
+      "name": "unclosed-object",
+      "result": "{\u000a    \"a\": 1"
+    },
+    {
+      "group": "print",
+      "name": "unclosed-nested",
+      "result": "{\u000a    {\u000a        {"
+    },
+    {
+      "group": "print",
+      "name": "unclosed-array",
+      "result": "[\u000a    1,\u000a    [\u000a        2"
+    },
+    {
+      "group": "print",
+      "name": "unterminated-string",
+      "result": "{\u000a    \"a\": \"b"
+    },
+    {
+      "group": "print",
+      "name": "unbalanced-quotes",
+      "result": "{\u000a    \"a\": \"b,\"c\":1}"
+    },
+    {
+      "group": "print",
+      "name": "trailing-comma-object",
+      "result": "{\u000a    \"a\": 1,\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "trailing-comma-array",
+      "result": "[\u000a    1,\u000a    2,\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "line-comment",
+      "result": "{\u000a    \"a\": 1,\u000a    //anoteabouta\"b\": 2\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "block-comment",
+      "result": "{\u000a    \"a\": 1/*note*/,\u000a    \"b\": 2\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "bare-words",
+      "result": "{\u000a    a: b,\u000a    c: [\u000a        d\u000a    ]\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "two-documents",
+      "result": "{}{}"
+    },
+    {
+      "group": "print",
+      "name": "two-documents-values",
+      "result": "{\u000a    \"a\": 1\u000a}{\u000a    \"b\": 2\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "colon-in-array",
+      "result": "[\u000a    1: 2\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "commas-only",
+      "result": ",\u000a,\u000a,"
+    },
+    {
+      "group": "print",
+      "name": "colons-only",
+      "result": ": : "
+    },
+    {
+      "group": "print",
+      "name": "lone-quote",
+      "result": "\""
+    },
+    {
+      "group": "print",
+      "name": "backslash-outside",
+      "result": "[\u000a    1,\u000a    \\2\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "backslash-at-end",
+      "result": "\"abc\\"
+    },
+    {
+      "group": "print",
+      "name": "leading-text",
+      "result": "xyz{\u000a    \"a\": 1\u000a}"
+    },
+    {
+      "group": "print",
+      "name": "js-literals",
+      "result": "[\u000a    NaN,\u000a    Infinity,\u000a    -Infinity,\u000a    undefined\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "hex-number",
+      "result": "[\u000a    0x1F\u000a]"
+    },
+    {
+      "group": "print",
+      "name": "stray-close-after-document",
+      "result": {
+        "$throws": "System.FormatException: Unexpected ']' at index 7: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "print",
+      "name": "close-in-string-then-stray",
+      "result": {
+        "$throws": "System.FormatException: Unexpected '}' at index 9: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "printer.string",
+      "name": "readme",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "readme",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "readme",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "readme",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "readme",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "readme",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empty-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "empty-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "empty-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "empty-object",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "empty-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "empty-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empty-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "empty-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "empty-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "empty-array",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "empty-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "empty-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empty-object-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "empty-object-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "empty-object-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "empty-object-space",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "empty-object-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "empty-object-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empty-array-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "empty-array-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "empty-array-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "empty-array-space",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "empty-array-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "empty-array-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empty-object-newline",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "empty-object-newline",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "empty-object-newline",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "empty-object-newline",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "empty-object-newline",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "empty-object-newline",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "nested-empty-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "nested-empty-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "nested-empty-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "nested-empty-object",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "nested-empty-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "nested-empty-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "nested-empty-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "nested-empty-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "nested-empty-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "nested-empty-array",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "nested-empty-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "nested-empty-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empties-in-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "empties-in-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "empties-in-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "empties-in-array",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "empties-in-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "empties-in-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empties-deep",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "empties-deep",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "empties-deep",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "empties-deep",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "empties-deep",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "empties-deep",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "empty-then-value",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "empty-then-value",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "empty-then-value",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "empty-then-value",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "empty-then-value",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "empty-then-value",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "flat-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "flat-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "flat-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "flat-object",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "flat-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "flat-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "flat-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "flat-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "flat-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "flat-array",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "flat-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "flat-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "array-of-objects",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "array-of-objects",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "array-of-objects",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "array-of-objects",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "array-of-objects",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "array-of-objects",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "object-of-arrays",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "object-of-arrays",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "object-of-arrays",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "object-of-arrays",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "object-of-arrays",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "object-of-arrays",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "mixed-deep",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "mixed-deep",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "mixed-deep",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "mixed-deep",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "mixed-deep",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "mixed-deep",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "spaced",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "spaced",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "spaced",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "spaced",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "spaced",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "spaced",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "tabs-crlf",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "tabs-crlf",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "tabs-crlf",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "tabs-crlf",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "tabs-crlf",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "tabs-crlf",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "already-pretty",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "already-pretty",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "already-pretty",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "already-pretty",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "already-pretty",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "already-pretty",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "already-pretty-crlf",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "already-pretty-crlf",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "already-pretty-crlf",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "already-pretty-crlf",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "already-pretty-crlf",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "already-pretty-crlf",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "pretty-two-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "pretty-two-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "pretty-two-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "pretty-two-space",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "pretty-two-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "pretty-two-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "string-spaces",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "string-spaces",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "string-spaces",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "string-spaces",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "string-spaces",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "string-spaces",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "string-structure",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "string-structure",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "string-structure",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "string-structure",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "string-structure",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "string-structure",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "escaped-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "escaped-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "escaped-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "escaped-quote",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "escaped-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "escaped-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "escaped-backslash-end",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "escaped-backslash-end",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "escaped-backslash-end",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "escaped-backslash-end",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "escaped-backslash-end",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "escaped-backslash-end",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "escaped-backslash-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "escaped-backslash-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "escaped-backslash-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "escaped-backslash-only",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "escaped-backslash-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "escaped-backslash-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "escaped-backslash-then-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "escaped-backslash-then-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "escaped-backslash-then-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "escaped-backslash-then-quote",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "escaped-backslash-then-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "escaped-backslash-then-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "escape-sequences",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "escape-sequences",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "escape-sequences",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "escape-sequences",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "escape-sequences",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "escape-sequences",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "unicode-escapes",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "unicode-escapes",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "unicode-escapes",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "unicode-escapes",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "unicode-escapes",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "unicode-escapes",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "single-quoted",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "single-quoted",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "single-quoted",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "single-quoted",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "single-quoted",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "single-quoted",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "single-in-double",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "single-in-double",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "single-in-double",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "single-in-double",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "single-in-double",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "single-in-double",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "double-in-single",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "double-in-single",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "double-in-single",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "double-in-single",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "double-in-single",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "double-in-single",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "escaped-single",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "escaped-single",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "escaped-single",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "escaped-single",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "escaped-single",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "escaped-single",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "single-with-structure",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "single-with-structure",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "single-with-structure",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "single-with-structure",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "single-with-structure",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "single-with-structure",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "number",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "negative-zero",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "negative-zero",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "negative-zero",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "negative-zero",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "negative-zero",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "negative-zero",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "decimal",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "decimal",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "decimal",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "decimal",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "decimal",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "decimal",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "exponent",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "exponent",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "exponent",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "exponent",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "exponent",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "exponent",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "leading-zeros",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "leading-zeros",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "leading-zeros",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "leading-zeros",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "leading-zeros",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "leading-zeros",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "string-scalar",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "string-scalar",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "string-scalar",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "string-scalar",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "string-scalar",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "string-scalar",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "true",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "true",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "true",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "true",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "true",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "true",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "null",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "null",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "null",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "null",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "null",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "null",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "padded-number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "padded-number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "padded-number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "padded-number",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "padded-number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "padded-number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "numbers",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "numbers",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "numbers",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "numbers",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "numbers",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "numbers",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "non-ascii",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "non-ascii",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "non-ascii",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "non-ascii",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "non-ascii",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "non-ascii",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "emoji",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "emoji",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "emoji",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "emoji",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "emoji",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "emoji",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "lone-high-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "lone-high-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "lone-high-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "lone-high-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "lone-high-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "lone-high-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "lone-low-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "lone-low-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "lone-low-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "lone-low-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "lone-low-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "lone-low-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "lone-high-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "lone-high-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "lone-high-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "lone-high-outside",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "lone-high-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "lone-high-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "nul-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "nul-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "nul-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "nul-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "nul-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "nul-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "nul-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "nul-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "nul-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "nul-outside",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "nul-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "nul-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "control-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "control-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "control-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "control-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "control-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "control-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "line-separator-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "line-separator-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "line-separator-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "line-separator-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "line-separator-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "line-separator-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "raw-newline-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "raw-newline-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "raw-newline-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "raw-newline-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "raw-newline-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "raw-newline-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "raw-crlf-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "raw-crlf-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "raw-crlf-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "raw-crlf-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "raw-crlf-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "raw-crlf-in-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "bom-start",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "bom-start",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "bom-start",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "bom-start",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "bom-start",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "bom-start",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "nbsp-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "nbsp-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "nbsp-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "nbsp-between",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "nbsp-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "nbsp-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "zero-width-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "zero-width-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "zero-width-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "zero-width-between",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "zero-width-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "zero-width-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "ideographic-space-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "ideographic-space-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "ideographic-space-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "ideographic-space-between",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "ideographic-space-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "ideographic-space-between",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "rtl",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "rtl",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "rtl",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "rtl",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "rtl",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "rtl",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-empty",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "blank-empty",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "blank-empty",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "blank-empty",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "blank-empty",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "blank-empty",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "blank-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "blank-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "blank-space",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "blank-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "blank-space",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-mixed",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "blank-mixed",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "blank-mixed",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "blank-mixed",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "blank-mixed",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "blank-mixed",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-nbsp",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "blank-nbsp",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "blank-nbsp",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "blank-nbsp",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "blank-nbsp",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "blank-nbsp",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-bom",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "blank-bom",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "blank-bom",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "blank-bom",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "blank-bom",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "blank-bom",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-zero-width",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "blank-zero-width",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "blank-zero-width",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "blank-zero-width",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "blank-zero-width",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "blank-zero-width",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-line-separator",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "blank-line-separator",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "blank-line-separator",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "blank-line-separator",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "blank-line-separator",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "blank-line-separator",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-ideographic",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "blank-ideographic",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "blank-ideographic",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "blank-ideographic",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "blank-ideographic",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "blank-ideographic",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-vertical-tab",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "blank-vertical-tab",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "blank-vertical-tab",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "blank-vertical-tab",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "blank-vertical-tab",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "blank-vertical-tab",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-form-feed",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "blank-form-feed",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "blank-form-feed",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "blank-form-feed",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "blank-form-feed",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "blank-form-feed",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "blank-next-line",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "blank-next-line",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "blank-next-line",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "blank-next-line",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "blank-next-line",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "blank-next-line",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "stray-close-brace",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "stray-close-brace",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "stray-close-brace",
+      "result": {
+        "written": "",
+        "$throws": "System.FormatException: Unexpected '}' at index 0: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "stray-close-brace",
+      "result": {
+        "written": "",
+        "$throws": "System.FormatException: Unexpected '}' at index 0: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "extension.default-options",
+      "name": "stray-close-brace",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "stray-close-brace",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "stray-close-bracket",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "stray-close-bracket",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "stray-close-bracket",
+      "result": {
+        "written": "",
+        "$throws": "System.FormatException: Unexpected ']' at index 0: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "stray-close-bracket",
+      "result": {
+        "written": "",
+        "$throws": "System.FormatException: Unexpected ']' at index 0: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "extension.default-options",
+      "name": "stray-close-bracket",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "stray-close-bracket",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "extra-close",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "extra-close",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "extra-close",
+      "result": {
+        "written": "{\u000a    \"a\": 1\u000a}",
+        "$throws": "System.FormatException: Unexpected '}' at index 7: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "extra-close",
+      "result": {
+        "written": "{\u000a    \"a\": 1\u000a}",
+        "$throws": "System.FormatException: Unexpected '}' at index 7: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "extension.default-options",
+      "name": "extra-close",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "extra-close",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "wrong-close-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "wrong-close-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "wrong-close-object",
+      "result": {
+        "written": "{\u000a    \"a\": [\u000a        1",
+        "$throws": "System.FormatException: Unexpected '}' at index 7: expected ']'."
+      }
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "wrong-close-object",
+      "result": {
+        "written": "{\u000a    \"a\": [\u000a        1",
+        "$throws": "System.FormatException: Unexpected '}' at index 7: expected ']'."
+      }
+    },
+    {
+      "group": "extension.default-options",
+      "name": "wrong-close-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "wrong-close-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "wrong-close-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "wrong-close-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "wrong-close-array",
+      "result": {
+        "written": "[\u000a    1,\u000a    2",
+        "$throws": "System.FormatException: Unexpected '}' at index 4: expected ']'."
+      }
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "wrong-close-array",
+      "result": {
+        "written": "[\u000a    1,\u000a    2",
+        "$throws": "System.FormatException: Unexpected '}' at index 4: expected ']'."
+      }
+    },
+    {
+      "group": "extension.default-options",
+      "name": "wrong-close-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "wrong-close-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "close-first",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "close-first",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "close-first",
+      "result": {
+        "written": "",
+        "$throws": "System.FormatException: Unexpected '}' at index 0: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "close-first",
+      "result": {
+        "written": "",
+        "$throws": "System.FormatException: Unexpected '}' at index 0: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "extension.default-options",
+      "name": "close-first",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "close-first",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "unclosed-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "unclosed-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "unclosed-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "unclosed-object",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "unclosed-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "unclosed-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "unclosed-nested",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "unclosed-nested",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "unclosed-nested",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "unclosed-nested",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "unclosed-nested",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "unclosed-nested",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "unclosed-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "unclosed-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "unclosed-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "unclosed-array",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "unclosed-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "unclosed-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "unterminated-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "unterminated-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "unterminated-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "unterminated-string",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "unterminated-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "unterminated-string",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "unbalanced-quotes",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "unbalanced-quotes",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "unbalanced-quotes",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "unbalanced-quotes",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "unbalanced-quotes",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "unbalanced-quotes",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "trailing-comma-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "trailing-comma-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "trailing-comma-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "trailing-comma-object",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "trailing-comma-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "trailing-comma-object",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "trailing-comma-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "trailing-comma-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "trailing-comma-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "trailing-comma-array",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "trailing-comma-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "trailing-comma-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "line-comment",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "line-comment",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "line-comment",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "line-comment",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "line-comment",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "line-comment",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "block-comment",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "block-comment",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "block-comment",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "block-comment",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "block-comment",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "block-comment",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "bare-words",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "bare-words",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "bare-words",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "bare-words",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "bare-words",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "bare-words",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "two-documents",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "two-documents",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "two-documents",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "two-documents",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "two-documents",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "two-documents",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "two-documents-values",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "two-documents-values",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "two-documents-values",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "two-documents-values",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "two-documents-values",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "two-documents-values",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "colon-in-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "colon-in-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "colon-in-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "colon-in-array",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "colon-in-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "colon-in-array",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "commas-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "commas-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "commas-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "commas-only",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "commas-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "commas-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "colons-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "colons-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "colons-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "colons-only",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "colons-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "colons-only",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "lone-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "lone-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "lone-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "lone-quote",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "lone-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "lone-quote",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "backslash-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "backslash-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "backslash-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "backslash-outside",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "backslash-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "backslash-outside",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "backslash-at-end",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "backslash-at-end",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "backslash-at-end",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "backslash-at-end",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "backslash-at-end",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "backslash-at-end",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "leading-text",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "leading-text",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "leading-text",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "leading-text",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "leading-text",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "leading-text",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "js-literals",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "js-literals",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "js-literals",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "js-literals",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "js-literals",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "js-literals",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "hex-number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "hex-number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "hex-number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "hex-number",
+      "result": "=print"
+    },
+    {
+      "group": "extension.default-options",
+      "name": "hex-number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "hex-number",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "stray-close-after-document",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "stray-close-after-document",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "stray-close-after-document",
+      "result": {
+        "written": "{\u000a    \"a\": 1\u000a}",
+        "$throws": "System.FormatException: Unexpected ']' at index 7: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "stray-close-after-document",
+      "result": {
+        "written": "{\u000a    \"a\": 1\u000a}",
+        "$throws": "System.FormatException: Unexpected ']' at index 7: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "extension.default-options",
+      "name": "stray-close-after-document",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "stray-close-after-document",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string",
+      "name": "close-in-string-then-stray",
+      "result": "=print"
+    },
+    {
+      "group": "printer.span",
+      "name": "close-in-string-then-stray",
+      "result": "=print"
+    },
+    {
+      "group": "printer.string.writer",
+      "name": "close-in-string-then-stray",
+      "result": {
+        "written": "{\u000a    \"a\": \"}\"\u000a}",
+        "$throws": "System.FormatException: Unexpected '}' at index 9: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "printer.span.writer",
+      "name": "close-in-string-then-stray",
+      "result": {
+        "written": "{\u000a    \"a\": \"}\"\u000a}",
+        "$throws": "System.FormatException: Unexpected '}' at index 9: there is no open object or array to close."
+      }
+    },
+    {
+      "group": "extension.default-options",
+      "name": "close-in-string-then-stray",
+      "result": "=print"
+    },
+    {
+      "group": "printer.default-options",
+      "name": "close-in-string-then-stray",
+      "result": "=print"
+    },
+    {
+      "group": "idempotent",
+      "name": "readme",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empty-object",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empty-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empty-object-space",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empty-array-space",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empty-object-newline",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "nested-empty-object",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "nested-empty-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empties-in-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empties-deep",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "empty-then-value",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "flat-object",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "flat-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "array-of-objects",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "object-of-arrays",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "mixed-deep",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "spaced",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "tabs-crlf",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "already-pretty",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "already-pretty-crlf",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "pretty-two-space",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "string-spaces",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "string-structure",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "escaped-quote",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "escaped-backslash-end",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "escaped-backslash-only",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "escaped-backslash-then-quote",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "escape-sequences",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "unicode-escapes",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "single-quoted",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "single-in-double",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "double-in-single",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "escaped-single",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "single-with-structure",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "number",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "negative-zero",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "decimal",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "exponent",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "leading-zeros",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "string-scalar",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "true",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "null",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "padded-number",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "numbers",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "non-ascii",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "emoji",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "lone-high-in-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "lone-low-in-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "lone-high-outside",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "nul-in-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "nul-outside",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "control-in-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "line-separator-in-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "raw-newline-in-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "raw-crlf-in-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "bom-start",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "nbsp-between",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "zero-width-between",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "ideographic-space-between",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "rtl",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-empty",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-space",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-mixed",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-nbsp",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-bom",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-zero-width",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-line-separator",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-ideographic",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-vertical-tab",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-form-feed",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "blank-next-line",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "unclosed-object",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "unclosed-nested",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "unclosed-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "unterminated-string",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "unbalanced-quotes",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "trailing-comma-object",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "trailing-comma-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "line-comment",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "block-comment",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "bare-words",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "two-documents",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "two-documents-values",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "colon-in-array",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "commas-only",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "colons-only",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "lone-quote",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "backslash-outside",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "backslash-at-end",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "leading-text",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "js-literals",
+      "result": true
+    },
+    {
+      "group": "idempotent",
+      "name": "hex-number",
+      "result": true
+    },
+    {
+      "group": "options.indent-0",
+      "name": "readme",
+      "result": "{\u000a\"Lorem\": \"ipsum\",\u000a\"dolor\": {\u000a\"sit\": \"amet\"\u000a},\u000a\"consectetur\": {\u000a\"adipisicing\": {\u000a\"sed\": \"do\"\u000a}\u000a},\u000a\"empty\": {}\u000a}"
+    },
+    {
+      "group": "options.indent-0",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.indent-0",
+      "name": "nested-empty-object",
+      "result": "{\u000a\"a\": {}\u000a}"
+    },
+    {
+      "group": "options.indent-0",
+      "name": "empties-in-array",
+      "result": "[\u000a{},\u000a[],\u000a{},\u000a[]\u000a]"
+    },
+    {
+      "group": "options.indent-0",
+      "name": "flat-array",
+      "result": "[\u000a1,\u000a2,\u000a3\u000a]"
+    },
+    {
+      "group": "options.indent-0",
+      "name": "object-of-arrays",
+      "result": "{\u000a\"a\": [\u000a1,\u000a2\u000a],\u000a\"b\": [\u000a[\u000a3\u000a],\u000a[\u000a4,\u000a5\u000a]\u000a]\u000a}"
+    },
+    {
+      "group": "options.indent-0",
+      "name": "string-structure",
+      "result": "{\u000a\"a\": \"{[,:]}\"\u000a}"
+    },
+    {
+      "group": "options.indent-0",
+      "name": "raw-newline-in-string",
+      "result": "{\u000a\"a\": \"line1\u000aline2\"\u000a}"
+    },
+    {
+      "group": "options.indent-0",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.indent-0",
+      "name": "unclosed-object",
+      "result": "{\u000a\"a\": 1"
+    },
+    {
+      "group": "options.indent-1",
+      "name": "readme",
+      "result": "{\u000a \"Lorem\": \"ipsum\",\u000a \"dolor\": {\u000a  \"sit\": \"amet\"\u000a },\u000a \"consectetur\": {\u000a  \"adipisicing\": {\u000a   \"sed\": \"do\"\u000a  }\u000a },\u000a \"empty\": {}\u000a}"
+    },
+    {
+      "group": "options.indent-1",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.indent-1",
+      "name": "nested-empty-object",
+      "result": "{\u000a \"a\": {}\u000a}"
+    },
+    {
+      "group": "options.indent-1",
+      "name": "empties-in-array",
+      "result": "[\u000a {},\u000a [],\u000a {},\u000a []\u000a]"
+    },
+    {
+      "group": "options.indent-1",
+      "name": "flat-array",
+      "result": "[\u000a 1,\u000a 2,\u000a 3\u000a]"
+    },
+    {
+      "group": "options.indent-1",
+      "name": "object-of-arrays",
+      "result": "{\u000a \"a\": [\u000a  1,\u000a  2\u000a ],\u000a \"b\": [\u000a  [\u000a   3\u000a  ],\u000a  [\u000a   4,\u000a   5\u000a  ]\u000a ]\u000a}"
+    },
+    {
+      "group": "options.indent-1",
+      "name": "string-structure",
+      "result": "{\u000a \"a\": \"{[,:]}\"\u000a}"
+    },
+    {
+      "group": "options.indent-1",
+      "name": "raw-newline-in-string",
+      "result": "{\u000a \"a\": \"line1\u000aline2\"\u000a}"
+    },
+    {
+      "group": "options.indent-1",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.indent-1",
+      "name": "unclosed-object",
+      "result": "{\u000a \"a\": 1"
+    },
+    {
+      "group": "options.indent-2",
+      "name": "readme",
+      "result": "{\u000a  \"Lorem\": \"ipsum\",\u000a  \"dolor\": {\u000a    \"sit\": \"amet\"\u000a  },\u000a  \"consectetur\": {\u000a    \"adipisicing\": {\u000a      \"sed\": \"do\"\u000a    }\u000a  },\u000a  \"empty\": {}\u000a}"
+    },
+    {
+      "group": "options.indent-2",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.indent-2",
+      "name": "nested-empty-object",
+      "result": "{\u000a  \"a\": {}\u000a}"
+    },
+    {
+      "group": "options.indent-2",
+      "name": "empties-in-array",
+      "result": "[\u000a  {},\u000a  [],\u000a  {},\u000a  []\u000a]"
+    },
+    {
+      "group": "options.indent-2",
+      "name": "flat-array",
+      "result": "[\u000a  1,\u000a  2,\u000a  3\u000a]"
+    },
+    {
+      "group": "options.indent-2",
+      "name": "object-of-arrays",
+      "result": "{\u000a  \"a\": [\u000a    1,\u000a    2\u000a  ],\u000a  \"b\": [\u000a    [\u000a      3\u000a    ],\u000a    [\u000a      4,\u000a      5\u000a    ]\u000a  ]\u000a}"
+    },
+    {
+      "group": "options.indent-2",
+      "name": "string-structure",
+      "result": "{\u000a  \"a\": \"{[,:]}\"\u000a}"
+    },
+    {
+      "group": "options.indent-2",
+      "name": "raw-newline-in-string",
+      "result": "{\u000a  \"a\": \"line1\u000aline2\"\u000a}"
+    },
+    {
+      "group": "options.indent-2",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.indent-2",
+      "name": "unclosed-object",
+      "result": "{\u000a  \"a\": 1"
+    },
+    {
+      "group": "options.indent-8",
+      "name": "readme",
+      "result": "{\u000a        \"Lorem\": \"ipsum\",\u000a        \"dolor\": {\u000a                \"sit\": \"amet\"\u000a        },\u000a        \"consectetur\": {\u000a                \"adipisicing\": {\u000a                        \"sed\": \"do\"\u000a                }\u000a        },\u000a        \"empty\": {}\u000a}"
+    },
+    {
+      "group": "options.indent-8",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.indent-8",
+      "name": "nested-empty-object",
+      "result": "{\u000a        \"a\": {}\u000a}"
+    },
+    {
+      "group": "options.indent-8",
+      "name": "empties-in-array",
+      "result": "[\u000a        {},\u000a        [],\u000a        {},\u000a        []\u000a]"
+    },
+    {
+      "group": "options.indent-8",
+      "name": "flat-array",
+      "result": "[\u000a        1,\u000a        2,\u000a        3\u000a]"
+    },
+    {
+      "group": "options.indent-8",
+      "name": "object-of-arrays",
+      "result": "{\u000a        \"a\": [\u000a                1,\u000a                2\u000a        ],\u000a        \"b\": [\u000a                [\u000a                        3\u000a                ],\u000a                [\u000a                        4,\u000a                        5\u000a                ]\u000a        ]\u000a}"
+    },
+    {
+      "group": "options.indent-8",
+      "name": "string-structure",
+      "result": "{\u000a        \"a\": \"{[,:]}\"\u000a}"
+    },
+    {
+      "group": "options.indent-8",
+      "name": "raw-newline-in-string",
+      "result": "{\u000a        \"a\": \"line1\u000aline2\"\u000a}"
+    },
+    {
+      "group": "options.indent-8",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.indent-8",
+      "name": "unclosed-object",
+      "result": "{\u000a        \"a\": 1"
+    },
+    {
+      "group": "options.tabs",
+      "name": "readme",
+      "result": "{\u000a\u0009\"Lorem\": \"ipsum\",\u000a\u0009\"dolor\": {\u000a\u0009\u0009\"sit\": \"amet\"\u000a\u0009},\u000a\u0009\"consectetur\": {\u000a\u0009\u0009\"adipisicing\": {\u000a\u0009\u0009\u0009\"sed\": \"do\"\u000a\u0009\u0009}\u000a\u0009},\u000a\u0009\"empty\": {}\u000a}"
+    },
+    {
+      "group": "options.tabs",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.tabs",
+      "name": "nested-empty-object",
+      "result": "{\u000a\u0009\"a\": {}\u000a}"
+    },
+    {
+      "group": "options.tabs",
+      "name": "empties-in-array",
+      "result": "[\u000a\u0009{},\u000a\u0009[],\u000a\u0009{},\u000a\u0009[]\u000a]"
+    },
+    {
+      "group": "options.tabs",
+      "name": "flat-array",
+      "result": "[\u000a\u00091,\u000a\u00092,\u000a\u00093\u000a]"
+    },
+    {
+      "group": "options.tabs",
+      "name": "object-of-arrays",
+      "result": "{\u000a\u0009\"a\": [\u000a\u0009\u00091,\u000a\u0009\u00092\u000a\u0009],\u000a\u0009\"b\": [\u000a\u0009\u0009[\u000a\u0009\u0009\u00093\u000a\u0009\u0009],\u000a\u0009\u0009[\u000a\u0009\u0009\u00094,\u000a\u0009\u0009\u00095\u000a\u0009\u0009]\u000a\u0009]\u000a}"
+    },
+    {
+      "group": "options.tabs",
+      "name": "string-structure",
+      "result": "{\u000a\u0009\"a\": \"{[,:]}\"\u000a}"
+    },
+    {
+      "group": "options.tabs",
+      "name": "raw-newline-in-string",
+      "result": "{\u000a\u0009\"a\": \"line1\u000aline2\"\u000a}"
+    },
+    {
+      "group": "options.tabs",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.tabs",
+      "name": "unclosed-object",
+      "result": "{\u000a\u0009\"a\": 1"
+    },
+    {
+      "group": "options.tabs-indent-2",
+      "name": "readme",
+      "result": "{\u000a\u0009\"Lorem\": \"ipsum\",\u000a\u0009\"dolor\": {\u000a\u0009\u0009\"sit\": \"amet\"\u000a\u0009},\u000a\u0009\"consectetur\": {\u000a\u0009\u0009\"adipisicing\": {\u000a\u0009\u0009\u0009\"sed\": \"do\"\u000a\u0009\u0009}\u000a\u0009},\u000a\u0009\"empty\": {}\u000a}"
+    },
+    {
+      "group": "options.tabs-indent-2",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.tabs-indent-2",
+      "name": "nested-empty-object",
+      "result": "{\u000a\u0009\"a\": {}\u000a}"
+    },
+    {
+      "group": "options.tabs-indent-2",
+      "name": "empties-in-array",
+      "result": "[\u000a\u0009{},\u000a\u0009[],\u000a\u0009{},\u000a\u0009[]\u000a]"
+    },
+    {
+      "group": "options.tabs-indent-2",
+      "name": "flat-array",
+      "result": "[\u000a\u00091,\u000a\u00092,\u000a\u00093\u000a]"
+    },
+    {
+      "group": "options.tabs-indent-2",
+      "name": "object-of-arrays",
+      "result": "{\u000a\u0009\"a\": [\u000a\u0009\u00091,\u000a\u0009\u00092\u000a\u0009],\u000a\u0009\"b\": [\u000a\u0009\u0009[\u000a\u0009\u0009\u00093\u000a\u0009\u0009],\u000a\u0009\u0009[\u000a\u0009\u0009\u00094,\u000a\u0009\u0009\u00095\u000a\u0009\u0009]\u000a\u0009]\u000a}"
+    },
+    {
+      "group": "options.tabs-indent-2",
+      "name": "string-structure",
+      "result": "{\u000a\u0009\"a\": \"{[,:]}\"\u000a}"
+    },
+    {
+      "group": "options.tabs-indent-2",
+      "name": "raw-newline-in-string",
+      "result": "{\u000a\u0009\"a\": \"line1\u000aline2\"\u000a}"
+    },
+    {
+      "group": "options.tabs-indent-2",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.tabs-indent-2",
+      "name": "unclosed-object",
+      "result": "{\u000a\u0009\"a\": 1"
+    },
+    {
+      "group": "options.tabs-indent-0",
+      "name": "readme",
+      "result": "{\u000a\u0009\"Lorem\": \"ipsum\",\u000a\u0009\"dolor\": {\u000a\u0009\u0009\"sit\": \"amet\"\u000a\u0009},\u000a\u0009\"consectetur\": {\u000a\u0009\u0009\"adipisicing\": {\u000a\u0009\u0009\u0009\"sed\": \"do\"\u000a\u0009\u0009}\u000a\u0009},\u000a\u0009\"empty\": {}\u000a}"
+    },
+    {
+      "group": "options.tabs-indent-0",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.tabs-indent-0",
+      "name": "nested-empty-object",
+      "result": "{\u000a\u0009\"a\": {}\u000a}"
+    },
+    {
+      "group": "options.tabs-indent-0",
+      "name": "empties-in-array",
+      "result": "[\u000a\u0009{},\u000a\u0009[],\u000a\u0009{},\u000a\u0009[]\u000a]"
+    },
+    {
+      "group": "options.tabs-indent-0",
+      "name": "flat-array",
+      "result": "[\u000a\u00091,\u000a\u00092,\u000a\u00093\u000a]"
+    },
+    {
+      "group": "options.tabs-indent-0",
+      "name": "object-of-arrays",
+      "result": "{\u000a\u0009\"a\": [\u000a\u0009\u00091,\u000a\u0009\u00092\u000a\u0009],\u000a\u0009\"b\": [\u000a\u0009\u0009[\u000a\u0009\u0009\u00093\u000a\u0009\u0009],\u000a\u0009\u0009[\u000a\u0009\u0009\u00094,\u000a\u0009\u0009\u00095\u000a\u0009\u0009]\u000a\u0009]\u000a}"
+    },
+    {
+      "group": "options.tabs-indent-0",
+      "name": "string-structure",
+      "result": "{\u000a\u0009\"a\": \"{[,:]}\"\u000a}"
+    },
+    {
+      "group": "options.tabs-indent-0",
+      "name": "raw-newline-in-string",
+      "result": "{\u000a\u0009\"a\": \"line1\u000aline2\"\u000a}"
+    },
+    {
+      "group": "options.tabs-indent-0",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.tabs-indent-0",
+      "name": "unclosed-object",
+      "result": "{\u000a\u0009\"a\": 1"
+    },
+    {
+      "group": "options.newline-lf",
+      "name": "readme",
+      "result": "{\u000a    \"Lorem\": \"ipsum\",\u000a    \"dolor\": {\u000a        \"sit\": \"amet\"\u000a    },\u000a    \"consectetur\": {\u000a        \"adipisicing\": {\u000a            \"sed\": \"do\"\u000a        }\u000a    },\u000a    \"empty\": {}\u000a}"
+    },
+    {
+      "group": "options.newline-lf",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.newline-lf",
+      "name": "nested-empty-object",
+      "result": "{\u000a    \"a\": {}\u000a}"
+    },
+    {
+      "group": "options.newline-lf",
+      "name": "empties-in-array",
+      "result": "[\u000a    {},\u000a    [],\u000a    {},\u000a    []\u000a]"
+    },
+    {
+      "group": "options.newline-lf",
+      "name": "flat-array",
+      "result": "[\u000a    1,\u000a    2,\u000a    3\u000a]"
+    },
+    {
+      "group": "options.newline-lf",
+      "name": "object-of-arrays",
+      "result": "{\u000a    \"a\": [\u000a        1,\u000a        2\u000a    ],\u000a    \"b\": [\u000a        [\u000a            3\u000a        ],\u000a        [\u000a            4,\u000a            5\u000a        ]\u000a    ]\u000a}"
+    },
+    {
+      "group": "options.newline-lf",
+      "name": "string-structure",
+      "result": "{\u000a    \"a\": \"{[,:]}\"\u000a}"
+    },
+    {
+      "group": "options.newline-lf",
+      "name": "raw-newline-in-string",
+      "result": "{\u000a    \"a\": \"line1\u000aline2\"\u000a}"
+    },
+    {
+      "group": "options.newline-lf",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.newline-lf",
+      "name": "unclosed-object",
+      "result": "{\u000a    \"a\": 1"
+    },
+    {
+      "group": "options.newline-crlf",
+      "name": "readme",
+      "result": "{\u000d\u000a    \"Lorem\": \"ipsum\",\u000d\u000a    \"dolor\": {\u000d\u000a        \"sit\": \"amet\"\u000d\u000a    },\u000d\u000a    \"consectetur\": {\u000d\u000a        \"adipisicing\": {\u000d\u000a            \"sed\": \"do\"\u000d\u000a        }\u000d\u000a    },\u000d\u000a    \"empty\": {}\u000d\u000a}"
+    },
+    {
+      "group": "options.newline-crlf",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.newline-crlf",
+      "name": "nested-empty-object",
+      "result": "{\u000d\u000a    \"a\": {}\u000d\u000a}"
+    },
+    {
+      "group": "options.newline-crlf",
+      "name": "empties-in-array",
+      "result": "[\u000d\u000a    {},\u000d\u000a    [],\u000d\u000a    {},\u000d\u000a    []\u000d\u000a]"
+    },
+    {
+      "group": "options.newline-crlf",
+      "name": "flat-array",
+      "result": "[\u000d\u000a    1,\u000d\u000a    2,\u000d\u000a    3\u000d\u000a]"
+    },
+    {
+      "group": "options.newline-crlf",
+      "name": "object-of-arrays",
+      "result": "{\u000d\u000a    \"a\": [\u000d\u000a        1,\u000d\u000a        2\u000d\u000a    ],\u000d\u000a    \"b\": [\u000d\u000a        [\u000d\u000a            3\u000d\u000a        ],\u000d\u000a        [\u000d\u000a            4,\u000d\u000a            5\u000d\u000a        ]\u000d\u000a    ]\u000d\u000a}"
+    },
+    {
+      "group": "options.newline-crlf",
+      "name": "string-structure",
+      "result": "{\u000d\u000a    \"a\": \"{[,:]}\"\u000d\u000a}"
+    },
+    {
+      "group": "options.newline-crlf",
+      "name": "raw-newline-in-string",
+      "result": "{\u000d\u000a    \"a\": \"line1\u000aline2\"\u000d\u000a}"
+    },
+    {
+      "group": "options.newline-crlf",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.newline-crlf",
+      "name": "unclosed-object",
+      "result": "{\u000d\u000a    \"a\": 1"
+    },
+    {
+      "group": "options.newline-cr",
+      "name": "readme",
+      "result": "{\u000d    \"Lorem\": \"ipsum\",\u000d    \"dolor\": {\u000d        \"sit\": \"amet\"\u000d    },\u000d    \"consectetur\": {\u000d        \"adipisicing\": {\u000d            \"sed\": \"do\"\u000d        }\u000d    },\u000d    \"empty\": {}\u000d}"
+    },
+    {
+      "group": "options.newline-cr",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.newline-cr",
+      "name": "nested-empty-object",
+      "result": "{\u000d    \"a\": {}\u000d}"
+    },
+    {
+      "group": "options.newline-cr",
+      "name": "empties-in-array",
+      "result": "[\u000d    {},\u000d    [],\u000d    {},\u000d    []\u000d]"
+    },
+    {
+      "group": "options.newline-cr",
+      "name": "flat-array",
+      "result": "[\u000d    1,\u000d    2,\u000d    3\u000d]"
+    },
+    {
+      "group": "options.newline-cr",
+      "name": "object-of-arrays",
+      "result": "{\u000d    \"a\": [\u000d        1,\u000d        2\u000d    ],\u000d    \"b\": [\u000d        [\u000d            3\u000d        ],\u000d        [\u000d            4,\u000d            5\u000d        ]\u000d    ]\u000d}"
+    },
+    {
+      "group": "options.newline-cr",
+      "name": "string-structure",
+      "result": "{\u000d    \"a\": \"{[,:]}\"\u000d}"
+    },
+    {
+      "group": "options.newline-cr",
+      "name": "raw-newline-in-string",
+      "result": "{\u000d    \"a\": \"line1\u000aline2\"\u000d}"
+    },
+    {
+      "group": "options.newline-cr",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.newline-cr",
+      "name": "unclosed-object",
+      "result": "{\u000d    \"a\": 1"
+    },
+    {
+      "group": "options.newline-empty",
+      "name": "readme",
+      "result": "{    \"Lorem\": \"ipsum\",    \"dolor\": {        \"sit\": \"amet\"    },    \"consectetur\": {        \"adipisicing\": {            \"sed\": \"do\"        }    },    \"empty\": {}}"
+    },
+    {
+      "group": "options.newline-empty",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.newline-empty",
+      "name": "nested-empty-object",
+      "result": "{    \"a\": {}}"
+    },
+    {
+      "group": "options.newline-empty",
+      "name": "empties-in-array",
+      "result": "[    {},    [],    {},    []]"
+    },
+    {
+      "group": "options.newline-empty",
+      "name": "flat-array",
+      "result": "[    1,    2,    3]"
+    },
+    {
+      "group": "options.newline-empty",
+      "name": "object-of-arrays",
+      "result": "{    \"a\": [        1,        2    ],    \"b\": [        [            3        ],        [            4,            5        ]    ]}"
+    },
+    {
+      "group": "options.newline-empty",
+      "name": "string-structure",
+      "result": "{    \"a\": \"{[,:]}\"}"
+    },
+    {
+      "group": "options.newline-empty",
+      "name": "raw-newline-in-string",
+      "result": "{    \"a\": \"line1\u000aline2\"}"
+    },
+    {
+      "group": "options.newline-empty",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.newline-empty",
+      "name": "unclosed-object",
+      "result": "{    \"a\": 1"
+    },
+    {
+      "group": "options.newline-space-indent-0",
+      "name": "readme",
+      "result": "{ \"Lorem\": \"ipsum\", \"dolor\": { \"sit\": \"amet\" }, \"consectetur\": { \"adipisicing\": { \"sed\": \"do\" } }, \"empty\": {} }"
+    },
+    {
+      "group": "options.newline-space-indent-0",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.newline-space-indent-0",
+      "name": "nested-empty-object",
+      "result": "{ \"a\": {} }"
+    },
+    {
+      "group": "options.newline-space-indent-0",
+      "name": "empties-in-array",
+      "result": "[ {}, [], {}, [] ]"
+    },
+    {
+      "group": "options.newline-space-indent-0",
+      "name": "flat-array",
+      "result": "[ 1, 2, 3 ]"
+    },
+    {
+      "group": "options.newline-space-indent-0",
+      "name": "object-of-arrays",
+      "result": "{ \"a\": [ 1, 2 ], \"b\": [ [ 3 ], [ 4, 5 ] ] }"
+    },
+    {
+      "group": "options.newline-space-indent-0",
+      "name": "string-structure",
+      "result": "{ \"a\": \"{[,:]}\" }"
+    },
+    {
+      "group": "options.newline-space-indent-0",
+      "name": "raw-newline-in-string",
+      "result": "{ \"a\": \"line1\u000aline2\" }"
+    },
+    {
+      "group": "options.newline-space-indent-0",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.newline-space-indent-0",
+      "name": "unclosed-object",
+      "result": "{ \"a\": 1"
+    },
+    {
+      "group": "options.newline-text",
+      "name": "readme",
+      "result": "{<br>    \"Lorem\": \"ipsum\",<br>    \"dolor\": {<br>        \"sit\": \"amet\"<br>    },<br>    \"consectetur\": {<br>        \"adipisicing\": {<br>            \"sed\": \"do\"<br>        }<br>    },<br>    \"empty\": {}<br>}"
+    },
+    {
+      "group": "options.newline-text",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.newline-text",
+      "name": "nested-empty-object",
+      "result": "{<br>    \"a\": {}<br>}"
+    },
+    {
+      "group": "options.newline-text",
+      "name": "empties-in-array",
+      "result": "[<br>    {},<br>    [],<br>    {},<br>    []<br>]"
+    },
+    {
+      "group": "options.newline-text",
+      "name": "flat-array",
+      "result": "[<br>    1,<br>    2,<br>    3<br>]"
+    },
+    {
+      "group": "options.newline-text",
+      "name": "object-of-arrays",
+      "result": "{<br>    \"a\": [<br>        1,<br>        2<br>    ],<br>    \"b\": [<br>        [<br>            3<br>        ],<br>        [<br>            4,<br>            5<br>        ]<br>    ]<br>}"
+    },
+    {
+      "group": "options.newline-text",
+      "name": "string-structure",
+      "result": "{<br>    \"a\": \"{[,:]}\"<br>}"
+    },
+    {
+      "group": "options.newline-text",
+      "name": "raw-newline-in-string",
+      "result": "{<br>    \"a\": \"line1\u000aline2\"<br>}"
+    },
+    {
+      "group": "options.newline-text",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.newline-text",
+      "name": "unclosed-object",
+      "result": "{<br>    \"a\": 1"
+    },
+    {
+      "group": "options.indent-2-crlf",
+      "name": "readme",
+      "result": "{\u000d\u000a  \"Lorem\": \"ipsum\",\u000d\u000a  \"dolor\": {\u000d\u000a    \"sit\": \"amet\"\u000d\u000a  },\u000d\u000a  \"consectetur\": {\u000d\u000a    \"adipisicing\": {\u000d\u000a      \"sed\": \"do\"\u000d\u000a    }\u000d\u000a  },\u000d\u000a  \"empty\": {}\u000d\u000a}"
+    },
+    {
+      "group": "options.indent-2-crlf",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.indent-2-crlf",
+      "name": "nested-empty-object",
+      "result": "{\u000d\u000a  \"a\": {}\u000d\u000a}"
+    },
+    {
+      "group": "options.indent-2-crlf",
+      "name": "empties-in-array",
+      "result": "[\u000d\u000a  {},\u000d\u000a  [],\u000d\u000a  {},\u000d\u000a  []\u000d\u000a]"
+    },
+    {
+      "group": "options.indent-2-crlf",
+      "name": "flat-array",
+      "result": "[\u000d\u000a  1,\u000d\u000a  2,\u000d\u000a  3\u000d\u000a]"
+    },
+    {
+      "group": "options.indent-2-crlf",
+      "name": "object-of-arrays",
+      "result": "{\u000d\u000a  \"a\": [\u000d\u000a    1,\u000d\u000a    2\u000d\u000a  ],\u000d\u000a  \"b\": [\u000d\u000a    [\u000d\u000a      3\u000d\u000a    ],\u000d\u000a    [\u000d\u000a      4,\u000d\u000a      5\u000d\u000a    ]\u000d\u000a  ]\u000d\u000a}"
+    },
+    {
+      "group": "options.indent-2-crlf",
+      "name": "string-structure",
+      "result": "{\u000d\u000a  \"a\": \"{[,:]}\"\u000d\u000a}"
+    },
+    {
+      "group": "options.indent-2-crlf",
+      "name": "raw-newline-in-string",
+      "result": "{\u000d\u000a  \"a\": \"line1\u000aline2\"\u000d\u000a}"
+    },
+    {
+      "group": "options.indent-2-crlf",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.indent-2-crlf",
+      "name": "unclosed-object",
+      "result": "{\u000d\u000a  \"a\": 1"
+    },
+    {
+      "group": "options.default-instance",
+      "name": "readme",
+      "result": "{\u000a    \"Lorem\": \"ipsum\",\u000a    \"dolor\": {\u000a        \"sit\": \"amet\"\u000a    },\u000a    \"consectetur\": {\u000a        \"adipisicing\": {\u000a            \"sed\": \"do\"\u000a        }\u000a    },\u000a    \"empty\": {}\u000a}"
+    },
+    {
+      "group": "options.default-instance",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.default-instance",
+      "name": "nested-empty-object",
+      "result": "{\u000a    \"a\": {}\u000a}"
+    },
+    {
+      "group": "options.default-instance",
+      "name": "empties-in-array",
+      "result": "[\u000a    {},\u000a    [],\u000a    {},\u000a    []\u000a]"
+    },
+    {
+      "group": "options.default-instance",
+      "name": "flat-array",
+      "result": "[\u000a    1,\u000a    2,\u000a    3\u000a]"
+    },
+    {
+      "group": "options.default-instance",
+      "name": "object-of-arrays",
+      "result": "{\u000a    \"a\": [\u000a        1,\u000a        2\u000a    ],\u000a    \"b\": [\u000a        [\u000a            3\u000a        ],\u000a        [\u000a            4,\u000a            5\u000a        ]\u000a    ]\u000a}"
+    },
+    {
+      "group": "options.default-instance",
+      "name": "string-structure",
+      "result": "{\u000a    \"a\": \"{[,:]}\"\u000a}"
+    },
+    {
+      "group": "options.default-instance",
+      "name": "raw-newline-in-string",
+      "result": "{\u000a    \"a\": \"line1\u000aline2\"\u000a}"
+    },
+    {
+      "group": "options.default-instance",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.default-instance",
+      "name": "unclosed-object",
+      "result": "{\u000a    \"a\": 1"
+    },
+    {
+      "group": "options.new-instance",
+      "name": "readme",
+      "result": "{\u000a    \"Lorem\": \"ipsum\",\u000a    \"dolor\": {\u000a        \"sit\": \"amet\"\u000a    },\u000a    \"consectetur\": {\u000a        \"adipisicing\": {\u000a            \"sed\": \"do\"\u000a        }\u000a    },\u000a    \"empty\": {}\u000a}"
+    },
+    {
+      "group": "options.new-instance",
+      "name": "empty-object",
+      "result": "{}"
+    },
+    {
+      "group": "options.new-instance",
+      "name": "nested-empty-object",
+      "result": "{\u000a    \"a\": {}\u000a}"
+    },
+    {
+      "group": "options.new-instance",
+      "name": "empties-in-array",
+      "result": "[\u000a    {},\u000a    [],\u000a    {},\u000a    []\u000a]"
+    },
+    {
+      "group": "options.new-instance",
+      "name": "flat-array",
+      "result": "[\u000a    1,\u000a    2,\u000a    3\u000a]"
+    },
+    {
+      "group": "options.new-instance",
+      "name": "object-of-arrays",
+      "result": "{\u000a    \"a\": [\u000a        1,\u000a        2\u000a    ],\u000a    \"b\": [\u000a        [\u000a            3\u000a        ],\u000a        [\u000a            4,\u000a            5\u000a        ]\u000a    ]\u000a}"
+    },
+    {
+      "group": "options.new-instance",
+      "name": "string-structure",
+      "result": "{\u000a    \"a\": \"{[,:]}\"\u000a}"
+    },
+    {
+      "group": "options.new-instance",
+      "name": "raw-newline-in-string",
+      "result": "{\u000a    \"a\": \"line1\u000aline2\"\u000a}"
+    },
+    {
+      "group": "options.new-instance",
+      "name": "number",
+      "result": "1"
+    },
+    {
+      "group": "options.new-instance",
+      "name": "unclosed-object",
+      "result": "{\u000a    \"a\": 1"
+    },
+    {
+      "group": "options.errors",
+      "name": "indent-negative",
+      "result": {
+        "$throws": "System.ArgumentOutOfRangeException: IndentSize cannot be negative. (Parameter 'value')",
+        "$param": "value"
+      }
+    },
+    {
+      "group": "options.errors",
+      "name": "indent-min-value",
+      "result": {
+        "$throws": "System.ArgumentOutOfRangeException: IndentSize cannot be negative. (Parameter 'value')",
+        "$param": "value"
+      }
+    },
+    {
+      "group": "options.errors",
+      "name": "newline-null",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'value')",
+        "$param": "value"
+      }
+    },
+    {
+      "group": "options.errors",
+      "name": "indent-max-value-options",
+      "result": 2147483647
+    },
+    {
+      "group": "options.errors",
+      "name": "indent-max-value-printer",
+      "result": {
+        "$throws": "System.OutOfMemoryException: Insufficient memory to continue the execution of the program."
+      }
+    },
+    {
+      "group": "options.errors",
+      "name": "indent-max-value-extension",
+      "result": {
+        "$throws": "System.OutOfMemoryException: Insufficient memory to continue the execution of the program."
+      }
+    },
+    {
+      "group": "options.errors",
+      "name": "indent-max-value-with-tabs",
+      "result": "[\u000a\u00091,\u000a\u00092,\u000a\u00093\u000a]"
+    },
+    {
+      "group": "options.errors",
+      "name": "indent-100000",
+      "result": {
+        "length": 2500043,
+        "sha256": "ae19429297d0329d6b75f16a5d1bab3b0747666167d26d71eee54834f512d603",
+        "head": "{\u000a                                                                                                                                                                                                      ",
+        "tail": "                                                                                                                                                                                                     ]\u000a}"
+      }
+    },
+    {
+      "group": "options.errors",
+      "name": "newline-10000-chars",
+      "result": {
+        "length": 40019,
+        "sha256": "ec7ff295cced8a6c6ac75453837e1ae2b40f69946f4a951147665e24d5a238b3",
+        "head": "[xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "tail": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx]"
+      }
+    },
+    {
+      "group": "options.record",
+      "name": "default-values",
+      "result": {
+        "IndentSize": 4,
+        "UseTabs": false,
+        "NewLine": "\u000a"
+      }
+    },
+    {
+      "group": "options.record",
+      "name": "default-to-string",
+      "result": "JsonPrettyPrintOptions { IndentSize = 4, UseTabs = False, NewLine = \u000a }"
+    },
+    {
+      "group": "options.record",
+      "name": "custom-to-string",
+      "result": "JsonPrettyPrintOptions { IndentSize = 2, UseTabs = True, NewLine = \u000d\u000a }"
+    },
+    {
+      "group": "options.record",
+      "name": "default-same-instance",
+      "result": true
+    },
+    {
+      "group": "options.record",
+      "name": "new-equals-default",
+      "result": true
+    },
+    {
+      "group": "options.record",
+      "name": "new-operator-equals-default",
+      "result": true
+    },
+    {
+      "group": "options.record",
+      "name": "new-hash-equals-default-hash",
+      "result": true
+    },
+    {
+      "group": "options.record",
+      "name": "different-newline-not-equal",
+      "result": false
+    },
+    {
+      "group": "options.record",
+      "name": "with-indent",
+      "result": "JsonPrettyPrintOptions { IndentSize = 2, UseTabs = False, NewLine = \u000a }"
+    },
+    {
+      "group": "options.record",
+      "name": "with-leaves-default",
+      "result": true
+    },
+    {
+      "group": "options.record",
+      "name": "with-nothing-equal-not-same",
+      "result": "True False"
+    },
+    {
+      "group": "options.record",
+      "name": "printer-default-options-is-default",
+      "result": true
+    },
+    {
+      "group": "options.record",
+      "name": "printer-keeps-options-instance",
+      "result": true
+    },
+    {
+      "group": "options.record",
+      "name": "equals-null",
+      "result": false
+    },
+    {
+      "group": "nulls",
+      "name": "extension",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'inputString')",
+        "$param": "inputString"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "printer-string",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'inputString')",
+        "$param": "inputString"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "extension-options-null-input",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'inputString')",
+        "$param": "inputString"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "extension-null-options",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'options')",
+        "$param": "options"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "extension-both-null",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'options')",
+        "$param": "options"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "printer-null-options",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'options')",
+        "$param": "options"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "printer-string-writer-null-input",
+      "result": {
+        "written": "",
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'inputString')",
+        "$param": "inputString"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "printer-string-null-writer",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'output')",
+        "$param": "output"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "printer-blank-string-null-writer",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'output')",
+        "$param": "output"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "printer-span-null-writer",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'output')",
+        "$param": "output"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "printer-null-string-null-writer",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'inputString')",
+        "$param": "inputString"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "printer-empty-span",
+      "result": ""
+    },
+    {
+      "group": "nulls",
+      "name": "printer-default-span",
+      "result": ""
+    },
+    {
+      "group": "nulls",
+      "name": "printer-default-span-writer",
+      "result": ""
+    },
+    {
+      "group": "nulls",
+      "name": "tojson-null-options",
+      "result": "{\u000a    \"Name\": \"x\",\u000a    \"Count\": 0,\u000a    \"Tags\": null,\u000a    \"When\": \"0001-01-01T00:00:00\",\u000a    \"Nested\": null\u000a}"
+    },
+    {
+      "group": "nulls",
+      "name": "tojson-null-typeinfo",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'typeInfo')",
+        "$param": "typeInfo"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "fromjson-null-options",
+      "result": "Int32:42"
+    },
+    {
+      "group": "nulls",
+      "name": "fromjson-null-typeinfo",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'typeInfo')",
+        "$param": "typeInfo"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "fromjson-null-json-typeinfo",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'json')",
+        "$param": "json"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "fromjson-null-json-null-typeinfo",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'json')",
+        "$param": "json"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "fromjson-null-json-options",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'json')",
+        "$param": "json"
+      }
+    },
+    {
+      "group": "nulls",
+      "name": "tojson-null",
+      "result": "null"
+    },
+    {
+      "group": "nulls",
+      "name": "tojson-null-pretty",
+      "result": "null"
+    },
+    {
+      "group": "nulls",
+      "name": "fromjson-null-json",
+      "result": {
+        "$throws": "System.ArgumentNullException: Value cannot be null. (Parameter 'json')",
+        "$param": "json"
+      }
+    },
+    {
+      "group": "reuse",
+      "name": "printer-unterminated-string",
+      "result": [
+        "{\u000a    \"a\": \"b",
+        "{\u000a    \"c\": 1\u000a}"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "printer-stray-close",
+      "result": [
+        {
+          "$throws": "System.FormatException: Unexpected '}' at index 0: there is no open object or array to close."
+        },
+        "{\u000a    \"c\": [\u000a        1\u000a    ]\u000a}"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "printer-unclosed",
+      "result": [
+        "{\u000a    {\u000a        {",
+        "[\u000a    1\u000a]"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "printer-pending-escape",
+      "result": [
+        "{\u000a    \"a\": \"x\\",
+        "{\u000a    \"b\": \"y\"\u000a}"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "printer-single-quote",
+      "result": [
+        "{\u000a    'a': 'b",
+        "{\u000a    'c': 1\u000a}"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "printer-wrong-close",
+      "result": [
+        {
+          "$throws": "System.FormatException: Unexpected '}' at index 2: expected ']'."
+        },
+        "[\u000a    {}\u000a]"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "extension-after-unterminated",
+      "result": [
+        "{\u000a    \"a\": \"b",
+        "{\u000a    \"c\": 1\u000a}"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "extension-after-stray-close",
+      "result": [
+        {
+          "$throws": "System.FormatException: Unexpected ']' at index 0: there is no open object or array to close."
+        },
+        "[\u000a    1,\u000a    {}\u000a]"
+      ]
+    },
+    {
+      "group": "reuse",
+      "name": "extension-after-pending-escape",
+      "result": [
+        "[\u000a    \"\\",
+        "[\u000a    \"a\"\u000a]"
+      ]
+    },
+    {
+      "group": "writer",
+      "name": "appends-after-existing-text",
+      "result": "prefix:[\u000a    1,\u000a    2,\u000a    3\u000a]|after"
+    },
+    {
+      "group": "writer",
+      "name": "blank-writes-nothing",
+      "result": 0
+    },
+    {
+      "group": "writer",
+      "name": "writer-newline-ignored",
+      "result": "[\u000a    1,\u000a    2,\u000a    3\u000a]"
+    },
+    {
+      "group": "writer",
+      "name": "partial-before-wrong-close",
+      "result": {
+        "written": "{\u000a    \"a\": [\u000a        1,\u000a        2",
+        "$throws": "System.FormatException: Unexpected '}' at index 9: expected ']'."
+      }
+    },
+    {
+      "group": "writer",
+      "name": "two-documents-one-writer",
+      "result": "[\u000a    1\u000a]{}"
+    },
+    {
+      "group": "big",
+      "name": "document-1mb",
+      "result": {
+        "length": 2698139,
+        "sha256": "75d09c83276f23aaabc09b2616b95aa924ae6afbdfd20fed6cbf563234065138",
+        "head": "[\u000a    {\u000a        \"id\": 0,\u000a        \"name\": \"item 0\",\u000a        \"tags\": [\u000a            \"a\",\u000a            \"b\",\u000a            \"c\"\u000a        ],\u000a        \"nested\": {\u000a            \"x\": 0,\u000a            \"y\": [\u000a           ",
+        "tail": "              2,\u000a                {\u000a                    \"z\": null\u000a                }\u000a            ],\u000a            \"empty\": {}\u000a        },\u000a        \"text\": \"lorem ipsum, dolor: {sit} [amet] \\\"6480\\\"\"\u000a    }\u000a]"
+      }
+    },
+    {
+      "group": "big",
+      "name": "document-4mb",
+      "result": {
+        "length": 10664539,
+        "sha256": "4b774218b06ba4ba73c48c8ee1f70cfa7252551eeadd1ad64efecf4c960e4394",
+        "head": "[\u000a    {\u000a        \"id\": 0,\u000a        \"name\": \"item 0\",\u000a        \"tags\": [\u000a            \"a\",\u000a            \"b\",\u000a            \"c\"\u000a        ],\u000a        \"nested\": {\u000a            \"x\": 0,\u000a            \"y\": [\u000a           ",
+        "tail": "             2,\u000a                {\u000a                    \"z\": null\u000a                }\u000a            ],\u000a            \"empty\": {}\u000a        },\u000a        \"text\": \"lorem ipsum, dolor: {sit} [amet] \\\"25436\\\"\"\u000a    }\u000a]"
+      }
+    },
+    {
+      "group": "big",
+      "name": "string-1m-chars",
+      "result": {
+        "length": 1000015,
+        "sha256": "a83df6dbc6f843f66885e36cbf9272a54f06d0c63e58eac104feacd4824ee09c",
+        "head": "{\u000a    \"a\": \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "tail": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\u000a}"
+      }
+    },
+    {
+      "group": "big",
+      "name": "whitespace-1m",
+      "result": "{}"
+    },
+    {
+      "group": "big",
+      "name": "array-1m-zeros",
+      "result": {
+        "length": 7000002,
+        "sha256": "d4d8b1ca49d8aa199fa4647b24d0bb89eeb51f819c57d4b3e639dd3cbdbe4fdb",
+        "head": "[\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a  ",
+        "tail": " 0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0,\u000a    0\u000a]"
+      }
+    },
+    {
+      "group": "big",
+      "name": "deep-arrays-1000",
+      "result": {
+        "length": 3996002,
+        "sha256": "5156e61158821f9a59e301d71d723011972d9ff2b2866e83a3f60dccda7c037f",
+        "head": "[\u000a    [\u000a        [\u000a            [\u000a                [\u000a                    [\u000a                        [\u000a                            [\u000a                                [\u000a                                    [\u000a",
+        "tail": "\u000a                                    ]\u000a                                ]\u000a                            ]\u000a                        ]\u000a                    ]\u000a                ]\u000a            ]\u000a        ]\u000a    ]\u000a]"
+      }
+    },
+    {
+      "group": "big",
+      "name": "deep-objects-1000",
+      "result": {
+        "length": 4009001,
+        "sha256": "57f9efcde727ef0f6bae4da576f29c108ed063741b985978c4a427e20ef03b22",
+        "head": "{\u000a    \"a\": {\u000a        \"a\": {\u000a            \"a\": {\u000a                \"a\": {\u000a                    \"a\": {\u000a                        \"a\": {\u000a                            \"a\": {\u000a                                \"a\": ",
+        "tail": "\u000a                                    }\u000a                                }\u000a                            }\u000a                        }\u000a                    }\u000a                }\u000a            }\u000a        }\u000a    }\u000a}"
+      }
+    },
+    {
+      "group": "big",
+      "name": "unclosed-2000",
+      "result": {
+        "length": 7999999,
+        "sha256": "bdc874b1e0bba8619006de077104348355e8d57631db52da2fea6554d0387a9e",
+        "head": "[\u000a    [\u000a        [\u000a            [\u000a                [\u000a                    [\u000a                        [\u000a                            [\u000a                                [\u000a                                    [\u000a",
+        "tail": "                                                                                                                                                                                                       ["
+      }
+    },
+    {
+      "group": "big",
+      "name": "unclosed-20000-indent-0",
+      "result": {
+        "length": 39999,
+        "sha256": "d8c1e0a13355637720994ece44afff3656cd93ba1f4bc29da17880639ef83b63",
+        "head": "[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a",
+        "tail": "\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a["
+      }
+    },
+    {
+      "group": "big",
+      "name": "deep-balanced-20000-indent-0",
+      "result": {
+        "length": 79998,
+        "sha256": "c9511df1b5496cd0bcd4a4ca5dc7be9db5b74d33e2aac8c1b17093fdfffaf03e",
+        "head": "[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a[\u000a",
+        "tail": "\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]\u000a]"
+      }
+    },
+    {
+      "group": "big",
+      "name": "document-1mb-writer-equals-string",
+      "result": true
+    },
+    {
+      "group": "threads",
+      "name": "eight-threads-same-answers",
+      "result": true
+    },
+    {
+      "group": "culture",
+      "name": "tr-TR.print-readme",
+      "result": true
+    },
+    {
+      "group": "culture",
+      "name": "tr-TR.print-numbers",
+      "result": "[\u000a    1.5e-10,\u000a    -0,\u000a    0.0,\u000a    1E+2\u000a]"
+    },
+    {
+      "group": "culture",
+      "name": "tr-TR.tojson-double",
+      "result": "1.5"
+    },
+    {
+      "group": "culture",
+      "name": "tr-TR.tojson-date",
+      "result": "\"2010-01-01T00:00:00Z\""
+    },
+    {
+      "group": "culture",
+      "name": "tr-TR.fromjson-double",
+      "result": "Double:1.5"
+    },
+    {
+      "group": "culture",
+      "name": "de-DE.print-readme",
+      "result": true
+    },
+    {
+      "group": "culture",
+      "name": "de-DE.print-numbers",
+      "result": "[\u000a    1.5e-10,\u000a    -0,\u000a    0.0,\u000a    1E+2\u000a]"
+    },
+    {
+      "group": "culture",
+      "name": "de-DE.tojson-double",
+      "result": "1.5"
+    },
+    {
+      "group": "culture",
+      "name": "de-DE.tojson-date",
+      "result": "\"2010-01-01T00:00:00Z\""
+    },
+    {
+      "group": "culture",
+      "name": "de-DE.fromjson-double",
+      "result": "Double:1.5"
+    },
+    {
+      "group": "culture",
+      "name": "ar-SA.print-readme",
+      "result": true
+    },
+    {
+      "group": "culture",
+      "name": "ar-SA.print-numbers",
+      "result": "[\u000a    1.5e-10,\u000a    -0,\u000a    0.0,\u000a    1E+2\u000a]"
+    },
+    {
+      "group": "culture",
+      "name": "ar-SA.tojson-double",
+      "result": "1.5"
+    },
+    {
+      "group": "culture",
+      "name": "ar-SA.tojson-date",
+      "result": "\"2010-01-01T00:00:00Z\""
+    },
+    {
+      "group": "culture",
+      "name": "ar-SA.fromjson-double",
+      "result": "Double:1.5"
+    },
+    {
+      "group": "tojson",
+      "name": "int",
+      "result": "42"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "int",
+      "result": "42"
+    },
+    {
+      "group": "tojson",
+      "name": "long-max",
+      "result": "9223372036854775807"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "long-max",
+      "result": "9223372036854775807"
+    },
+    {
+      "group": "tojson",
+      "name": "uint-max",
+      "result": "4294967295"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "uint-max",
+      "result": "4294967295"
+    },
+    {
+      "group": "tojson",
+      "name": "double-tenth",
+      "result": "0.1"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "double-tenth",
+      "result": "0.1"
+    },
+    {
+      "group": "tojson",
+      "name": "double-huge",
+      "result": "1E+300"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "double-huge",
+      "result": "1E+300"
+    },
+    {
+      "group": "tojson",
+      "name": "double-negative-zero",
+      "result": "-0"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "double-negative-zero",
+      "result": "-0"
+    },
+    {
+      "group": "tojson",
+      "name": "double-nan",
+      "result": {
+        "$throws": "System.ArgumentException: .NET number values such as positive and negative infinity cannot be written as valid JSON. To make it work when using 'JsonSerializer', consider specifying 'JsonNumberHandling.AllowNamedFloatingPointLiterals' (see https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonnumberhandling).",
+        "$from": "System.Text.Json"
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "double-nan",
+      "result": {
+        "$throws": "System.ArgumentException: .NET number values such as positive and negative infinity cannot be written as valid JSON. To make it work when using 'JsonSerializer', consider specifying 'JsonNumberHandling.AllowNamedFloatingPointLiterals' (see https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonnumberhandling).",
+        "$from": "System.Text.Json"
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "double-infinity",
+      "result": {
+        "$throws": "System.ArgumentException: .NET number values such as positive and negative infinity cannot be written as valid JSON. To make it work when using 'JsonSerializer', consider specifying 'JsonNumberHandling.AllowNamedFloatingPointLiterals' (see https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonnumberhandling).",
+        "$from": "System.Text.Json"
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "double-infinity",
+      "result": {
+        "$throws": "System.ArgumentException: .NET number values such as positive and negative infinity cannot be written as valid JSON. To make it work when using 'JsonSerializer', consider specifying 'JsonNumberHandling.AllowNamedFloatingPointLiterals' (see https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonnumberhandling).",
+        "$from": "System.Text.Json"
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "float-tenth",
+      "result": "0.1"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "float-tenth",
+      "result": "0.1"
+    },
+    {
+      "group": "tojson",
+      "name": "decimal",
+      "result": "1.10"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "decimal",
+      "result": "1.10"
+    },
+    {
+      "group": "tojson",
+      "name": "bool",
+      "result": "true"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "bool",
+      "result": "true"
+    },
+    {
+      "group": "tojson",
+      "name": "char",
+      "result": "\"x\""
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "char",
+      "result": "\"x\""
+    },
+    {
+      "group": "tojson",
+      "name": "string",
+      "result": "\"hello\""
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "string",
+      "result": "\"hello\""
+    },
+    {
+      "group": "tojson",
+      "name": "string-html",
+      "result": "\"\\u003Cb\\u003E\\u0026\\u0027\\u00E9\\u0022\\u003C/b\\u003E\""
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "string-html",
+      "result": "\"\\u003Cb\\u003E\\u0026\\u0027\\u00E9\\u0022\\u003C/b\\u003E\""
+    },
+    {
+      "group": "tojson",
+      "name": "string-controls",
+      "result": "\"a\\tb\\nc\\u0001d\\u2028e\\\\f\""
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "string-controls",
+      "result": "\"a\\tb\\nc\\u0001d\\u2028e\\\\f\""
+    },
+    {
+      "group": "tojson",
+      "name": "string-emoji",
+      "result": "\"\\uD83D\\uDE00\""
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "string-emoji",
+      "result": "\"\\uD83D\\uDE00\""
+    },
+    {
+      "group": "tojson",
+      "name": "string-lone-surrogate",
+      "result": "\"x\\uFFFDy\""
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "string-lone-surrogate",
+      "result": "\"x\\uFFFDy\""
+    },
+    {
+      "group": "tojson",
+      "name": "date-utc",
+      "result": "\"2010-01-01T00:00:00Z\""
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "date-utc",
+      "result": "\"2010-01-01T00:00:00Z\""
+    },
+    {
+      "group": "tojson",
+      "name": "date-offset",
+      "result": "\"2010-01-01T00:00:00+02:00\""
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "date-offset",
+      "result": "\"2010-01-01T00:00:00+02:00\""
+    },
+    {
+      "group": "tojson",
+      "name": "guid",
+      "result": "\"0f8fad5b-d9cb-469f-a165-70867728950e\""
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "guid",
+      "result": "\"0f8fad5b-d9cb-469f-a165-70867728950e\""
+    },
+    {
+      "group": "tojson",
+      "name": "timespan",
+      "result": "\"01:02:03\""
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "timespan",
+      "result": "\"01:02:03\""
+    },
+    {
+      "group": "tojson",
+      "name": "enum",
+      "result": "1"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "enum",
+      "result": "1"
+    },
+    {
+      "group": "tojson",
+      "name": "int-array",
+      "result": "[1,2,3]"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "int-array",
+      "result": "[\u000a    1,\u000a    2,\u000a    3\u000a]"
+    },
+    {
+      "group": "tojson",
+      "name": "string-list",
+      "result": "[\"a\",\"b\"]"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "string-list",
+      "result": "[\u000a    \"a\",\u000a    \"b\"\u000a]"
+    },
+    {
+      "group": "tojson",
+      "name": "dictionary",
+      "result": "{\"b\":2,\"a\":1}"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "dictionary",
+      "result": "{\u000a    \"b\": 2,\u000a    \"a\": 1\u000a}"
+    },
+    {
+      "group": "tojson",
+      "name": "dictionary-int-keys",
+      "result": "{\"1\":\"one\"}"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "dictionary-int-keys",
+      "result": "{\u000a    \"1\": \"one\"\u000a}"
+    },
+    {
+      "group": "tojson",
+      "name": "anonymous",
+      "result": "{\"Name\":\"Mark\",\"Tags\":[\"a\",\"b\"]}"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "anonymous",
+      "result": "{\u000a    \"Name\": \"Mark\",\u000a    \"Tags\": [\u000a        \"a\",\u000a        \"b\"\u000a    ]\u000a}"
+    },
+    {
+      "group": "tojson",
+      "name": "anonymous-nested",
+      "result": "{\"A\":{\"B\":[1,\"x\",null,true]},\"Empty\":{}}"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "anonymous-nested",
+      "result": "{\u000a    \"A\": {\u000a        \"B\": [\u000a            1,\u000a            \"x\",\u000a            null,\u000a            true\u000a        ]\u000a    },\u000a    \"Empty\": {}\u000a}"
+    },
+    {
+      "group": "tojson",
+      "name": "poco",
+      "result": "{\"Name\":\"n\",\"Count\":2,\"Tags\":[\"t\"],\"When\":\"2010-01-01T00:00:00Z\",\"Nested\":{\"Value\":1.5,\"Flag\":true}}"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "poco",
+      "result": "{\u000a    \"Name\": \"n\",\u000a    \"Count\": 2,\u000a    \"Tags\": [\u000a        \"t\"\u000a    ],\u000a    \"When\": \"2010-01-01T00:00:00Z\",\u000a    \"Nested\": {\u000a        \"Value\": 1.5,\u000a        \"Flag\": true\u000a    }\u000a}"
+    },
+    {
+      "group": "tojson",
+      "name": "poco-defaults",
+      "result": "{\"Name\":null,\"Count\":0,\"Tags\":null,\"When\":\"0001-01-01T00:00:00\",\"Nested\":null}"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "poco-defaults",
+      "result": "{\u000a    \"Name\": null,\u000a    \"Count\": 0,\u000a    \"Tags\": null,\u000a    \"When\": \"0001-01-01T00:00:00\",\u000a    \"Nested\": null\u000a}"
+    },
+    {
+      "group": "tojson",
+      "name": "cycle",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: A possible object cycle was detected. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 64. Consider using ReferenceHandler.Preserve on JsonSerializerOptions to support cycles. Path: $.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Name.",
+        "$from": "System.Text.Json"
+      }
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "cycle",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: A possible object cycle was detected. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 64. Consider using ReferenceHandler.Preserve on JsonSerializerOptions to support cycles. Path: $.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Name.",
+        "$from": "System.Text.Json"
+      }
+    },
+    {
+      "group": "tojson",
+      "name": "bytes",
+      "result": "\"AQID\""
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "bytes",
+      "result": "\"AQID\""
+    },
+    {
+      "group": "tojson",
+      "name": "object-array",
+      "result": "[1,\"a\",null,true]"
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "object-array",
+      "result": "[\u000a    1,\u000a    \"a\",\u000a    null,\u000a    true\u000a]"
+    },
+    {
+      "group": "tojson",
+      "name": "uri",
+      "result": "\"https://example.com/a?b=c\""
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "uri",
+      "result": "\"https://example.com/a?b=c\""
+    },
+    {
+      "group": "tojson",
+      "name": "version",
+      "result": "\"1.2.3.4\""
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "version",
+      "result": "\"1.2.3.4\""
+    },
+    {
+      "group": "tojson",
+      "name": "date-unspecified",
+      "result": "\"2010-01-01T00:00:00\""
+    },
+    {
+      "group": "tojson.pretty",
+      "name": "date-unspecified",
+      "result": "\"2010-01-01T00:00:00\""
+    },
+    {
+      "group": "tojson.options",
+      "name": "camel-case-pretty",
+      "result": "{\u000a    \"name\": \"n\",\u000a    \"count\": 2,\u000a    \"tags\": [\u000a        \"t\"\u000a    ],\u000a    \"when\": \"2010-01-01T00:00:00Z\",\u000a    \"nested\": {\u000a        \"value\": 1.5,\u000a        \"flag\": null\u000a    }\u000a}"
+    },
+    {
+      "group": "tojson.options",
+      "name": "null-options-pretty",
+      "result": "{\u000a    \"Name\": \"n\",\u000a    \"Count\": 2,\u000a    \"Tags\": [\u000a        \"t\"\u000a    ],\u000a    \"When\": \"2010-01-01T00:00:00Z\",\u000a    \"Nested\": {\u000a        \"Value\": 1.5,\u000a        \"Flag\": null\u000a    }\u000a}"
+    },
+    {
+      "group": "tojson.options",
+      "name": "null-options-compact",
+      "result": "{\"Name\":\"n\",\"Count\":2,\"Tags\":[\"t\"],\"When\":\"2010-01-01T00:00:00Z\",\"Nested\":{\"Value\":1.5,\"Flag\":null}}"
+    },
+    {
+      "group": "tojson.options",
+      "name": "write-indented-not-pretty",
+      "result": "{\u000d\u000a  \"Name\": \"n\",\u000d\u000a  \"Count\": 2,\u000d\u000a  \"Tags\": [\u000d\u000a    \"t\"\u000d\u000a  ],\u000d\u000a  \"When\": \"2010-01-01T00:00:00Z\",\u000d\u000a  \"Nested\": {\u000d\u000a    \"Value\": 1.5,\u000d\u000a    \"Flag\": null\u000d\u000a  }\u000d\u000a}"
+    },
+    {
+      "group": "tojson.options",
+      "name": "write-indented-and-pretty",
+      "result": "{\u000a    \"Name\": \"n\",\u000a    \"Count\": 2,\u000a    \"Tags\": [\u000a        \"t\"\u000a    ],\u000a    \"When\": \"2010-01-01T00:00:00Z\",\u000a    \"Nested\": {\u000a        \"Value\": 1.5,\u000a        \"Flag\": null\u000a    }\u000a}"
+    },
+    {
+      "group": "tojson.options",
+      "name": "relaxed-escaping",
+      "result": "\"<b>&'\u00e9\\\"</b>\""
+    },
+    {
+      "group": "tojson.options",
+      "name": "include-fields",
+      "result": "{\"Name\":\"n\",\"Count\":2,\"Tags\":[\"t\"],\"When\":\"2010-01-01T00:00:00Z\",\"Nested\":{\"Value\":1.5,\"Flag\":null},\"Field\":null}"
+    },
+    {
+      "group": "tojson.options",
+      "name": "nan-allowed",
+      "result": "\"NaN\""
+    },
+    {
+      "group": "tojson.options",
+      "name": "cycle-preserved",
+      "result": "{\"$id\":\"1\",\"Name\":\"a\",\"Next\":{\"$id\":\"2\",\"Name\":\"b\",\"Next\":{\"$ref\":\"1\"}}}"
+    },
+    {
+      "group": "tojson.typeinfo",
+      "name": "int",
+      "result": "42"
+    },
+    {
+      "group": "tojson.typeinfo",
+      "name": "int-pretty",
+      "result": "42"
+    },
+    {
+      "group": "tojson.typeinfo",
+      "name": "int-array-pretty",
+      "result": "[\u000a    1,\u000a    2\u000a]"
+    },
+    {
+      "group": "tojson.typeinfo",
+      "name": "string",
+      "result": "\"a\\u0022b\""
+    },
+    {
+      "group": "tojson.typeinfo",
+      "name": "null-string",
+      "result": "null"
+    },
+    {
+      "group": "fromjson",
+      "name": "int",
+      "result": "Int32:42"
+    },
+    {
+      "group": "fromjson",
+      "name": "int-negative-zero",
+      "result": "Int32:0"
+    },
+    {
+      "group": "fromjson",
+      "name": "int-with-fraction",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: The JSON value could not be converted to System.Int32. Path: $ | LineNumber: 0 | BytePositionInLine: 4.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.FormatException: Either the JSON value is not in a supported format, or is out of bounds for an Int32."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-quoted",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: The JSON value could not be converted to System.Int32. Path: $ | LineNumber: 0 | BytePositionInLine: 4.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.InvalidOperationException: Cannot get the value of a token type 'String' as a number."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-null",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: The JSON value could not be converted to System.Int32. Path: $ | LineNumber: 0 | BytePositionInLine: 4.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.InvalidOperationException: Cannot get the value of a token type 'Null' as a number."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-word",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: 'x' is an invalid start of a value. Path: $ | LineNumber: 0 | BytePositionInLine: 0.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.Text.Json.JsonReaderException: 'x' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-empty",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. Path: $ | LineNumber: 0 | BytePositionInLine: 0.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.Text.Json.JsonReaderException: The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. LineNumber: 0 | BytePositionInLine: 0."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-blank",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. Path: $ | LineNumber: 0 | BytePositionInLine: 2.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.Text.Json.JsonReaderException: The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. LineNumber: 0 | BytePositionInLine: 2."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-exponent",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: The JSON value could not be converted to System.Int32. Path: $ | LineNumber: 0 | BytePositionInLine: 3.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.FormatException: Either the JSON value is not in a supported format, or is out of bounds for an Int32."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-overflow",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: The JSON value could not be converted to System.Int32. Path: $ | LineNumber: 0 | BytePositionInLine: 10.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.FormatException: Either the JSON value is not in a supported format, or is out of bounds for an Int32."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "long-max",
+      "result": "Int64:9223372036854775807"
+    },
+    {
+      "group": "fromjson",
+      "name": "double",
+      "result": "Double:1.5"
+    },
+    {
+      "group": "fromjson",
+      "name": "double-overflow",
+      "result": "Double:Infinity"
+    },
+    {
+      "group": "fromjson",
+      "name": "decimal",
+      "result": "Decimal:1.10"
+    },
+    {
+      "group": "fromjson",
+      "name": "bool",
+      "result": "bool:true"
+    },
+    {
+      "group": "fromjson",
+      "name": "string",
+      "result": "string:a\u000ab"
+    },
+    {
+      "group": "fromjson",
+      "name": "string-null",
+      "result": null
+    },
+    {
+      "group": "fromjson",
+      "name": "string-from-number",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: The JSON value could not be converted to System.String. Path: $ | LineNumber: 0 | BytePositionInLine: 2.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.InvalidOperationException: Cannot get the value of a token type 'Number' as a string."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "string-single-quoted",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: ''' is an invalid start of a value. Path: $ | LineNumber: 0 | BytePositionInLine: 0.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.Text.Json.JsonReaderException: ''' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "object-from-object",
+      "result": "JsonElement:Object:{\"a\":1,\"b\":[true,null]}"
+    },
+    {
+      "group": "fromjson",
+      "name": "object-from-array",
+      "result": "JsonElement:Array:[1,2]"
+    },
+    {
+      "group": "fromjson",
+      "name": "object-from-number",
+      "result": "JsonElement:Number:1"
+    },
+    {
+      "group": "fromjson",
+      "name": "dictionary",
+      "result": {
+        "$type": "Dictionary<String,Object>",
+        "a": "JsonElement:Number:1",
+        "b": "JsonElement:String:\"x\"",
+        "c": "JsonElement:Array:[1]",
+        "d": null,
+        "e": "JsonElement:Object:{\"f\":2.5}"
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "int-array",
+      "result": {
+        "$type": "Int32[]",
+        "items": [
+          "Int32:1",
+          "Int32:2"
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "string-list",
+      "result": {
+        "$type": "List<String>",
+        "items": [
+          "string:a",
+          "string:b"
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco",
+      "result": {
+        "$type": "Poco",
+        "Name": "string:n",
+        "Count": "Int32:2",
+        "Tags": {
+          "$type": "String[]",
+          "items": [
+            "string:t"
+          ]
+        },
+        "When": "DateTime:2010-01-01T00:00:00.0000000Z Utc",
+        "Nested": {
+          "$type": "Inner",
+          "Value": "Double:1.5",
+          "Flag": "bool:true"
+        },
+        "Field": null
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-lowercase-keys",
+      "result": {
+        "$type": "Poco",
+        "Name": null,
+        "Count": "Int32:0",
+        "Tags": null,
+        "When": "DateTime:0001-01-01T00:00:00.0000000 Unspecified",
+        "Nested": null,
+        "Field": null
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-extra-property",
+      "result": {
+        "$type": "Poco",
+        "Name": "string:n",
+        "Count": "Int32:0",
+        "Tags": null,
+        "When": "DateTime:0001-01-01T00:00:00.0000000 Unspecified",
+        "Nested": null,
+        "Field": null
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-wrong-type",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: The JSON value could not be converted to System.Int32. Path: $.Count | LineNumber: 0 | BytePositionInLine: 14.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.InvalidOperationException: Cannot get the value of a token type 'String' as a number."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-comment",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: '/' is invalid after a value. Expected either ',', '}', or ']'. Path: $ | LineNumber: 0 | BytePositionInLine: 12.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.Text.Json.JsonReaderException: '/' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 0 | BytePositionInLine: 12."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-trailing-comma",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: The JSON object contains a trailing comma at the end which is not supported in this mode. Change the reader options. Path: $ | LineNumber: 0 | BytePositionInLine: 12.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.Text.Json.JsonReaderException: The JSON object contains a trailing comma at the end which is not supported in this mode. Change the reader options. LineNumber: 0 | BytePositionInLine: 12."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-single-quotes",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: ''' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 0 | BytePositionInLine: 1.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.Text.Json.JsonReaderException: ''' is an invalid start of a property name. Expected a '\"'. LineNumber: 0 | BytePositionInLine: 1."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-unquoted-keys",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: 'N' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 0 | BytePositionInLine: 1.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.Text.Json.JsonReaderException: 'N' is an invalid start of a property name. Expected a '\"'. LineNumber: 0 | BytePositionInLine: 1."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-truncated",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: Expected depth to be zero at the end of the JSON payload. There is an open JSON object or array that should be closed. Path: $ | LineNumber: 0 | BytePositionInLine: 11.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.Text.Json.JsonReaderException: Expected depth to be zero at the end of the JSON payload. There is an open JSON object or array that should be closed. LineNumber: 0 | BytePositionInLine: 11."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "poco-empty-object",
+      "result": {
+        "$type": "Poco",
+        "Name": null,
+        "Count": "Int32:0",
+        "Tags": null,
+        "When": "DateTime:0001-01-01T00:00:00.0000000 Unspecified",
+        "Nested": null,
+        "Field": null
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "date-iso",
+      "result": "DateTime:2010-01-01T00:00:00.0000000 Unspecified"
+    },
+    {
+      "group": "fromjson",
+      "name": "date-iso-utc",
+      "result": "DateTime:2010-01-01T00:00:00.0000000Z Utc"
+    },
+    {
+      "group": "fromjson",
+      "name": "date-microsoft-format",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: The JSON value could not be converted to System.DateTime. Path: $ | LineNumber: 0 | BytePositionInLine: 25.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.FormatException: The JSON value is not in a supported DateTime format."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "guid",
+      "result": "Guid:0f8fad5b-d9cb-469f-a165-70867728950e"
+    },
+    {
+      "group": "fromjson",
+      "name": "enum-number",
+      "result": "DayOfWeek:Monday"
+    },
+    {
+      "group": "fromjson",
+      "name": "enum-name",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: The JSON value could not be converted to System.DayOfWeek. Path: $ | LineNumber: 0 | BytePositionInLine: 8.",
+        "$from": "System.Text.Json"
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "two-documents",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: '2' is invalid after a single JSON value. Expected end of data. Path: $ | LineNumber: 0 | BytePositionInLine: 2.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.Text.Json.JsonReaderException: '2' is invalid after a single JSON value. Expected end of data. LineNumber: 0 | BytePositionInLine: 2."
+        ]
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "pretty-printed-poco",
+      "result": {
+        "$type": "Poco",
+        "Name": "string:n",
+        "Count": "Int32:0",
+        "Tags": {
+          "$type": "String[]",
+          "items": [
+            "string:t"
+          ]
+        },
+        "When": "DateTime:0001-01-01T00:00:00.0000000 Unspecified",
+        "Nested": null,
+        "Field": null
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "options.case-insensitive",
+      "result": {
+        "$type": "Poco",
+        "Name": "string:n",
+        "Count": "Int32:2",
+        "Tags": null,
+        "When": "DateTime:0001-01-01T00:00:00.0000000 Unspecified",
+        "Nested": null,
+        "Field": null
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "options.allow-comments-and-commas",
+      "result": {
+        "$type": "Poco",
+        "Name": "string:n",
+        "Count": "Int32:0",
+        "Tags": null,
+        "When": "DateTime:0001-01-01T00:00:00.0000000 Unspecified",
+        "Nested": null,
+        "Field": null
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "options.null-options",
+      "result": {
+        "$type": "Poco",
+        "Name": "string:n",
+        "Count": "Int32:0",
+        "Tags": null,
+        "When": "DateTime:0001-01-01T00:00:00.0000000 Unspecified",
+        "Nested": null,
+        "Field": null
+      }
+    },
+    {
+      "group": "fromjson",
+      "name": "typeinfo.int",
+      "result": "Int32:42"
+    },
+    {
+      "group": "fromjson",
+      "name": "typeinfo.int-word",
+      "result": {
+        "$throws": "System.Text.Json.JsonException: 'x' is an invalid start of a value. Path: $ | LineNumber: 0 | BytePositionInLine: 0.",
+        "$from": "System.Text.Json",
+        "$inner": [
+          "System.Text.Json.JsonReaderException: 'x' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0."
+        ]
+      }
+    }
+  ]
+}
