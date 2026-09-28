@@ -352,3 +352,95 @@ True
     "e": {}
 }
 --- end (43 chars)
+=== home and getting started: the Ada example ===
+{
+    "name": "Ada",
+    "tags": [
+        "math",
+        "engines"
+    ],
+    "born": 1815,
+    "empty": {}
+}
+--- end (111 chars)
+=== getting started: serialising an object ===
+{
+    "Name": "Mark",
+    "Tags": [
+        "a",
+        "b"
+    ],
+    "When": "2010-01-01T00:00:00",
+    "Price": 9.5
+}
+--- end (121 chars)
+=== not a validator: block comment ===
+{
+    "a": 1/*note*/,
+    "b": 2
+}
+--- end (34 chars)
+=== recipes: one line ===
+{ "a": 1, "b": [ 1, 2 ], "c": {} }
+--- end (34 chars)
+=== recipes: minify ===
+{"a":[1,2]}
+--- end (11 chars)
+=== serialisation helpers: default escaping ===
+{"s":"\u003Cb\u003E\u0026\u0027\u00E9\u0022\u003C/b\u003E"}
+--- end (59 chars)
+=== serialisation helpers: relaxed escaping ===
+{"s":"<b>&'é\"</b>"}
+--- end (20 chars)
+=== not a validator: strip comments first, then pretty ===
+{
+    "a": 1,
+    "b": 2
+}
+--- end (26 chars)
+=== getting started: PowerShell ===
+{
+    "a": [
+        1,
+        2
+    ],
+    "b": {}
+}
+{
+  "a": [
+    1
+  ]
+}
+{
+    "name": "Ada",
+    "tags": [
+        "math"
+    ]
+}
+--- end (135 chars)
+=== getting started: F# ===
+{
+    "a": [
+        1,
+        {
+            "b": "c"
+        }
+    ],
+    "e": {}
+}
+{
+  "a": [
+    1,
+    {
+      "b": "c"
+    }
+  ],
+  "e": {}
+}
+{
+    "Name": "Ada",
+    "Tags": [
+        "math"
+    ]
+}
+--- end (205 chars)

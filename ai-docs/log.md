@@ -63,3 +63,7 @@ Append-only. One line per operation: `## [YYYY-MM-DD] op | title` where op is on
 - 9 (nit, fixed): release.yml comment and plan: attest also holds id-token; nuget.org accepts only the push job because the policy names the nuget environment (keep it in the D7 edit).
 - Not taken: net8.0 consumers in run.sh (the differential ran net8.0 with 0 differences; .NET 8 leaves support 2026-11-10).
 - Local after the fixes: build 0 warnings, 8 golden tests per runtime, format clean, actionlint with shellcheck clean, zizmor clean, tests/Golden untouched.
+
+## [2026-09-28] update | Wiki brought under wikiwright's saved-output rule for 3.0.1
+- notes/2026-09-28-wiki-verify.cs run against 3.0.1: 354 lines, identical to the saved output. wikiwright 0.3.0's `outputs` (fixed for input and output pairs, code followed by output and values in comments) then found 23 page outputs and 11 missing: 9 never printed by the program, all of them matching the page once printed, and 2 commands in untagged fences.
+- The program now prints the 9 and runs the pages' PowerShell and F# snippets as written (pwsh 7.6.6, dotnet fsi); output 446 lines, saved LF. The two command fences are tagged `sh` and `bat` on the wiki. `outputs`: 21 checked, 0 missing; `check`: 0 errors. The note's update procedure now diffs against the saved output and runs `outputs`.
