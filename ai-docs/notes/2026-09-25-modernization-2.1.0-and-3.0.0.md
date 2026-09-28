@@ -1,6 +1,20 @@
+---
+title: 2.1.0 and 3.0.0 pass (2026-09-25)
+kind: note
+date: 2026-09-25
+verified: 2026-09-28
+stale_after: never
+tags: [v2, v3, 2.1.0, 3.0.0, log, ci, release]
+summary: "what the 2.1.0 and 3.0.0 pass decided (deferred line breaks, escapes before dispatch, the switch engine), the analyzer suppressions, the CI lock-file fix, the burned v2.1.0 and v3.0.0 tags and why 2.1.1 and 3.0.1 were published instead; read before changing the engine, the build or a release tag"
+---
+
 # 2026-09-25: modernization plan executed, 2.1.0 and 3.0.0 released
 
-All six stages of [the modernization plan](../plans/modernization-plan.md) were done in one session on the branch `master`, as two tagged releases. This note records what was decided that the code and CHANGELOG do not say, and what to watch after the tags were pushed.
+## Summary
+
+The session log of the first modernization pass, moved here from the old ai-docs/log/ folder on 2026-09-28: the design choices of 2.1.0 and 3.0.0, the analyzer suppressions, the CI lock-file fix, and why the v2.1.0 and v3.0.0 tags never published and 2.1.1 and 3.0.1 were released instead.
+
+All six stages of [the modernization plan](../plans/2026-09-25-modernization-2.1.0-and-3.0.0.md) were done in one session on the branch `master`, as two tagged releases. This note records what was decided that the code and CHANGELOG do not say, and what to watch after the tags were pushed.
 
 ## 2.1.0 (stages 1 to 5)
 
@@ -85,8 +99,8 @@ Lesson for this harness: bash heredocs mangled `\\n` inside Python string litera
 
 ## Related
 
-- Review notes that produced the plan: `markdavidrogers-site/ai-docs/research/2026-09-25-jsonprettyprinter-2.0-review.md` (in the sibling repo).
-- Sibling library with the same plan shape: `DotNetRandomNameGenerator/ai-docs/plans/modernization-plan.md`.
+- Review notes that produced the plan: markdavidrogers-site/ai-docs/research/2026-09-25-jsonprettyprinter-2.0-review.md (in the sibling repo).
+- Sibling library with the same plan shape: DotNetRandomNameGenerator/ai-docs/plans/2026-09-25-modernization-2.1.0.md.
 
 ## Published as 2.1.1 and 3.0.1
 

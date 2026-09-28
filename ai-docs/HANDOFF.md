@@ -1,21 +1,34 @@
 # Handoff
 
+Updated 2026-09-28, evening. Read this first, then the plan and [log.md](log.md).
+
 ## Current state
 
-3.0.1 is the current release, live on nuget.org since 2026-09-25 (2.1.1 is the last 2.x; the `v2.1.0` and `v3.0.0` tags never published). The modernization plan (`plans/modernization-plan.md`) is complete. The GitHub wiki was written and published on 2026-09-28 (wiki commit `c6b285c`, working copy `D:\m4bwa\Claude\Projects\Ai\labs\DotNetJsonPrettyPrinter.wiki`); `notes/2026-09-28-github-wiki.md` says how to update it and re-verify its examples.
-
-## Standing work
-
-- With the next README change: reword "comments ... come out indented" (a `//` comment breaks the document) and the "try it live" sentence (the site's formatter is System.Text.Json, not this package). With the next CHANGELOG change: 2.0.0 escapes quotes as `\u0022`, not `\"`.
-- With the next csproj change: `<PackageValidationBaselineVersion>3.0.1</PackageValidationBaselineVersion>`.
-- The package-modernize retrofit of this repository (golden capture, release workflow with attestation, security settings) is still owed per the package-modernization inventory; copy the RandomNameGeneratorLibrary kickoff prompt.
-- Dependabot pull requests arrive weekly.
+- 3.0.1 is the release on nuget.org. The package-modernize retrofit is at the **pull-request stop**: https://github.com/m4bwav/DotNetJsonPrettyPrinter/pull/8 (branch `v3-retrofit`, version 3.0.2-beta.1, no library code change).
+- Plan: [plans/2026-09-28-retrofit-and-3.0.2-release.md](plans/2026-09-28-retrofit-and-3.0.2-release.md). Rulings: "Do all the recommendations and record learnings, run all the commands you want" (every recommendation stands).
+- Done and read back: golden capture (08b777a) and replay (1174 cases per runtime, canary seen red), workflows from the templates, rulesets 24143846 (master, required check `ci`) and 24143848 (tags, admins only), security settings, homepage, delete-on-merge, a GitHub Release for v2.0.0.
+- Independent review done: 525,778 comparisons per runtime against 3.0.1, 0 differences; its 9 findings fixed or answered (log.md, and the comment on the pull request). CI green on 637c6c3 (run 36490775529).
 
 ## Next single action
 
-Nothing is owed by the agent for the wiki. The next planned work is the package-modernize retrofit; the README and CHANGELOG fixes above ride along with it.
+The maintainer reviews and merges pull request #8. Then, in order (plan, Phases 4 to 7):
+
+1. Read the merge back (`gh pr view 8 --json mergeCommit,mergedAt`); delete branches `modernize-net10` and `release-2.1.0` (ruled; `release-2.1.0` is the v2.1.1 tag's commit, which the tag keeps). Keep tags v2.1.0 and v3.0.0.
+2. The maintainer edits the nuget.org Trusted Publishing policy: Workflow File `ci.yml` becomes `release.yml` (owner m4bwav, repository DotNetJsonPrettyPrinter, environment `nuget`). Log only what the maintainer says, quoted; the beta's push job proves it.
+3. After `ci` is green on master: tag `v3.0.2-beta.1` on that commit, push the tag, wait at the `nuget` approval (the maintainer clicks Review deployments), then `gh workflow run verify-published.yml -f version=3.0.2-beta.1` (three OSes), `gh attestation verify` with `--format json`.
+4. Release 3.0.2: a small pull request that moves the 3.0.2-beta.1 CHANGELOG content under a dated `## [3.0.2] - YYYY-MM-DD` heading (the beta section then says it rehearsed 3.0.2), sets `<Version>3.0.2</Version>` and the compare links; merge, green, tag `v3.0.2`, approval, verify-published, `check-readme-images.mjs --registry nuget` on the README inside the nuget.org package, then a pull request raising `PackageValidationBaselineVersion` to 3.0.2.
+5. Deprecations on nuget.org (the maintainer, any time; exact fields in the plan under "D16 fields"): 1.0.0, 1.0.1 and 2.0.0 as Legacy; 1.0.1.1 stays.
+6. The wiki with wikiwright's Update mode ([notes/2026-09-28-github-wiki.md](notes/2026-09-28-github-wiki.md)). Already done (2026-09-28, wikiwright 0.3.0 session): the wiki is under the saved-output rule for 3.0.1; the program prints every page output, including the PowerShell and F# snippets, `wikiwright.py outputs` (0.3.0) finds 21 and misses 0, and two command fences were tagged (the note, "Brought under the saved-output rule"). Still to do: bump to 3.0.2 and put the measured upgrade story (`tests/Golden/upgrade/diff-*.txt`, CHANGELOG 3.0.2-beta.1) on Versions and upgrading, and the .NET Framework double formatting on Serialisation helpers. Push, `wikiwright.py check` and `live`.
+
+## Skill work in flight (other repositories)
+
+- package-modernize, branch `jpp-retrofit-lessons` (pushed, no pull request yet): L-110 to L-119, template fixes, references/retrofit.md corrections (second run) and dated references/nuget.md traps are committed. Still to do there: make the Phase 7 and wikiwright hand-over wording identical in both skills (retrofit or not, release or not, the golden capture feeding Versions and upgrading), a CHANGELOG entry, then the pull request.
+- wikiwright, branch `jpp-wiki-lessons` (pushed): L-103 to L-105. Still to do: the `outputs` helper fix with unit tests, a C# note in references/nuget.md, CHANGELOG and a patch release (tag and GitHub Release); HANDOFF open item 1 (retarget the eval action cases to is-an-image-url, re-run, record in TESTS.md).
+- package-modernization records (private repository): the kickoff prompt for this run (status line and "What the run found wrong"), inventory row 5, the Wikis table row (now wikiwright-maintained), by pull request.
+- Evergreen upkeep the SessionStart hook asked for: `evergreen` has one verify-at-use claim due (`evergreen.py claims evergreen --due`, then `--stamp due`).
 
 ## Where things are
 
-- Logs: `log/` (one file per session). Notes: `notes/`. Plan: `plans/modernization-plan.md`.
-- Release procedure: `AGENTS.md` and the README's "Building and releasing".
+- Golden recordings and capture: `tests/Golden/` (README there); never edit. Replay: `tests/JsonPrettyPrinterPlus.GoldenTests`.
+- Gap audit: [notes/2026-09-28-phase-0-gap-audit.md](notes/2026-09-28-phase-0-gap-audit.md). Survey: [notes/2026-09-28-survey.txt](notes/2026-09-28-survey.txt).
+- Wiki working copy: `D:\m4bwa\Claude\Projects\Ai\labs\DotNetJsonPrettyPrinter.wiki` (master, c6b285c, unchanged so far).

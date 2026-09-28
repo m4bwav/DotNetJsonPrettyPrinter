@@ -1,0 +1,34 @@
+# Public API of the published JsonPrettyPrinter 3.0.1 (JsonPrettyPrinterPlus.dll built for .NETStandard,Version=v2.0, from nuget.org),
+# listed by reflection on 2026-09-28 with tests/Golden/ApiList on .NET Framework 4.8.9345.0.
+# The tests check every line still exists. Parameter names are listed because callers use them in named arguments.
+JsonPrettyPrinterPlus.JsonPrettyPrintOptions constructor .ctor()
+JsonPrettyPrinterPlus.JsonPrettyPrintOptions implements System.IEquatable<JsonPrettyPrinterPlus.JsonPrettyPrintOptions>
+JsonPrettyPrinterPlus.JsonPrettyPrintOptions method JsonPrettyPrinterPlus.JsonPrettyPrintOptions <Clone>$()
+JsonPrettyPrinterPlus.JsonPrettyPrintOptions method System.Boolean Equals(JsonPrettyPrinterPlus.JsonPrettyPrintOptions other)
+JsonPrettyPrinterPlus.JsonPrettyPrintOptions method System.Boolean Equals(System.Object obj)
+JsonPrettyPrinterPlus.JsonPrettyPrintOptions method System.Int32 GetHashCode()
+JsonPrettyPrinterPlus.JsonPrettyPrintOptions method System.String ToString()
+JsonPrettyPrinterPlus.JsonPrettyPrintOptions property System.Boolean UseTabs { get; init; }
+JsonPrettyPrinterPlus.JsonPrettyPrintOptions property System.Int32 IndentSize { get; init; }
+JsonPrettyPrinterPlus.JsonPrettyPrintOptions property System.String NewLine { get; init; }
+JsonPrettyPrinterPlus.JsonPrettyPrintOptions property static JsonPrettyPrinterPlus.JsonPrettyPrintOptions Default { get; }
+JsonPrettyPrinterPlus.JsonPrettyPrintOptions type sealed class
+JsonPrettyPrinterPlus.JsonPrettyPrinter constructor .ctor()
+JsonPrettyPrinterPlus.JsonPrettyPrinter constructor .ctor(JsonPrettyPrinterPlus.JsonPrettyPrintOptions options)
+JsonPrettyPrinterPlus.JsonPrettyPrinter method System.String PrettyPrint(System.ReadOnlySpan<System.Char> input)
+JsonPrettyPrinterPlus.JsonPrettyPrinter method System.String PrettyPrint(System.String inputString)
+JsonPrettyPrinterPlus.JsonPrettyPrinter method System.Void PrettyPrint(System.ReadOnlySpan<System.Char> input, System.IO.TextWriter output)
+JsonPrettyPrinterPlus.JsonPrettyPrinter method System.Void PrettyPrint(System.String inputString, System.IO.TextWriter output)
+JsonPrettyPrinterPlus.JsonPrettyPrinter property JsonPrettyPrinterPlus.JsonPrettyPrintOptions Options { get; }
+JsonPrettyPrinterPlus.JsonPrettyPrinter type sealed class
+JsonPrettyPrinterPlus.JsonSerialization.JsonExtensions method static extension System.String ToJson(System.Object graph)
+JsonPrettyPrinterPlus.JsonSerialization.JsonExtensions method static extension System.String ToJson(System.Object graph, System.Boolean prettyPrint)
+JsonPrettyPrinterPlus.JsonSerialization.JsonExtensions method static extension System.String ToJson(System.Object graph, System.Text.Json.JsonSerializerOptions options, System.Boolean prettyPrint = False)
+JsonPrettyPrinterPlus.JsonSerialization.JsonExtensions method static extension System.String ToJson<T>(T graph, System.Text.Json.Serialization.Metadata.JsonTypeInfo<T> typeInfo, System.Boolean prettyPrint = False)
+JsonPrettyPrinterPlus.JsonSerialization.JsonExtensions method static extension T DeserializeFromJson<T>(System.String json)
+JsonPrettyPrinterPlus.JsonSerialization.JsonExtensions method static extension T DeserializeFromJson<T>(System.String json, System.Text.Json.JsonSerializerOptions options)
+JsonPrettyPrinterPlus.JsonSerialization.JsonExtensions method static extension T DeserializeFromJson<T>(System.String json, System.Text.Json.Serialization.Metadata.JsonTypeInfo<T> typeInfo)
+JsonPrettyPrinterPlus.JsonSerialization.JsonExtensions type static class
+JsonPrettyPrinterPlus.PrettyPrinterExtensions method static extension System.String PrettyPrintJson(System.String unprettyJson)
+JsonPrettyPrinterPlus.PrettyPrinterExtensions method static extension System.String PrettyPrintJson(System.String unprettyJson, JsonPrettyPrinterPlus.JsonPrettyPrintOptions options)
+JsonPrettyPrinterPlus.PrettyPrinterExtensions type static class

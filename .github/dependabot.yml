@@ -1,16 +1,40 @@
+# Weekly update pull requests. Merge when CI is green; read the release notes before merging a major.
+# The actions are pinned to commit SHAs with the version in a comment; Dependabot updates both.
+# The seven-day cooldown keeps brand-new releases out until they have had time to be pulled if bad (zizmor 1.30.1 requires at
+# least seven days on every ecosystem, RandomNameGeneratorLibrary 2026-09-28).
+# From the package-modernize template (2026-09-28). The library's runtime dependencies on netstandard2.0 (System.Memory,
+# System.Text.Json) are its declared floors, not versions to chase, so they are ignored here. An advisory on a floor version
+# still shows as a Dependabot alert and fails ci.yml's audit step.
 version: 2
 updates:
-  - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: weekly
   - package-ecosystem: nuget
     directory: /
     schedule:
       interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    ignore:
+      - dependency-name: System.Memory
+      - dependency-name: System.Text.Json
     groups:
       test-packages:
         patterns:
           - "NUnit*"
           - "Microsoft.NET.Test.Sdk"
           - "coverlet.*"
+  # Updates the SDK version in global.json.
+  - package-ecosystem: dotnet-sdk
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7

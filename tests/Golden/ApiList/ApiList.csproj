@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Lists the public API of a PUBLISHED JsonPrettyPrinter version by reflection (package-modernize retrofit, Phase 0).
+       From the skill's templates/nuget/tests/Golden/ApiList, with the version as a property so the same program lists
+       3.0.1 (the contract), 2.1.1 and 1.0.1.1 (the upgrade story).
+       Run: dotnet run -c Release -f net48 -p:OldVersion=3.0.1, then the output path and the version as the program's
+       two arguments (see Program.cs); the committed file is ../PublicApi-3.0.1.txt.
+       net48 loads lib/netstandard2.0 of 2.x and 3.x and lib/net35 of 1.x; net10.0 loads lib/net10.0 of 2.x and 3.x.
+       The empty Directory.* files beside this one keep the repository's MSBuild settings out. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net10.0;net48</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
+    <OldVersion Condition="'$(OldVersion)' == ''">3.0.1</OldVersion>
+    <!-- 1.x ships only lib/net35; restoring it into net10.0 warns NU1701, which is the point of the listing. -->
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="JsonPrettyPrinter" Version="[$(OldVersion)]" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

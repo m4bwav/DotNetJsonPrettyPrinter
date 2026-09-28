@@ -1,4 +1,23 @@
+---
+title: JsonPrettyPrinter modernization plan (2.1.0 and 3.0.0)
+kind: plan
+status: done
+date: 2026-09-25
+verified: 2026-09-28
+stale_after: never
+tags: [v2, v3, plan, nuget, 2.1.0, 3.0.0]
+summary: "the staged 2.0.0 to 3.0.0 plan of 2026-09-25, all six stages done and shipped as 2.1.1 and 3.0.1; read before changing the API or planning 4.0"
+---
+
 # JsonPrettyPrinter modernization plan
+
+## Status
+
+Done. All six stages shipped on 2026-09-25 as 2.1.1 and 3.0.1 (the v2.1.0 and v3.0.0 tags never published). New work follows the package-modernize retrofit plan of 2026-09-28 in this folder.
+
+## Goal
+
+Fix the 2.0.0 printer's bugs, add options and streaming, bring the build, analyzers and CI to current standards, and make the strategy machinery internal in 3.0.
 
 Written 2026-09-25 from a full read of the repo at 2.0.0 (commit `2af876a`), with the three bugs below reproduced against the built library. Meant to be executed in fresh sessions, one stage per session or PR. Tick boxes as work lands. Stages 1 to 5 shipped as **2.1.0** on 2026-09-25 (all in one session; see `ai-docs/log.md`); stage 6 is **3.0.0**.
 
@@ -76,3 +95,7 @@ Done 2026-09-25 as 3.0.0 (all three bullets below; the System.Text.Json decision
 
 - The site (`m4bwav/markdavidrogers-web`) formats JSON with System.Text.Json in `Tools/JsonPrettifier.cs` instead of this package. Once stage 1 ships, switching the site's `/tools` page and `prettify_json` MCP tool back to this package is an option; note the site tolerates trailing commas and comments, which this library does not validate.
 - Sibling library plan: `DotNetRandomNameGenerator/ai-docs/plans/modernization-plan.md`.
+
+## Next single action
+
+None; this plan is closed.

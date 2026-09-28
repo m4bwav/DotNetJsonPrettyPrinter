@@ -125,11 +125,65 @@ Show("Deserialize literal null", ("null".DeserializeFromJson<Person>() == null).
 Show("STJ indented vs ours", JsonSerializer.Serialize(new { a = new[] { 1 }, e = new { } }, new JsonSerializerOptions { WriteIndented = true }));
 Show("ours same input", JsonSerializer.Serialize(new { a = new[] { 1 }, e = new { } }).PrettyPrintJson());
 
+// ----- page outputs the first run left out (added 2026-09-28 when the wiki was brought under
+// wikiwright's saved-output rule; every block below is on a page exactly as printed here) -----
+Show("home and getting started: the Ada example", """{"name":"Ada","tags":["math","engines"],"born":1815,"empty":{}}""".PrettyPrintJson());
+Show("getting started: serialising an object", new { Name = "Mark", Tags = new[] { "a", "b" }, When = new DateTime(2010, 1, 1), Price = 9.5m }.ToJson(prettyPrint: true));
+Show("not a validator: block comment", """{"a":1 /* note */,"b":2}""".PrettyPrintJson());
+Show("recipes: one line", """{"a":1,"b":[1,2],"c":{}}""".PrettyPrintJson(new JsonPrettyPrintOptions { IndentSize = 0, NewLine = " " }));
+Show("recipes: minify", System.Text.Json.Nodes.JsonNode.Parse("""{ "a" : [ 1 , 2 ] }""")!.ToJsonString());
+Show("serialisation helpers: default escaping", new { s = """<b>&'é"</b>""" }.ToJson());
+Show("serialisation helpers: relaxed escaping", new { s = """<b>&'é"</b>""" }.ToJson(new JsonSerializerOptions { Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }));
+Show("not a validator: strip comments first, then pretty", System.Text.Json.Nodes.JsonNode.Parse(commented, null,
+    new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Skip, AllowTrailingCommas = true })!.ToJsonString().PrettyPrintJson());
+
+// The pages' PowerShell and F# snippets, run as written against the package in the NuGet cache.
+Show("getting started: PowerShell", Run("pwsh", "-NoProfile", "-NonInteractive", "-Command", """
+    Add-Type -Path "$env:USERPROFILE/.nuget/packages/jsonprettyprinter/3.0.1/lib/netstandard2.0/JsonPrettyPrinterPlus.dll"
+    [JsonPrettyPrinterPlus.PrettyPrinterExtensions]::PrettyPrintJson('{"a":[1,2],"b":{}}')
+
+    $options = [JsonPrettyPrinterPlus.JsonPrettyPrintOptions]::new()
+    $options.IndentSize = 2
+    [JsonPrettyPrinterPlus.PrettyPrinterExtensions]::PrettyPrintJson('{"a":[1]}', $options)
+
+    $compact = [ordered]@{ name = 'Ada'; tags = @('math') } | ConvertTo-Json -Compress
+    [JsonPrettyPrinterPlus.PrettyPrinterExtensions]::PrettyPrintJson($compact)
+    """));
+var fsx = Path.Combine(Path.GetTempPath(), "jpp-wiki-verify.fsx");
+File.WriteAllText(fsx, """"
+    #r "nuget: JsonPrettyPrinter, 3.0.1"
+    open JsonPrettyPrinterPlus
+    open JsonPrettyPrinterPlus.JsonSerialization
+
+    let json = """{"a":[1,{"b":"c"}],"e":{}}"""
+    printfn "%s" (json.PrettyPrintJson())
+    printfn "%s" (json.PrettyPrintJson(JsonPrettyPrintOptions(IndentSize = 2)))
+    printfn "%s" ({| Name = "Ada"; Tags = [| "math" |] |}.ToJson(prettyPrint = true))
+    """");
+Show("getting started: F#", Run("dotnet", "fsi", "--quiet", fsx));
+
 static void Show(string title, string text)
 {
     Console.WriteLine("=== " + title + " ===");
     Console.WriteLine(text.Replace("\r", "<CR>").Replace("\t", "<TAB>"));
     Console.WriteLine("--- end (" + text.Length + " chars)");
+}
+
+// Runs a page's snippet in another host and returns what it printed, LF line endings.
+static string Run(string file, params string[] args)
+{
+    var info = new System.Diagnostics.ProcessStartInfo(file) { RedirectStandardOutput = true, RedirectStandardError = true, UseShellExecute = false };
+    foreach (var a in args)
+    {
+        info.ArgumentList.Add(a);
+    }
+
+    using var p = System.Diagnostics.Process.Start(info)!;
+    var stdout = p.StandardOutput.ReadToEnd();
+    var stderr = p.StandardError.ReadToEnd();
+    p.WaitForExit();
+    var text = stdout + (stderr.Length > 0 ? "--- stderr\n" + stderr : "") + (p.ExitCode != 0 ? "--- exit " + p.ExitCode : "");
+    return text.Replace("\r\n", "\n").TrimEnd();
 }
 
 static string Catch(Func<string> f)

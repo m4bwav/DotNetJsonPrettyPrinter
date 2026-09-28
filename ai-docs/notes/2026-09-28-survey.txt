@@ -1,0 +1,357 @@
+# Phase 0 survey of JsonPrettyPrinter 3.0.1 (package-modernize retrofit, 2026-09-28). Every command above its output.
+
+# NuGet survey: JsonPrettyPrinter (2026-09-28T20:16Z)
+
+## Versions (flat container, includes unlisted)
+$ curl -s https://api.nuget.org/v3-flatcontainer/jsonprettyprinter/index.json
+1.0.0 1.0.1 1.0.1.1 2.0.0 2.1.1 3.0.1
+
+## Search entry: total downloads, verified owner, listed versions
+$ curl -s 'https://azuresearch-usnc.nuget.org/query?q=packageid:JsonPrettyPrinter&prerelease=true'
+{
+ "id": "JsonPrettyPrinter",
+ "latest": "3.0.1",
+ "totalDownloads": 309939,
+ "verified": false,
+ "owners": [
+  "rogersm0"
+ ],
+ "authors": [
+  "Mark Rogers"
+ ],
+ "license": "https://www.nuget.org/packages/JsonPrettyPrinter/3.0.1/license",
+ "project": "https://github.com/m4bwav/DotNetJsonPrettyPrinter",
+ "tags": [
+  "json",
+  "pretty-print",
+  "beautify",
+  "format",
+  "indent"
+ ],
+ "deprecation": null,
+ "vulnerabilities": []
+}
+ 1.0.0 downloads=21141
+ 1.0.1 downloads=88032
+ 1.0.1.1 downloads=200592
+ 2.0.0 downloads=65
+ 2.1.1 downloads=42
+ 3.0.1 downloads=67
+
+## Registration index: per-version listed flag, published date, deprecation, target frameworks
+$ curl -s --compressed https://api.nuget.org/v3/registration5-gz-semver2/jsonprettyprinter/index.json
+1.0.0 listed=true published=2014-03-31
+1.0.1 listed=true published=2014-03-31
+1.0.1.1 listed=true published=2014-04-03
+2.0.0 listed=true published=2026-09-25
+   net10.0: 
+   .NETStandard2.0: System.Text.Json [10.0.12, )
+2.1.1 listed=true published=2026-09-25
+   net10.0: 
+   .NETStandard2.0: System.Memory [4.6.3, ), System.Text.Json [10.0.12, )
+3.0.1 listed=true published=2026-09-25
+   net10.0: 
+   .NETStandard2.0: System.Memory [4.6.3, ), System.Text.Json [10.0.12, )
+
+## Package files of every version, newest ten (nupkg is a zip); a DLL outside lib/ installs nothing
+$ curl -s -o pkg.nupkg https://api.nuget.org/v3-flatcontainer/jsonprettyprinter/<version>/jsonprettyprinter.<version>.nupkg; unzip -l pkg.nupkg
+
+### 1.0.0
+502 _rels/.rels
+796 JsonPrettyPrinter.nuspec
+11776 lib/net35/JsonPrettyPrinterPlus.dll
+583 package/services/metadata/core-properties/c7227a2ab064429ba1eb8be5d4217f2d.psmdcp
+448 [Content_Types].xml
+9464 .signature.p7s
+
+### 1.0.1
+502 _rels/.rels
+794 JsonPrettyPrinter.nuspec
+11776 lib/net35/JsonPrettyPrinterPlus.dll
+581 package/services/metadata/core-properties/7e7b3f304e2c40368adf4872fd72fbeb.psmdcp
+448 [Content_Types].xml
+9465 .signature.p7s
+
+### 1.0.1.1
+502 _rels/.rels
+998 JsonPrettyPrinter.nuspec
+10752 lib/net35/JsonPrettyPrinterPlus.dll
+794 package/services/metadata/core-properties/a3ae56019cc247c6a230c25b9488fd7e.psmdcp
+448 [Content_Types].xml
+9464 .signature.p7s
+
+### 2.0.0
+480 _rels/.rels
+1472 JsonPrettyPrinter.nuspec
+3050 README.md
+11776 lib/net10.0/JsonPrettyPrinterPlus.dll
+830 lib/net10.0/JsonPrettyPrinterPlus.xml
+11776 lib/netstandard2.0/JsonPrettyPrinterPlus.dll
+830 lib/netstandard2.0/JsonPrettyPrinterPlus.xml
+582 [Content_Types].xml
+812 package/services/metadata/core-properties/nuget.psmdcp
+12982 .signature.p7s
+
+### 2.1.1
+480 _rels/.rels
+1423 JsonPrettyPrinter.nuspec
+4664 README.md
+2443 icon.png
+17920 lib/net10.0/JsonPrettyPrinterPlus.dll
+30019 lib/net10.0/JsonPrettyPrinterPlus.xml
+17920 lib/netstandard2.0/JsonPrettyPrinterPlus.dll
+30019 lib/netstandard2.0/JsonPrettyPrinterPlus.xml
+644 [Content_Types].xml
+812 package/services/metadata/core-properties/nuget.psmdcp
+12983 .signature.p7s
+
+### 3.0.1
+480 _rels/.rels
+1423 JsonPrettyPrinter.nuspec
+5002 README.md
+2443 icon.png
+12800 lib/net10.0/JsonPrettyPrinterPlus.dll
+11963 lib/net10.0/JsonPrettyPrinterPlus.xml
+12800 lib/netstandard2.0/JsonPrettyPrinterPlus.dll
+11963 lib/netstandard2.0/JsonPrettyPrinterPlus.xml
+644 [Content_Types].xml
+812 package/services/metadata/core-properties/nuget.psmdcp
+12982 .signature.p7s
+nuspec:
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>JsonPrettyPrinter</id>
+    <version>3.0.1</version>
+    <title>Json Pretty Printer</title>
+    <authors>Mark Rogers</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>icon.png</icon>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/m4bwav/DotNetJsonPrettyPrinter</projectUrl>
+    <description>A small, dependency-light JSON pretty printer and beautifier for .NET: PrettyPrintJson() on any JSON string, plus ToJson()/DeserializeFromJson() helpers over System.Text.Json.</description>
+    <releaseNotes>See https://github.com/m4bwav/DotNetJsonPrettyPrinter/blob/master/CHANGELOG.md</releaseNotes>
+    <copyright>Copyright (c) 2014-2026 Mark Rogers</copyright>
+    <tags>json pretty-print beautify format indent</tags>
+    <repository type="git" url="https://github.com/m4bwav/DotNetJsonPrettyPrinter" commit="16101453a30bd92d173e06172a52d0dcbd8c0ba3" />
+    <dependencies>
+      <group targetFramework="net10.0" />
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="System.Memory" version="4.6.3" exclude="Build,Analyzers" />
+        <dependency id="System.Text.Json" version="10.0.12" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
+
+# GitHub side (m4bwav/DotNetJsonPrettyPrinter)
+# GitHub survey: m4bwav/DotNetJsonPrettyPrinter (2026-09-28T20:17Z)
+
+## Repository
+$ gh repo view m4bwav/DotNetJsonPrettyPrinter --json name,description,defaultBranchRef,pushedAt,createdAt,licenseInfo,stargazerCount,forkCount,isArchived,homepageUrl --jq '{name,description,defaultBranch:.defaultBranchRef.name,pushedAt,createdAt,license:.licenseInfo.key,stars:.stargazerCount,forks:.forkCount,archived:.isArchived,homepage:.homepageUrl}'
+{"archived":false,"createdAt":"2014-03-25T00:47:43Z","defaultBranch":"master","description":"Json Pretty Printer/Beautifier Library For .Net","forks":2,"homepage":"http://www.markdavidrogers.com/json-pretty-printerbeautifier-library-for-net/","license":"mit","name":"DotNetJsonPrettyPrinter","pushedAt":"2026-09-28T18:15:42Z","stars":9}
+
+## Settings and security features
+$ gh api repos/m4bwav/DotNetJsonPrettyPrinter --jq '{delete_branch_on_merge, has_wiki, has_projects, allow_squash_merge, web_commit_signoff_required, security_and_analysis}'
+{"allow_squash_merge":true,"delete_branch_on_merge":false,"has_projects":true,"has_wiki":true,"security_and_analysis":{"dependabot_security_updates":{"status":"disabled"},"secret_scanning":{"status":"disabled"},"secret_scanning_non_provider_patterns":{"status":"disabled"},"secret_scanning_push_protection":{"status":"disabled"},"secret_scanning_validity_checks":{"status":"disabled"}},"web_commit_signoff_required":false}
+
+## Default workflow permissions
+$ gh api repos/m4bwav/DotNetJsonPrettyPrinter/actions/permissions/workflow
+{"default_workflow_permissions":"write","can_approve_pull_request_reviews":true}
+## Branches
+$ gh api repos/m4bwav/DotNetJsonPrettyPrinter/branches --paginate --jq '.[].name'
+master
+modernize-net10
+release-2.1.0
+
+## Rulesets and branch protection
+$ r=$(gh api repos/m4bwav/DotNetJsonPrettyPrinter/rulesets --jq '.[] | "\(.id) \(.name) \(.enforcement)"'); echo "${r:-(no rulesets)}"; if p=$(gh api repos/m4bwav/DotNetJsonPrettyPrinter/branches/$(gh repo view m4bwav/DotNetJsonPrettyPrinter --json defaultBranchRef --jq .defaultBranchRef.name)/protection --jq . 2>/dev/null); then echo "$p"; else echo '(no classic branch protection)'; fi
+(no rulesets)
+(no classic branch protection)
+
+## Issues (all states)
+$ gh issue list -R m4bwav/DotNetJsonPrettyPrinter --state all --limit 100 --json number,title,state,author,createdAt,closedAt --jq '.[] | "#\(.number) \(.state) \(.createdAt[:10]) \(.author.login): \(.title)"'
+
+## Pull requests (all states)
+$ gh pr list -R m4bwav/DotNetJsonPrettyPrinter --state all --limit 100 --json number,title,state,author,headRefName,createdAt --jq '.[] | "#\(.number) \(.state) \(.createdAt[:10]) \(.author.login) [\(.headRefName)]: \(.title)"'
+#7 CLOSED 2026-09-25 app/dependabot [dependabot/nuget/JsonPrettyPrinterPlusTests/test-packages-4618f455fa]: Bump the test-packages group with 1 update
+#6 CLOSED 2026-09-25 app/dependabot [dependabot/github_actions/actions/checkout-7]: Bump actions/checkout from 6 to 7
+#5 CLOSED 2026-09-25 app/dependabot [dependabot/github_actions/softprops/action-gh-release-3]: Bump softprops/action-gh-release from 2 to 3
+#4 CLOSED 2026-09-25 app/dependabot [dependabot/github_actions/actions/setup-dotnet-6]: Bump actions/setup-dotnet from 5 to 6
+#3 CLOSED 2026-09-25 app/dependabot [dependabot/github_actions/dorny/test-reporter-3]: Bump dorny/test-reporter from 2 to 3
+#2 MERGED 2026-09-25 m4bwav [modernize-net10]: Rebuild for netstandard2.0 and net10.0 (2.0.0)
+#1 MERGED 2016-05-15 gitter-badger [gitter-badge]: Add a Gitter chat badge to README.md
+
+## Open Dependabot alerts by severity, package and scope
+$ gh api "repos/m4bwav/DotNetJsonPrettyPrinter/dependabot/alerts?state=open&per_page=100" --paginate --jq '.[] | "\(.security_advisory.severity) \(.dependency.package.name) \(.dependency.scope)"' | sort | uniq -c | sort -rn
+
+## Open Dependabot alerts, count
+$ gh api "repos/m4bwav/DotNetJsonPrettyPrinter/dependabot/alerts?state=open&per_page=100" --paginate --jq length
+0
+
+## Webhooks (dead services leave these)
+$ gh api repos/m4bwav/DotNetJsonPrettyPrinter/hooks --jq '.[] | "\(.id) \(.config.url) active=\(.active) events=\(.events|join(","))"'
+
+## Actions secrets (count) and variables
+$ gh api repos/m4bwav/DotNetJsonPrettyPrinter/actions/secrets --jq '{total_count, names:[.secrets[].name]}'; gh api repos/m4bwav/DotNetJsonPrettyPrinter/actions/variables --jq '{total_count, names:[.variables[].name]}'
+{"names":[],"total_count":0}
+{"names":[],"total_count":0}
+
+## Environments
+$ gh api repos/m4bwav/DotNetJsonPrettyPrinter/environments --jq '.environments[]? | "\(.name) reviewers=\([.protection_rules[]? | select(.type=="required_reviewers") | .reviewers[]?.reviewer.login] | join(","))"'
+nuget reviewers=m4bwav
+
+## Workflows
+$ gh api repos/m4bwav/DotNetJsonPrettyPrinter/actions/workflows --jq '.workflows[] | "\(.name) \(.path) \(.state)"'
+CI .github/workflows/ci.yml active
+Dependabot Updates dynamic/dependabot/dependabot-updates active
+
+## Action pins in the default branch's workflows, with each action's runtime
+$ action_pins (git tree, contents API, action.yml at each ref)
+.github/workflows/ci.yml NuGet/login@v1 -> node24
+.github/workflows/ci.yml actions/checkout@v7 -> node24
+.github/workflows/ci.yml actions/download-artifact@v8 -> node24
+.github/workflows/ci.yml actions/setup-dotnet@v6 -> node24
+.github/workflows/ci.yml actions/upload-artifact@v7 -> node24
+.github/workflows/ci.yml dorny/test-reporter@v3 -> node24
+.github/workflows/ci.yml softprops/action-gh-release@v3 -> node24
+
+## Forks
+$ gh api repos/m4bwav/DotNetJsonPrettyPrinter/forks --jq '.[] | "\(.full_name) pushed=\(.pushed_at[:10])"'
+BeatlesCoder/DotNetJsonPrettyPrinter pushed=2016-05-15
+gitter-badger/DotNetJsonPrettyPrinter pushed=2016-05-15
+
+## Releases and tags
+$ gh release list -R m4bwav/DotNetJsonPrettyPrinter --limit 20; gh api repos/m4bwav/DotNetJsonPrettyPrinter/tags --jq '.[].name' | head -30
+v3.0.1	Latest	v3.0.1	2026-09-25T03:37:33Z
+v2.1.1		v2.1.1	2026-09-25T03:35:53Z
+Original Version		1.0	2014-03-25T14:18:17Z
+v3.0.1
+v3.0.0
+v2.1.1
+v2.1.0
+v2.0.0
+1.0
+
+## Dead-service files in the default branch
+$ gh api repos/m4bwav/DotNetJsonPrettyPrinter/git/trees/HEAD?recursive=1 --jq '.tree[].path' | grep -Ei '^(\.travis\.yml|\.snyk|\.synk|\.sonarcloud\.properties|sonar-project\.properties|\.coveralls\.yml|codecov\.yml|\.codecov\.yml|appveyor\.yml|\.circleci/|\.npmignore|\.nuspec|\.vscode/)' || echo '(none)'
+(none)
+
+## Dotfiles at the root of the default branch
+$ gh api repos/m4bwav/DotNetJsonPrettyPrinter/contents --jq '.[].name' | grep '^\.' || echo '(none)'
+.editorconfig
+.gitattributes
+.github
+.gitignore
+
+## Branches with no open pull request (stale work or bot leftovers; each needs a disposition)
+$ comm -23 <(gh api repos/m4bwav/DotNetJsonPrettyPrinter/branches --paginate --jq '.[].name' | sort) <( (gh pr list -R m4bwav/DotNetJsonPrettyPrinter --state open --limit 200 --json headRefName --jq '.[].headRefName'; gh repo view m4bwav/DotNetJsonPrettyPrinter --json defaultBranchRef --jq .defaultBranchRef.name) | sort) || echo '(none)'
+modernize-net10
+release-2.1.0
+
+## Badges in the README
+$ gh api repos/m4bwav/DotNetJsonPrettyPrinter/readme --jq .content | base64 -d 2>/dev/null | grep -Eo 'https?://[^ )]*(shields\.io|travis-ci|david-dm|snyk\.io|coveralls|codecov|gitter|sonarcloud|nodei\.co|badgen|badge)[^ )]*' | sort -u || echo '(none)'
+https://github.com/m4bwav/DotNetJsonPrettyPrinter/actions/workflows/ci.yml/badge.svg
+https://img.shields.io/nuget/v/JsonPrettyPrinter.svg
+
+## Things only the maintainer can see
+- Installed GitHub Apps and authorized OAuth apps: github.com/settings/installations and github.com/settings/applications (the API refuses the gh token).
+- Whether a token in history is still live: revoke it at the provider regardless.
+
+## Next: in the clone
+- Read every .csproj, .sln or .slnx, Directory.Build.props, .nuspec, packages.config, global.json, the tests, the README and every dotfile.
+- dotnet --list-sdks; dotnet restore; dotnet build; dotnet test as they are (an old project may need a .NET Framework reference assembly pack or the Windows SDK).
+- dotnet list package --outdated --include-transitive; dotnet list package --vulnerable --include-transitive.
+- Then the golden capture from the PUBLISHED package in a scratch console project (scripts/golden-capture-nuget.template.cs).
+
+# README images
+$ node scripts/check-readme-images.mjs README.md --registry nuget  (repository README)
+2 image(s) in D:/m4bwa/Claude/Projects/Ai/labs/DotNetJsonPrettyPrinter/README.md, checked for nuget
+ok   [NuGet] https://img.shields.io/nuget/v/JsonPrettyPrinter.svg
+ok   [CI] https://github.com/m4bwav/DotNetJsonPrettyPrinter/actions/workflows/ci.yml/badge.svg
+every image works
+exit 0
+$ ... (README.md inside the published 3.0.1 nupkg)
+2 image(s) in <scratchpad>/pkgs/3.0.1/README.md, checked for nuget
+ok   [NuGet] https://img.shields.io/nuget/v/JsonPrettyPrinter.svg
+ok   [CI] https://github.com/m4bwav/DotNetJsonPrettyPrinter/actions/workflows/ci.yml/badge.svg
+every image works
+exit 0
+
+# Baseline (the repository as it is, master 08836a7)
+$ dotnet --list-sdks
+9.0.317 [C:\Program Files\dotnet\sdk]
+10.0.401 [C:\Program Files\dotnet\sdk]
+
+$ dotnet restore --locked-mode
+  Determining projects to restore...
+  Restored D:\m4bwa\Claude\Projects\Ai\labs\DotNetJsonPrettyPrinter\JsonPrettyPrinterPlusTests\JsonPrettyPrinterPlusTests.csproj (in 373 ms).
+  Restored D:\m4bwa\Claude\Projects\Ai\labs\DotNetJsonPrettyPrinter\benchmarks\JsonPrettyPrinterPlus.Benchmarks\JsonPrettyPrinterPlus.Benchmarks.csproj (in 370 ms).
+  Restored D:\m4bwa\Claude\Projects\Ai\labs\DotNetJsonPrettyPrinter\JsonPrettyPrinterPlus\JsonPrettyPrinterPlus.csproj (in 370 ms).
+exit 0
+
+$ dotnet format --no-restore --verify-no-changes
+exit 0
+
+$ dotnet build --no-restore -c Release
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.48
+exit 0
+
+$ dotnet test --no-build -c Release -f net10.0
+Test run for D:\m4bwa\Claude\Projects\Ai\labs\DotNetJsonPrettyPrinter\JsonPrettyPrinterPlusTests\bin\Release\net10.0\JsonPrettyPrinterPlusTests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    37, Skipped:     0, Total:    37, Duration: 491 ms - JsonPrettyPrinterPlusTests.dll (net10.0)
+exit 0
+
+$ dotnet test --no-build -c Release -f net48
+Test run for D:\m4bwa\Claude\Projects\Ai\labs\DotNetJsonPrettyPrinter\JsonPrettyPrinterPlusTests\bin\Release\net48\JsonPrettyPrinterPlusTests.dll (.NETFramework,Version=v4.8)
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    37, Skipped:     0, Total:    37, Duration: 869 ms - JsonPrettyPrinterPlusTests.dll (net48)
+exit 0
+
+$ dotnet pack JsonPrettyPrinterPlus --no-build -c Release -o <scratchpad>/baseline-artifacts
+  Successfully created package '<scratchpad>\baseline-artifacts\JsonPrettyPrinter.3.0.1.nupkg'.
+  Successfully created package '<scratchpad>\baseline-artifacts\JsonPrettyPrinter.3.0.1.snupkg'.
+exit 0
+
+# Packages
+$ dotnet package list --outdated --include-transitive
+  Restored D:\m4bwa\Claude\Projects\Ai\labs\DotNetJsonPrettyPrinter\JsonPrettyPrinterPlusTests\JsonPrettyPrinterPlusTests.csproj (in 144 ms).
+  Restored D:\m4bwa\Claude\Projects\Ai\labs\DotNetJsonPrettyPrinter\benchmarks\JsonPrettyPrinterPlus.Benchmarks\JsonPrettyPrinterPlus.Benchmarks.csproj (in 140 ms).
+  Restored D:\m4bwa\Claude\Projects\Ai\labs\DotNetJsonPrettyPrinter\JsonPrettyPrinterPlus\JsonPrettyPrinterPlus.csproj (in 140 ms).
+Project `JsonPrettyPrinterPlusTests` has the following updates to its packages
+   [net48]: 
+   > coverlet.collector      10.0.1      10.0.1     10.1.0
+   > NUnit                   4.6.1       4.6.1      5.0.0 
+   [net10.0]: 
+   > coverlet.collector      10.0.1      10.0.1     10.1.0
+   > NUnit                   4.6.1       4.6.1      5.0.0 
+
+$ dotnet package list --vulnerable --include-transitive
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+The following sources were used:
+   https://api.nuget.org/v3/index.json
+The given project `JsonPrettyPrinterPlus.Benchmarks` has no vulnerable packages given the current sources.
+The given project `JsonPrettyPrinterPlus` has no vulnerable packages given the current sources.
+The given project `JsonPrettyPrinterPlusTests` has no vulnerable packages given the current sources.
+
+$ python scripts/nuget-latest.py System.Text.Json System.Memory NUnit NUnit3TestAdapter Microsoft.NET.Test.Sdk coverlet.collector BenchmarkDotNet Microsoft.NETFramework.ReferenceAssemblies xunit.v3 Microsoft.Testing.Extensions.CodeCoverage
+System.Text.Json                              10.0.12      2026-09-08  age   20d vuln=False deprecated=False  prev 10.0.11 2026-08-11
+System.Memory                                 4.6.3        2025-04-04  age  542d vuln=False deprecated=False  prev 4.6.2 2025-03-19
+NUnit                                         5.0.0        2026-09-27  age    1d vuln=False deprecated=False  prev 4.6.1 2026-05-19  COOLDOWN (<3 days)
+NUnit3TestAdapter                             6.3.0        2026-08-24  age   35d vuln=False deprecated=False  prev 6.2.0 2026-03-21
+Microsoft.NET.Test.Sdk                        18.10.1      2026-09-15  age   13d vuln=False deprecated=False  prev 18.10.0 2026-09-09
+coverlet.collector                            10.1.0       2026-09-27  age    1d vuln=False deprecated=False  prev 10.0.1 2026-05-18  COOLDOWN (<3 days)
+BenchmarkDotNet                               0.15.8       2025-11-30  age  302d vuln=False deprecated=False  prev 0.15.6 2025-11-05
+Microsoft.NETFramework.ReferenceAssemblies    1.0.3        2022-08-19  age 1501d vuln=False deprecated=False  prev 1.0.2 2021-05-07
+xunit.v3                                      4.0.1        2026-09-12  age   16d vuln=False deprecated=False  prev 4.0.0 2026-08-15
+Microsoft.Testing.Extensions.CodeCoverage     18.11.2      2026-09-11  age   17d vuln=False deprecated=False  prev 18.11.0 2026-09-02

@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The golden replay (plan D1): the Phase 0 capture's cases, compiled unchanged against this repository's library and
+    compared with what the published 3.0.1 answered on the same runtime (tests/Golden/3.0.1.<runtime>-windows.json).
+    A project of its own, so no other test shares its process (skill L-072). Also checks the public API list.
+  -->
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net48</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
+  <!-- 64-bit, because the net48 recording came from a 64-bit process (skill L-098); pinned so the lock file is the same on every OS. -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net48'">
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Frozen since the Phase 0 commit 08b777a; never edit them to make a test pass. -->
+    <Compile Include="../Golden/Capture/Cases.cs" Link="Capture/Cases.cs" />
+    <Compile Include="../Golden/Capture/Json.cs" Link="Capture/Json.cs" />
+    <None Include="../Golden/3.0.1.*.json" LinkBase="Golden" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../Golden/PublicApi-3.0.1.txt" LinkBase="Golden" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
+    <PackageReference Include="NUnit" Version="4.6.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="6.3.0" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../JsonPrettyPrinterPlus/JsonPrettyPrinterPlus.csproj" />
+  </ItemGroup>
+
+</Project>
