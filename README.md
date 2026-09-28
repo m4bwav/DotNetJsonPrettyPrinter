@@ -3,17 +3,18 @@ DotNetJsonPrettyPrinter
 
 Json Pretty Printer/Beautifier Library For .Net
 
-[![NuGet](https://img.shields.io/nuget/v/JsonPrettyPrinter.svg)](https://www.nuget.org/packages/JsonPrettyPrinter/) [![CI](https://github.com/m4bwav/DotNetJsonPrettyPrinter/actions/workflows/ci.yml/badge.svg)](https://github.com/m4bwav/DotNetJsonPrettyPrinter/actions/workflows/ci.yml)
+[![NuGet](https://img.shields.io/nuget/v/JsonPrettyPrinter.svg)](https://www.nuget.org/packages/JsonPrettyPrinter/) [![CI](https://github.com/m4bwav/DotNetJsonPrettyPrinter/actions/workflows/ci.yml/badge.svg)](https://github.com/m4bwav/DotNetJsonPrettyPrinter/actions/workflows/ci.yml) [![Downloads](https://img.shields.io/nuget/dt/JsonPrettyPrinter.svg)](https://www.nuget.org/packages/JsonPrettyPrinter/)
 
 ```
 dotnet add package JsonPrettyPrinter
 ```
 
-Targets `netstandard2.0` (any .NET Framework 4.6.2+, .NET Core, Mono, Unity) and `net10.0` (trim and native AOT compatible). Try it live at https://www.markdavidrogers.com/tools or through the site's MCP server tool `prettify_json`.
+Targets `netstandard2.0` (any .NET Framework 4.6.2+, .NET Core, Mono, Unity) and `net10.0` (trim and native AOT compatible).
 
 Background article: https://www.markdavidrogers.com/json-pretty-printerbeautifier-library-for-net/  
 NuGet package: https://www.nuget.org/packages/JsonPrettyPrinter/  
-Changes: [CHANGELOG.md](CHANGELOG.md)
+Changes: [CHANGELOG.md](CHANGELOG.md)  
+Documentation, recipes and the upgrade notes: https://github.com/m4bwav/DotNetJsonPrettyPrinter/wiki
 
 This library is a simple and light weight json pretty printer. There are few other .net json pretty printers, but they are usually heavier and focus on some other aspect of javascript or have only been described in article format.
 
@@ -60,7 +61,7 @@ Defaults are `IndentSize = 4`, `UseTabs = false` and `NewLine = "\n"`.
 
 ## Not a validator
 
-The printer tracks strings, escapes and bracket nesting and copies everything else through as it finds it. Trailing commas, comments, single-quoted strings or bare words come out indented rather than rejected. The only errors it raises are `ArgumentNullException` for null input and `FormatException` (with the character index) for a closing bracket that has nothing to close or closes the wrong kind of scope. A document that ends before its last bracket is printed as far as it goes.
+The printer tracks strings, escapes and bracket nesting and copies everything else through as it finds it. Trailing commas, block comments, single-quoted strings and bare words come out indented rather than rejected. A `//` comment does not survive: the printer drops the spaces inside it and the line break that ends it, so it runs into what follows (`// note`, a line break, then `"b":2` prints as `//note"b": 2`). Strip comments before printing a document that has them. The only errors it raises are `ArgumentNullException` for null input and `FormatException` (with the character index) for a closing bracket that has nothing to close or closes the wrong kind of scope. A document that ends before its last bracket is printed as far as it goes.
 
 ## Serialising
 
@@ -77,7 +78,20 @@ var camel = thing.ToJson(new JsonSerializerOptions { PropertyNamingPolicy = Json
 var aot = thing.ToJson(MyContext.Default.MyType, prettyPrint: true);
 ```
 
-The helpers use `System.Text.Json`, which the `netstandard2.0` build references as a package (its only dependency); the `net10.0` build uses the one in the framework.
+The helpers use `System.Text.Json`, which the `netstandard2.0` build references as a package (with `System.Memory`, its only dependencies); the `net10.0` build uses the one in the framework.
+
+On .NET Framework, which loads the `netstandard2.0` build, System.Text.Json writes doubles with up to 17 significant digits: `0.1` serialises as `0.10000000000000001` and `-0.0` as `0`. On .NET 10 they come out as `0.1` and `-0`.
+
+## Upgrading from 1.x
+
+Most installs are still 1.0.1.1 (2014, .NET Framework 3.5). Running the same cases against 1.0.1.1 and 3.x shows what changes:
+
+- Printing: empty objects and arrays print as `{}` and `[]`; an escaped backslash before a closing quote no longer stops the formatting of the rest of the document; a stray closing bracket throws `FormatException` with its index instead of `InvalidOperationException`; null throws `ArgumentNullException`; lines end with `"\n"`.
+- `ToJSON` is now `ToJson`, over System.Text.Json: dates are ISO 8601 strings instead of `/Date(...)/`, public fields are no longer written, NaN and infinities throw, and characters outside ASCII are escaped.
+- `DeserializeFromJson` is strict and case-sensitive: a lower-case property name no longer fills the property, and single quotes, unquoted keys and numbers written as strings throw `JsonException`. Pass `new JsonSerializerOptions { PropertyNameCaseInsensitive = true }` for the old name matching.
+- On .NET Core and .NET 5 or later, 1.x's `ToJSON` and `DeserializeFromJson` never worked (they need System.Web.Extensions); only its printer did.
+
+The full list, case by case, is on the wiki's [Versions and upgrading](https://github.com/m4bwav/DotNetJsonPrettyPrinter/wiki/Versions-and-Upgrading) page.
 
 ## Upgrading from 2.x to 3.0
 
@@ -93,7 +107,7 @@ dotnet pack JsonPrettyPrinterPlus -c Release -o artifacts
 dotnet run -c Release --project benchmarks/JsonPrettyPrinterPlus.Benchmarks   # optional
 ```
 
-CI (`.github/workflows/ci.yml`) builds, tests (net10.0 on Ubuntu and Windows, net48 on Windows), checks formatting, collects coverage and packs on every push. To publish: add the version to `CHANGELOG.md`, bump `<Version>` in `JsonPrettyPrinterPlus.csproj`, tag the commit `v<version>` and push the tag. The `publish` job refuses a tag that does not match the packed version, signs in to nuget.org with Trusted Publishing (GitHub OIDC, no stored API key; a `NUGET_USER` secret holding the nuget.org profile name lives in the `nuget` environment), pushes the package and creates a GitHub Release with the `.nupkg` and `.snupkg` attached.
+CI (`.github/workflows/ci.yml`) restores in locked mode, checks formatting, builds, audits the packages, runs the unit tests and the golden replay of 3.0.1's recorded answers (net10.0 on Ubuntu and Windows, net48 on Windows), packs, checks the package's contents and runs fresh consumers of it. To publish: add the version to `CHANGELOG.md`, set `<Version>` in `JsonPrettyPrinterPlus.csproj`, merge, wait for CI on master, then tag the commit `v<version>` and push the tag. `release.yml` refuses a tag that does not match the version or is not on master, builds and tests on Linux and Windows, attests the package, and waits for the maintainer's approval of the `nuget` environment before it pushes through Trusted Publishing (GitHub OIDC, no stored API key) and creates the GitHub Release. `verify-published.yml` then checks the version from nuget.org on Linux, macOS and Windows.
 
 ## License
 

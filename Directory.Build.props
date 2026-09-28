@@ -1,0 +1,11 @@
+<!-- From the package-modernize template (2026-09-28, plan D10): only the NuGet audit switches. The projects keep their own
+     analyzer, nullable and packaging settings. The golden capture folders have empty Directory.Build files of their own. -->
+<Project>
+
+  <PropertyGroup>
+    <!-- A new advisory in a test or build package warns locally; the CI audit step (AuditPipeline) fails on it. -->
+    <WarningsNotAsErrors>$(WarningsNotAsErrors);NU1901;NU1902;NU1903;NU1904</WarningsNotAsErrors>
+    <WarningsAsErrors Condition="'$(AuditPipeline)' == 'true'">$(WarningsAsErrors);NU1901;NU1902;NU1903;NU1904</WarningsAsErrors>
+  </PropertyGroup>
+
+</Project>

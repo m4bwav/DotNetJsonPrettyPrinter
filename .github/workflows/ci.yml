@@ -1,129 +1,120 @@
-# Build, test (Ubuntu + Windows; the net48 leg runs on Windows only) and pack on every push and pull request;
-# the .nupkg and .snupkg, coverage and test results are kept as run artifacts.
-# Publishing to NuGet happens only from a v* tag (see README "Building and releasing") through nuget.org
-# Trusted Publishing: the job trades GitHub's OIDC token for a one-hour NuGet key, so no long-lived API key is
-# stored anywhere. It needs a NUGET_USER secret (the nuget.org profile name) in the repository's "nuget"
-# environment, and it fails if the tag does not match <Version> in the csproj.
-name: CI
+# From the package-modernize template (CachingServiceWithAOPSupport 2.0.0, 2026-09-27), adapted for JsonPrettyPrinter in
+# the retrofit of 2026-09-28. Every push to master and every pull request: locked restore, dotnet format, build with
+# warnings as errors, the NuGet audit, the tests on Linux and Windows (net10.0 on both; net48 on Windows, which runs the
+# netstandard2.0 build; the golden replay in tests/JsonPrettyPrinterPlus.GoldenTests), a pack with a content and dependency
+# check, fresh consumers of the packed package (tests/consumers/run.sh), and the final `ci` job the ruleset on master
+# requires. Publishing is release.yml. Actions are pinned to commit SHAs with the version in a comment; Dependabot updates both.
+name: ci
 
 on:
   push:
     branches: [master]
-    tags: ['v*']
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
   build:
+    name: build and test (${{ matrix.os }})
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-24.04, windows-latest]
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          fetch-depth: 0 # SourceLink needs the commit history
-
-      - uses: actions/setup-dotnet@v6
+          fetch-depth: 0 # Source Link records the commit
+          persist-credentials: false
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
           global-json-file: global.json
           cache: true
           cache-dependency-path: '**/packages.lock.json'
-
       - run: dotnet restore --locked-mode
       - run: dotnet format --no-restore --verify-no-changes
       - run: dotnet build --no-restore -c Release
-
+      # A dedicated restore that fails on any audit finding, so a future advisory blocks a merge but not a local build.
+      - name: NuGet audit as errors
+        run: dotnet restore -p:AuditPipeline=true --force
       - name: Test (net10.0)
-        run: dotnet test --no-build -c Release -f net10.0 --logger trx --results-directory TestResults --collect:"XPlat Code Coverage"
-
-      - name: Test (net48, Windows only)
+        run: dotnet test --no-build -c Release -f net10.0 --logger trx --results-directory TestResults
+      - name: Test (net48, Windows only; exercises the netstandard2.0 build)
         if: runner.os == 'Windows'
         run: dotnet test --no-build -c Release -f net48 --logger trx --results-directory TestResults
-
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
           name: test-results-${{ matrix.os }}
           path: TestResults
           retention-days: 30
-
-      - name: Check the tag matches the packed version
-        if: startsWith(github.ref, 'refs/tags/v')
-        shell: bash
+      - name: Pack
+        run: dotnet pack JsonPrettyPrinterPlus --no-build -c Release -o artifacts
+      - name: The package holds exactly what it should and declares its dependencies
+        if: runner.os == 'Linux'
         run: |
-          csproj_version=$(sed -n 's/.*<Version>\(.*\)<\/Version>.*/\1/p' JsonPrettyPrinterPlus/JsonPrettyPrinterPlus.csproj)
-          tag_version="${GITHUB_REF_NAME#v}"
-          if [ "$csproj_version" != "$tag_version" ]; then
-            echo "::error::Tag v$tag_version does not match <Version>$csproj_version</Version> in JsonPrettyPrinterPlus.csproj"
+          nupkg=$(ls artifacts/JsonPrettyPrinter.[0-9]*.nupkg)
+          # Every file the package must hold, in C-locale order as `LC_ALL=C sort` gives it (uppercase first).
+          expected=$'JsonPrettyPrinter.nuspec\nREADME.md\nicon.png\nlib/net10.0/JsonPrettyPrinterPlus.dll\nlib/net10.0/JsonPrettyPrinterPlus.xml\nlib/netstandard2.0/JsonPrettyPrinterPlus.dll\nlib/netstandard2.0/JsonPrettyPrinterPlus.xml'
+          actual=$(unzip -Z1 "$nupkg" | grep -Ev '^(_rels/|package/|\[Content_Types\])' | LC_ALL=C sort)
+          if [ "$actual" != "$expected" ]; then
+            echo "::error::unexpected package contents"
+            diff <(echo "$expected") <(echo "$actual")
             exit 1
           fi
-
-      - run: dotnet pack JsonPrettyPrinterPlus --no-build -c Release -o artifacts
-        if: runner.os == 'Linux'
-
-      - uses: actions/upload-artifact@v7
+          nuspec=$(unzip -p "$nupkg" JsonPrettyPrinter.nuspec | tr -d '\r\n')
+          for tfm in .NETStandard2.0 net10.0; do
+            # grep finds nothing in an empty (self-closing) group; under -e and pipefail that would end the step without a message.
+            group=$(echo "$nuspec" | { grep -o "<group targetFramework=\"$tfm\">.*" || true; } | sed 's:</group>.*::')
+            deps=$(echo "$group" | { grep -o '<dependency id="[^"]*" version="[^"]*"' || true; } | LC_ALL=C sort | tr '\n' ' ')
+            # The declared dependencies of each group, sorted by id, each followed by one space ('' for none).
+            case "$tfm" in
+              .NETStandard2.0) want='<dependency id="System.Memory" version="4.6.3" <dependency id="System.Text.Json" version="10.0.12" ' ;;
+              *) want='' ;;
+            esac
+            if [ "$deps" != "$want" ]; then
+              echo "::error::$tfm dependencies: $deps"
+              exit 1
+            fi
+          done
+      # Fresh consumers of the packed package (tests/consumers/run.sh and Program.cs): net10.0 everywhere, net48 on Windows,
+      # in each dependency set the script lists.
+      - name: Fresh consumers of the packed package
+        run: |
+          version=$(sed -n 's:.*<Version>\(.*\)</Version>.*:\1:p' JsonPrettyPrinterPlus/JsonPrettyPrinterPlus.csproj)
+          tests/consumers/run.sh "$version" artifacts
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: runner.os == 'Linux'
         with:
-          name: package
+          name: packages
           path: artifacts/*nupkg
           retention-days: 30
 
-  test-report:
-    needs: build
-    if: always()
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      checks: write
+  ci:
+    name: ci
+    if: ${{ always() }}
+    needs: [build]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7 # the reporter maps test files back to the repository
-      - uses: actions/download-artifact@v8
-        with:
-          pattern: test-results-*
-          path: TestResults
-      - uses: dorny/test-reporter@v3
-        with:
-          name: Tests
-          path: 'TestResults/**/*.trx'
-          reporter: dotnet-trx
-          fail-on-error: false
-
-  publish:
-    if: startsWith(github.ref, 'refs/tags/v')
-    needs: build
-    runs-on: ubuntu-latest
-    environment: nuget
-    permissions:
-      id-token: write   # lets the job request the GitHub OIDC token that nuget.org exchanges for a temporary key
-      contents: write   # to create the GitHub Release
-    steps:
-      - uses: actions/download-artifact@v8
-        with:
-          name: package
-          path: artifacts
-      - uses: actions/setup-dotnet@v6
-        with:
-          dotnet-version: 10.0.x # no checkout in this job, so global.json is not available
-      - name: NuGet login (OIDC to temporary API key)
-        uses: NuGet/login@v1
-        id: login
-        with:
-          user: ${{ secrets.NUGET_USER }}
-      - run: dotnet nuget push "artifacts/*.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate
+      - name: Every job passed
         env:
-          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
-      - name: GitHub Release
-        uses: softprops/action-gh-release@v3
-        with:
-          generate_release_notes: true
-          files: |
-            artifacts/*.nupkg
-            artifacts/*.snupkg
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "job results: $RESULTS"
+          for result in $RESULTS; do
+            if [ "$result" != success ]; then
+              exit 1
+            fi
+          done

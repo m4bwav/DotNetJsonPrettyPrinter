@@ -1,6 +1,6 @@
 # DotNetJsonPrettyPrinter: notes for coding agents
 
-NuGet package `JsonPrettyPrinter` (namespace `JsonPrettyPrinterPlus`). Library in `JsonPrettyPrinterPlus/`, NUnit tests in `JsonPrettyPrinterPlusTests/`, BenchmarkDotNet project in `benchmarks/`. Plans and session logs live in `ai-docs/`; read `ai-docs/plans/modernization-plan.md` before changing the API.
+NuGet package `JsonPrettyPrinter` (namespace `JsonPrettyPrinterPlus`). Library in `JsonPrettyPrinterPlus/`, NUnit tests in `JsonPrettyPrinterPlusTests/`, the golden replay and API test in `tests/JsonPrettyPrinterPlus.GoldenTests/`, the recordings in `tests/Golden/`, package consumers in `tests/consumers/`, BenchmarkDotNet project in `benchmarks/`. Plans, decisions and notes live in `ai-docs/` (see its INDEX); read the plans there before changing the API.
 
 ## Build and test
 
@@ -8,7 +8,7 @@ NuGet package `JsonPrettyPrinter` (namespace `JsonPrettyPrinterPlus`). Library i
 dotnet restore --locked-mode          # lock files are committed; run plain `dotnet restore` after changing a PackageReference and commit the lock file
 dotnet format --verify-no-changes     # .editorconfig is enforced in CI and in the build
 dotnet build -c Release               # TreatWarningsAsErrors + latest-recommended analyzers on both projects
-dotnet test -c Release                # net10.0 and net48 (net48 executes only on Windows)
+dotnet test -c Release                # unit tests and the golden replay; net10.0 and net48 (net48 executes only on Windows)
 dotnet pack JsonPrettyPrinterPlus -c Release -o artifacts   # runs package validation against the baseline version in the csproj
 dotnet run -c Release --project benchmarks/JsonPrettyPrinterPlus.Benchmarks   # 1 MB document; put before/after numbers in CHANGELOG.md
 ```
@@ -19,7 +19,9 @@ dotnet run -c Release --project benchmarks/JsonPrettyPrinterPlus.Benchmarks   # 
 - The library multi-targets `netstandard2.0` and `net10.0`: no `ArgumentNullException.ThrowIfNull`, `HashCode`, or other net5+ APIs without an `#if` or polyfill. `IsExternalInit.cs` is the one polyfill so far.
 - `net10.0` is trim and AOT compatible. Anything that touches reflection-based System.Text.Json must carry `RequiresUnreferencedCode` and `RequiresDynamicCode` under `#if NET5_0_OR_GREATER`, and get a `JsonTypeInfo<T>` overload beside it.
 - Files are LF (`.gitattributes` and `.editorconfig`); do not commit CRLF.
-- Releasing: add the version to `CHANGELOG.md`, bump `<Version>` in `JsonPrettyPrinterPlus/JsonPrettyPrinterPlus.csproj`, tag `v<version>` and push the tag. The `publish` job checks tag against version, needs the `nuget` environment approval, pushes through Trusted Publishing and creates a GitHub Release. Never add an AI byline or trailer to commits, PRs or files.
+- The golden files are the contract: `tests/Golden/` (the 3.0.1 recordings, the capture program, the API list, the upgrade recordings) never changes after commit 08b777a. When `tests/JsonPrettyPrinterPlus.GoldenTests` fails, fix the library, or bring the difference to the maintainer as a named exception; never edit or regenerate a recording. `git diff --exit-code 08b777a -- tests/Golden` must stay empty.
+- Releasing: add a dated `## [X.Y.Z] - YYYY-MM-DD` section to `CHANGELOG.md` (release.yml takes the notes from it), set `<Version>` in `JsonPrettyPrinterPlus/JsonPrettyPrinterPlus.csproj`, merge through a pull request (master requires the `ci` check), wait for `ci` to pass on master, then tag that commit `vX.Y.Z` and push the tag. `release.yml` checks the tag against the version and master, tests, attests, and waits for the maintainer to approve the `nuget` environment before pushing through Trusted Publishing; the policy on nuget.org names `release.yml`. Afterwards run `verify-published.yml` with the version and raise `PackageValidationBaselineVersion`. Only repository admins can push tags. Never add an AI byline or trailer to commits, PRs or files.
+- Workflows: actions are pinned to commit SHAs with the version in a comment; run `actionlint` and `uvx zizmor --offline .` after any change. `tests/consumers/run.sh VERSION artifacts` runs the packed package in fresh net10.0 (and, on Windows, net48) projects.
 - Write what you learned or decided to `ai-docs/` before finishing a task (everlast, below).
 
 ## everlast (session knowledge, load on demand)
