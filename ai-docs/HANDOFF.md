@@ -7,7 +7,7 @@ Updated 2026-09-28, evening. Read this first, then the plan and [log.md](log.md)
 - 3.0.1 is the release on nuget.org. The package-modernize retrofit is at the **pull-request stop**: https://github.com/m4bwav/DotNetJsonPrettyPrinter/pull/8 (branch `v3-retrofit`, version 3.0.2-beta.1, no library code change).
 - Plan: [plans/2026-09-28-retrofit-and-3.0.2-release.md](plans/2026-09-28-retrofit-and-3.0.2-release.md). Rulings: "Do all the recommendations and record learnings, run all the commands you want" (every recommendation stands).
 - Done and read back: golden capture (08b777a) and replay (1174 cases per runtime, canary seen red), workflows from the templates, rulesets 24143846 (master, required check `ci`) and 24143848 (tags, admins only), security settings, homepage, delete-on-merge, a GitHub Release for v2.0.0.
-- The independent review ran on the pull request; its findings and answers are in log.md (the last entries).
+- Independent review done: 525,778 comparisons per runtime against 3.0.1, 0 differences; its 9 findings fixed or answered (log.md, and the comment on the pull request). CI green on 637c6c3 (run 36490775529).
 
 ## Next single action
 

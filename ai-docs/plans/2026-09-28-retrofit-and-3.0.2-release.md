@@ -15,7 +15,7 @@ The package-modernize skill's retrofit path (its references/retrofit.md, second 
 
 ## Status
 
-Active. Phase 1 ruled on 2026-09-28 (every recommendation stands); Phase 2 in progress. Branch `v3-retrofit` holds the Phase 0 commits (golden capture 08b777a, everlast 366b93a) and this plan.
+Active. At the pull-request stop (2026-09-28): pull request #8 open, CI green, review findings fixed; waiting for the maintainer's review and merge. Branch `v3-retrofit` holds the Phase 0 commits (golden capture 08b777a, everlast 366b93a) and this plan.
 
 ## Goal
 
@@ -99,14 +99,14 @@ Unchanged: targets, metadata, icon, README packing, SourceLink and symbols. Chan
 ### Phase 1: plan
 - [x] This plan and the decision record [../decisions/2026-09-28-retrofit-without-code-changes.md](../decisions/2026-09-28-retrofit-without-code-changes.md). **Stop** for the rulings and the one question.
 ### Phase 2: retrofit on branch v3-retrofit
-- [ ] Golden replay project first, green on the first build; canary after committing (a planted line in the engine turns it red, reverted, green; both logged); `git diff --exit-code 08b777a -- tests/Golden` empty
-- [ ] Templates adapted (then grep for `{{[A-Z_]+}}` and `TEMPLATE`); workflows, Dependabot, Directory.Build.props, consumers, SECURITY.md, AGENTS.md, README, CHANGELOG
-- [ ] actionlint and zizmor clean; each new CI check run locally with `bash -e -o pipefail` on the real nupkg, with a right and a wrong expectation (L-103); CI's exact test and pack commands locally (L-101); a fresh clone
-- [ ] `check-readme-images.mjs README.md --registry nuget` exit 0
-- [ ] Pushed; pull request with a "For review" list
+- [x] Golden replay project first, green on the first build; canary after committing (a planted line in the engine turns it red, reverted, green; both logged); `git diff --exit-code 08b777a -- tests/Golden` empty
+- [x] Templates adapted (then grep for `{{[A-Z_]+}}` and `TEMPLATE`); workflows, Dependabot, Directory.Build.props, consumers, SECURITY.md, AGENTS.md, README, CHANGELOG
+- [x] actionlint and zizmor clean; each new CI check run locally with `bash -e -o pipefail` on the real nupkg, with a right and a wrong expectation (L-103); CI's exact test and pack commands locally (L-101); a fresh clone
+- [x] `check-readme-images.mjs README.md --registry nuget` exit 0
+- [x] Pushed; pull request with a "For review" list
 ### Phase 3: review
-- [ ] Independent review (prompts/review-subagent.md) with a differential of the new build against the published 3.0.1 over generated JSON inputs on both runtimes; findings fixed or answered
-- [ ] Rulesets and security settings applied (per the answer to question 2). **Stop** for the pull request review.
+- [x] Independent review (prompts/review-subagent.md) with a differential of the new build against the published 3.0.1 over generated JSON inputs on both runtimes; findings fixed or answered
+- [x] Rulesets and security settings applied (per the answer to question 2). **Stop** for the pull request review.
 ### Phase 4: CI, merge, cleanup
 - [ ] CI green; merge read back (method and SHA); cleanup per question 4
 ### Phase 5: rehearsal
@@ -165,4 +165,4 @@ No leaked credentials (no secrets outside the environment's NUGET_USER). Workflo
 
 ## Next single action
 
-Phase 2: the golden replay project.
+The maintainer reviews and merges pull request #8; then Phase 4 (HANDOFF.md lists the steps).
