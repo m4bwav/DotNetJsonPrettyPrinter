@@ -27,6 +27,9 @@ jobs:
     name: build and test the release
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    permissions:
+      contents: read
+      checks: read
     outputs:
       version: ${{ steps.version.outputs.version }}
       prerelease: ${{ steps.version.outputs.prerelease }}
@@ -77,10 +80,25 @@ jobs:
             exit 1
           fi
           printf '%s\n' "$notes" > release-notes.md
+      - name: ci passed on the tagged commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          passed=$(gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/check-runs?check_name=ci" --jq '[.check_runs[] | select(.conclusion == "success")] | length')
+          if [ "$passed" = 0 ]; then
+            echo "::error::no successful ci check on $GITHUB_SHA; wait for ci on master, then tag"
+            exit 1
+          fi
       - run: dotnet restore --locked-mode
       - run: dotnet build --no-restore -c Release
       - run: dotnet test --no-build -c Release -f net10.0
       - run: dotnet pack JsonPrettyPrinterPlus --no-build -c Release -o artifacts
+      - name: The package to push holds exactly what it should
+        run: tests/package/check-contents.sh artifacts
+      - name: Fresh consumers of the package to push (net10.0)
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: tests/consumers/run.sh "$VERSION" artifacts
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: release
@@ -90,7 +108,8 @@ jobs:
           if-no-files-found: error
 
   test-windows:
-    name: test on Windows (net48 and net10.0)
+    name: test on Windows (net48 and net10.0) and the package to push
+    needs: build
     runs-on: windows-latest
     timeout-minutes: 30
     steps:
@@ -104,6 +123,13 @@ jobs:
       - run: dotnet build --no-restore -c Release
       - run: dotnet test --no-build -c Release -f net48
       - run: dotnet test --no-build -c Release -f net10.0
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: release
+      - name: Fresh consumers of the package to push (net10.0 and net48)
+        env:
+          VERSION: ${{ needs.build.outputs.version }}
+        run: tests/consumers/run.sh "$VERSION" artifacts
 
   attest:
     name: attest the package
@@ -129,7 +155,8 @@ jobs:
     timeout-minutes: 15
     # The human gate: the run waits here until the maintainer approves the `nuget` environment.
     environment: nuget
-    # The only job that can push. It checks nothing out, restores nothing and runs no dependency code.
+    # The only job the nuget.org policy accepts, because the policy names the `nuget` environment (attest also holds an
+    # OIDC token, for the attestation only). It checks nothing out, restores nothing and runs no dependency code.
     permissions:
       contents: read
       id-token: write

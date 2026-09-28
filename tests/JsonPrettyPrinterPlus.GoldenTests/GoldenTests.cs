@@ -129,11 +129,19 @@ namespace JsonPrettyPrinterPlus.GoldenTests
         }
 
         [Test]
-        public void The_named_exception_is_only_used_when_the_serializer_version_differs()
+        public void The_recording_marks_the_answers_worded_by_System_Text_Json()
         {
-            TestContext.Out.WriteLine("recorded " + _recordedSerializer + ", running " + Cases.SerializerVersion());
             var serializerWorded = _recorded!.Values.Count(v => v.ValueKind == JsonValueKind.Object && v.TryGetProperty("$from", out var f) && f.GetString() == "System.Text.Json");
             Assert.That(serializerWorded, Is.GreaterThan(0), "the recording marks the answers the exception may cover");
+        }
+
+        [Test]
+        public void Warns_while_the_message_exception_is_active()
+        {
+            if (!SerializerMatchesRecording)
+            {
+                Assert.Warn("System.Text.Json messages are compared by type, parameter, inner types and path only: recorded " + _recordedSerializer + ", running " + Cases.SerializerVersion());
+            }
         }
 
         private static bool JsonEqual(JsonElement expected, JsonElement actual, bool exactMessages)
@@ -149,7 +157,9 @@ namespace JsonPrettyPrinterPlus.GoldenTests
                     if (!exactMessages && IsSerializerWorded(expected) && IsSerializerWorded(actual))
                     {
                         return ExceptionType(expected) == ExceptionType(actual)
-                            && Property(expected, "$param") == Property(actual, "$param");
+                            && Property(expected, "$param") == Property(actual, "$param")
+                            && JsonPath(Property(expected, "$throws")!) == JsonPath(Property(actual, "$throws")!)
+                            && InnerTypes(expected) == InnerTypes(actual);
                     }
 
                     var ep = expected.EnumerateObject().ToList();
@@ -178,9 +188,25 @@ namespace JsonPrettyPrinterPlus.GoldenTests
 
         private static string ExceptionType(JsonElement e)
         {
-            var text = Property(e, "$throws")!;
+            return TypeOf(Property(e, "$throws")!);
+        }
+
+        private static string TypeOf(string text)
+        {
             var colon = text.IndexOf(':');
             return colon < 0 ? text : text.Substring(0, colon);
+        }
+
+        // "Path: $.Count | LineNumber: 0 | BytePositionInLine: 14." is where the reader stopped, not wording: keep it exact.
+        private static string JsonPath(string text)
+        {
+            var at = text.IndexOf("Path: ", StringComparison.Ordinal);
+            return at < 0 ? "" : text.Substring(at);
+        }
+
+        private static string InnerTypes(JsonElement e)
+        {
+            return e.TryGetProperty("$inner", out var inner) ? string.Join("|", inner.EnumerateArray().Select(x => TypeOf(x.GetString()!))) : "";
         }
     }
 }

@@ -131,7 +131,7 @@ Unchanged: targets, metadata, icon, README packing, SourceLink and symbols. Chan
 
 ## Security
 
-No leaked credentials (no secrets outside the environment's NUGET_USER). Workflows: contents read by default; id-token set to write only in the push job, which checks nothing out and runs first-party actions only; the GitHub Release in its own job; SHA pins; zizmor. Publishing: Trusted Publishing bound to release.yml and environment nuget with your approval; no API key stored. The library reads no files, makes no requests, uses no reflection outside the serializer helpers.
+No leaked credentials (no secrets outside the environment's NUGET_USER). Workflows: contents read by default; id-token set to write in the attest job (attestation only) and the push job, which checks nothing out and runs first-party actions only; nuget.org accepts only the push job, because the policy names the `nuget` environment (keep it when moving the policy); the GitHub Release in its own job; SHA pins; zizmor. Publishing: Trusted Publishing bound to release.yml and environment nuget with your approval; no API key stored. The library reads no files, makes no requests, uses no reflection outside the serializer helpers.
 
 ## Badges and images: disposition
 

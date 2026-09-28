@@ -52,3 +52,14 @@ Append-only. One line per operation: `## [YYYY-MM-DD] op | title` where op is on
 
 ## [2026-09-28] verify | CI run 36489822416 on pull request #8: build and test green on ubuntu-24.04 and windows-latest, ci green
 - Wiki Update mode, step 1 done early (it needs only 3.0.1): notes/2026-09-28-wiki-verify.cs run twice against 3.0.1 from the scratchpad, identical, 354 lines; saved LF as notes/2026-09-28-wiki-verify.out.txt. wikiwright.py outputs: 6 findings, all input blocks (wikiwright L-103). Wiki not yet changed.
+
+## [2026-09-28] add | Independent review of pull request #8 (at 511b40d) and the fixes
+- Differential of the packed 3.0.2-beta.1 against 3.0.1 from nuget.org over 25,037 generated inputs per runtime: 525,778 comparisons each on net10.0, net48 and net8.0, 0 differences; nupkg contents and nuspec dependencies identical to 3.0.1 apart from nuget.org's signature. Harness in the session scratchpad (review/diff).
+- 1 (risk, fixed): release.yml pushed a nupkg nothing had checked. Now: ci must have passed on the tagged SHA (check-runs API, checks read), the build job runs the content check and consumers on the package it uploads, test-windows needs build and runs the consumers (net10.0, net48) on the downloaded release artifact; ci.yml cancels in-progress runs only for pull requests. The content check moved to tests/package/check-contents.sh (shared); verified right (exit 0) and on a package without its icon (exit 1 with its error).
+- 2 (risk, fixed): ci.yml runs git diff --exit-code 08b777a -- tests/Golden.
+- 3 (risk, fixed): the lenient branch also compares inner exception types and the Path part; a test warns while it is active; the weak test renamed.
+- 4 (nit, answered): capture gaps (options with span and writer overloads, Equals(object), depth over 64, record operators in the API list) are covered by the differential with 0 differences; the capture stays frozen.
+- 5 to 8 (nits, fixed): README comments and errors wording; CHANGELOG: two loose comparisons named, 1.0.0 and 1.0.1 measured on .NET Framework, the 2.1.1 sentence names IndentSize = int.MaxValue and the removed APIs.
+- 9 (nit, fixed): release.yml comment and plan: attest also holds id-token; nuget.org accepts only the push job because the policy names the nuget environment (keep it in the D7 edit).
+- Not taken: net8.0 consumers in run.sh (the differential ran net8.0 with 0 differences; .NET 8 leaves support 2026-11-10).
+- Local after the fixes: build 0 warnings, 8 golden tests per runtime, format clean, actionlint with shellcheck clean, zizmor clean, tests/Golden untouched.

@@ -17,7 +17,7 @@ permissions:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 defaults:
   run:
@@ -42,6 +42,8 @@ jobs:
           global-json-file: global.json
           cache: true
           cache-dependency-path: '**/packages.lock.json'
+      - name: The golden recordings are unchanged since the Phase 0 commit
+        run: git diff --exit-code 08b777a -- tests/Golden
       - run: dotnet restore --locked-mode
       - run: dotnet format --no-restore --verify-no-changes
       - run: dotnet build --no-restore -c Release
@@ -63,31 +65,7 @@ jobs:
         run: dotnet pack JsonPrettyPrinterPlus --no-build -c Release -o artifacts
       - name: The package holds exactly what it should and declares its dependencies
         if: runner.os == 'Linux'
-        run: |
-          nupkg=$(ls artifacts/JsonPrettyPrinter.[0-9]*.nupkg)
-          # Every file the package must hold, in C-locale order as `LC_ALL=C sort` gives it (uppercase first).
-          expected=$'JsonPrettyPrinter.nuspec\nREADME.md\nicon.png\nlib/net10.0/JsonPrettyPrinterPlus.dll\nlib/net10.0/JsonPrettyPrinterPlus.xml\nlib/netstandard2.0/JsonPrettyPrinterPlus.dll\nlib/netstandard2.0/JsonPrettyPrinterPlus.xml'
-          actual=$(unzip -Z1 "$nupkg" | grep -Ev '^(_rels/|package/|\[Content_Types\])' | LC_ALL=C sort)
-          if [ "$actual" != "$expected" ]; then
-            echo "::error::unexpected package contents"
-            diff <(echo "$expected") <(echo "$actual")
-            exit 1
-          fi
-          nuspec=$(unzip -p "$nupkg" JsonPrettyPrinter.nuspec | tr -d '\r\n')
-          for tfm in .NETStandard2.0 net10.0; do
-            # grep finds nothing in an empty (self-closing) group; under -e and pipefail that would end the step without a message.
-            group=$(echo "$nuspec" | { grep -o "<group targetFramework=\"$tfm\">.*" || true; } | sed 's:</group>.*::')
-            deps=$(echo "$group" | { grep -o '<dependency id="[^"]*" version="[^"]*"' || true; } | LC_ALL=C sort | tr '\n' ' ')
-            # The declared dependencies of each group, sorted by id, each followed by one space ('' for none).
-            case "$tfm" in
-              .NETStandard2.0) want='<dependency id="System.Memory" version="4.6.3" <dependency id="System.Text.Json" version="10.0.12" ' ;;
-              *) want='' ;;
-            esac
-            if [ "$deps" != "$want" ]; then
-              echo "::error::$tfm dependencies: $deps"
-              exit 1
-            fi
-          done
+        run: tests/package/check-contents.sh artifacts
       # Fresh consumers of the packed package (tests/consumers/run.sh and Program.cs): net10.0 everywhere, net48 on Windows,
       # in each dependency set the script lists.
       - name: Fresh consumers of the packed package

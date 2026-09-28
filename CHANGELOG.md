@@ -6,7 +6,7 @@ All notable changes to the `JsonPrettyPrinter` package. The format follows [Keep
 
 ## [3.0.2-beta.1] - 2026-09-28
 
-No change to the library. Every answer the published 3.0.1 gives is now recorded (1,174 cases, on .NET Framework 4.8 and on .NET 10) and checked on every build, so the package behaves exactly as 3.0.1. This release corrects the README that nuget.org shows and is the first through the new release workflow.
+No change to the library. Every answer the published 3.0.1 gives is now recorded (1,174 cases, on .NET Framework 4.8 and on .NET 10) and checked on every build. Two kinds of answer are compared loosely, because a dependency or the OS words them: System.Text.Json's exception messages when the running System.Text.Json is not the recorded 10.0.12, and one `WriteIndented` result whose line breaks follow the OS. This release corrects the README that nuget.org shows and is the first through the new release workflow.
 
 ### Changed
 
@@ -16,14 +16,14 @@ No change to the library. Every answer the published 3.0.1 gives is now recorded
 
 ### Upgrading from 1.0.1.1, measured
 
-About nine in ten downloads of this package are 1.0.1 or 1.0.1.1, and the 2.0.0 entry below described the change to System.Text.Json in two sentences. The cases recorded for 3.0.1 were run against 1.0.1.1 as far as its API allows (446 of them; 1.0.0 and 1.0.1 give the same answers). On .NET Framework, 273 answers are identical, 60 differ only in line endings and 110 differ:
+About nine in ten downloads of this package are 1.0.1 or 1.0.1.1, and the 2.0.0 entry below described the change to System.Text.Json in two sentences. The cases recorded for 3.0.1 were run against 1.0.1.1 as far as its API allows (446 of them; on .NET Framework, 1.0.0 and 1.0.1 give the same answers). On .NET Framework, 273 answers are identical, 60 differ only in line endings and 110 differ:
 
 - Printing: `{}` and `[]` instead of an opening line, a blank indented line and a closing line; an escaped backslash before a closing quote no longer leaves the rest of the document unformatted; a stray or surplus closing bracket throws `FormatException` naming the index (1.x: `InvalidOperationException` "Stack empty."); a closing bracket of the wrong kind throws (1.x printed it); unclosed documents and trailing commas no longer leave lines of indentation only; null throws `ArgumentNullException` (1.x: `NullReferenceException`); a reused printer no longer carries string or nesting state into the next document; lines end with `"\n"` (1.x: `Environment.NewLine`). Comments, single quotes and bare words print as they did.
 - `ToJSON` became `ToJson` over System.Text.Json: dates as ISO 8601 (1.x: `/Date(milliseconds)/`, and a `DateTime` of unspecified kind taken as local time), `DateTimeOffset` with its offset, public fields no longer written, `TimeSpan` and `Version` as strings, byte arrays as base64, dictionaries with integer keys supported, NaN and infinities throw (1.x wrote them, which is not valid JSON), `<`, `>`, `&`, `'` and `"` escaped with upper-case hex, characters outside ASCII escaped, a lone surrogate replaced by U+FFFD, a reference cycle throws `JsonException`, and on .NET Framework doubles with 17 significant digits.
 - `DeserializeFromJson` is strict and case-sensitive: 1.x accepted lower-case property names, single quotes, unquoted keys, numbers written as strings and strings written as numbers, `1e3` for an integer and enum names, and it turned ISO dates into local time. 3.x throws `JsonException` for each of those, except that a lower-case property name is ignored without an error. An `object` target gives a `JsonElement` (1.x: dictionaries and arrays), and the `/Date(...)/` strings 1.x wrote cannot be read back.
 - On .NET Core and .NET 5 or later, 1.x's `ToJSON` and `DeserializeFromJson` throw `FileNotFoundException` for System.Web.Extensions on every call; only its printer works there.
 
-From 2.1.1 only the line endings change (see 3.0.0). The recordings and the comparison reports are in `tests/Golden/upgrade/`.
+From 2.1.1 only the line endings change, apart from `IndentSize = int.MaxValue`, which now fails in the constructor instead of at the first call; code that used `ToJSON` or the strategy types no longer compiles (see 3.0.0). The recordings and the comparison reports are in `tests/Golden/upgrade/`.
 
 ## [3.0.1] - 2026-09-25
 
