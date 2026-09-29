@@ -83,3 +83,6 @@ Append-only. One line per operation: `## [YYYY-MM-DD] op | title` where op is on
 - release run 36512903672: all five jobs success; the push job signed in through NuGet/login and pushed, which confirms the maintainer's policy edit to release.yml. GitHub Release v3.0.2-beta.1 (prerelease) with the nupkg and snupkg.
 - gh attestation verify on the release artifact (--format json): workflow .github/workflows/release.yml, ref refs/tags/v3.0.2-beta.1, exit 0.
 - verify-published run 36513697039 (version 3.0.2-beta.1): ubuntu-24.04, windows-latest, macos-latest all success (both indexes, repository signature, consumers from nuget.org).
+
+## [2026-09-29] update | Maintainer: "do everything but 2"
+- Read as: release 3.0.2, the wiki update, merge the Dependabot SDK pull request, the two skill pull requests, the records and the evergreen upkeep; not the nuget.org deprecations (item 2), which stay with the maintainer.
