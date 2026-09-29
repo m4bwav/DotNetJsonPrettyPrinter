@@ -86,3 +86,9 @@ Append-only. One line per operation: `## [YYYY-MM-DD] op | title` where op is on
 
 ## [2026-09-29] update | Maintainer: "do everything but 2"
 - Read as: release 3.0.2, the wiki update, merge the Dependabot SDK pull request, the two skill pull requests, the records and the evergreen upkeep; not the nuget.org deprecations (item 2), which stay with the maintainer.
+
+## [2026-09-29] add | 3.0.2 released; the first verify-published timed out on nuget.org's registration index
+- Pull request #9 (Dependabot, global.json SDK 10.0.401) merged as 0833ee7; pull request #10 (3.0.2: version, dated CHANGELOG) merged as a87aae5 after ci; ci on master a87aae5 success; tag v3.0.2 pushed and read back.
+- Maintainer: "I approved do the rest". release run 36514934679: all five jobs success, push through Trusted Publishing, GitHub Release v3.0.2. gh attestation verify (--format json): .github/workflows/release.yml at refs/tags/v3.0.2, exit 0.
+- verify-published run 36516856747 failed on all three OSes at the index wait: the flat container listed 3.0.2, the registration index still did not after 40 minutes (skill L-122). The wait is now 60 minutes (verify-published.yml in this repository and the template); rerun after the index lists it.
+- Baseline raised to 3.0.2 on branch docs-after-3.0.2 (pack needs the registration index too).
