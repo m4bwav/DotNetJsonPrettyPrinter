@@ -29,7 +29,7 @@ jobs:
       matrix:
         os: [ubuntu-24.04, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 45
+    timeout-minutes: 90
     env:
       VERSION: ${{ inputs.version }}
     steps:
@@ -39,9 +39,9 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
           dotnet-version: 10.0.x
-      - name: nuget.org lists the version in both indexes (they can lag about 15 to 25 minutes)
+      - name: nuget.org lists the version in both indexes (the registration index can lag over 20 minutes; this waits up to 60)
         run: |
-          for _ in $(seq 1 40); do
+          for _ in $(seq 1 120); do
             # The flat container (downloads) updates first; the registration index, which restores read, can lag.
             if curl -fsS "https://api.nuget.org/v3-flatcontainer/jsonprettyprinter/index.json" | grep -q "\"$VERSION\"" \
               && curl -fsS --compressed "https://api.nuget.org/v3/registration5-gz-semver2/jsonprettyprinter/index.json" | grep -q "\"version\":\"$VERSION\""; then

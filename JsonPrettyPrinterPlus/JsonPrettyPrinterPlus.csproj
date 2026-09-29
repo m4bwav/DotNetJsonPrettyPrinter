@@ -43,7 +43,7 @@
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
     <EnablePackageValidation>true</EnablePackageValidation>
     <!-- Package validation compares the API with the last published stable version; raise it after each release. -->
-    <PackageValidationBaselineVersion>3.0.1</PackageValidationBaselineVersion>
+    <PackageValidationBaselineVersion>3.0.2</PackageValidationBaselineVersion>
   </PropertyGroup>
 
   <ItemGroup>
