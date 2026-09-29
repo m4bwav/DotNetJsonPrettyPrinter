@@ -67,3 +67,22 @@ Append-only. One line per operation: `## [YYYY-MM-DD] op | title` where op is on
 ## [2026-09-28] update | Wiki brought under wikiwright's saved-output rule for 3.0.1
 - notes/2026-09-28-wiki-verify.cs run against 3.0.1: 354 lines, identical to the saved output. wikiwright 0.3.0's `outputs` (fixed for input and output pairs, code followed by output and values in comments) then found 23 page outputs and 11 missing: 9 never printed by the program, all of them matching the page once printed, and 2 commands in untagged fences.
 - The program now prints the 9 and runs the pages' PowerShell and F# snippets as written (pwsh 7.6.6, dotnet fsi); output 446 lines, saved LF. The two command fences are tagged `sh` and `bat` on the wiki. `outputs`: 21 checked, 0 missing; `check`: 0 errors. The note's update procedure now diffs against the saved output and runs `outputs`.
+
+## [2026-09-28] update | Maintainer on the nuget.org policy
+- Maintainer: "ok, i updated nuget" (after asking what to put for the glob pattern; the answer given was JsonPrettyPrinter, workflow release.yml, environment nuget). Unconfirmed until the 3.0.2-beta.1 push job signs in through NuGet/login.
+
+## [2026-09-28] add | Pull request #8 merged; 3.0.2-beta.1 tagged; release run waiting at the approval
+- Merged 2026-09-28T22:30:37Z as 57fbcd34 (a merge commit, two parents, not a squash). ci on master 57fbcd3: run 36492819192 success.
+- Deleted (ruled): branches modernize-net10 and release-2.1.0; branches now: master and a Dependabot dotnet-sdk branch. Tags v2.1.0 and v3.0.0 kept.
+- Tag v3.0.2-beta.1 on 57fbcd3 pushed and read back with ls-remote.
+- release run 36512903672: build (tag, master, ci on the SHA, content check, consumers) success; test-windows with consumers on the package to push success; attest success; push job waiting for the nuget environment approval.
+- A wait loop in this session polled a null run id for ten minutes (gh run list -b master returned a run without an id); stopped. Wait loops exit on an empty id or a gh error.
+
+## [2026-09-29] verify | 3.0.2-beta.1 approved, pushed and verified from nuget.org
+- Maintainer: "i approved".
+- release run 36512903672: all five jobs success; the push job signed in through NuGet/login and pushed, which confirms the maintainer's policy edit to release.yml. GitHub Release v3.0.2-beta.1 (prerelease) with the nupkg and snupkg.
+- gh attestation verify on the release artifact (--format json): workflow .github/workflows/release.yml, ref refs/tags/v3.0.2-beta.1, exit 0.
+- verify-published run 36513697039 (version 3.0.2-beta.1): ubuntu-24.04, windows-latest, macos-latest all success (both indexes, repository signature, consumers from nuget.org).
+
+## [2026-09-29] update | Maintainer: "do everything but 2"
+- Read as: release 3.0.2, the wiki update, merge the Dependabot SDK pull request, the two skill pull requests, the records and the evergreen upkeep; not the nuget.org deprecations (item 2), which stay with the maintainer.

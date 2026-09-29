@@ -4,7 +4,7 @@ All notable changes to the `JsonPrettyPrinter` package. The format follows [Keep
 
 ## [Unreleased]
 
-## [3.0.2-beta.1] - 2026-09-28
+## [3.0.2] - 2026-09-29
 
 No change to the library. Every answer the published 3.0.1 gives is now recorded (1,174 cases, on .NET Framework 4.8 and on .NET 10) and checked on every build. Two kinds of answer are compared loosely, because a dependency or the OS words them: System.Text.Json's exception messages when the running System.Text.Json is not the recorded 10.0.12, and one `WriteIndented` result whose line breaks follow the OS. This release corrects the README that nuget.org shows and is the first through the new release workflow.
 
@@ -24,6 +24,10 @@ About nine in ten downloads of this package are 1.0.1 or 1.0.1.1, and the 2.0.0 
 - On .NET Core and .NET 5 or later, 1.x's `ToJSON` and `DeserializeFromJson` throw `FileNotFoundException` for System.Web.Extensions on every call; only its printer works there.
 
 From 2.1.1 only the line endings change, apart from `IndentSize = int.MaxValue`, which now fails in the constructor instead of at the first call; code that used `ToJSON` or the strategy types no longer compiles (see 3.0.0). The recordings and the comparison reports are in `tests/Golden/upgrade/`.
+
+## [3.0.2-beta.1] - 2026-09-28
+
+The rehearsal of 3.0.2 through the new release workflow, verified from nuget.org on Linux, macOS and Windows; the same content as 3.0.2.
 
 ## [3.0.1] - 2026-09-25
 
@@ -89,7 +93,8 @@ Output is unchanged for well-formed input, except that empty objects and arrays 
 
 - Original `net35` release.
 
-[Unreleased]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v3.0.2-beta.1...HEAD
+[Unreleased]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v3.0.2...HEAD
+[3.0.2]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v3.0.1...v3.0.2
 [3.0.2-beta.1]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v3.0.1...v3.0.2-beta.1
 [3.0.1]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v2.1.1...v3.0.1
 [3.0.0]: https://github.com/m4bwav/DotNetJsonPrettyPrinter/compare/v2.1.0...v3.0.0
