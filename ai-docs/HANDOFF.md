@@ -26,4 +26,4 @@ Done on 2026-09-28: package-modernize #13 merged (L-110 to L-121, templates, ret
 
 - Golden recordings and capture: `tests/Golden/` (README there); never edit. Replay: `tests/JsonPrettyPrinterPlus.GoldenTests`.
 - Gap audit: [notes/2026-09-28-phase-0-gap-audit.md](notes/2026-09-28-phase-0-gap-audit.md). Survey: [notes/2026-09-28-survey.txt](notes/2026-09-28-survey.txt).
-- Wiki working copy: `D:\m4bwa\Claude\Projects\Ai\labs\DotNetJsonPrettyPrinter.wiki` (master, c6b285c, unchanged so far).
+- Wiki working copy: `D:\m4bwa\Claude\Projects\Ai\labs\DotNetJsonPrettyPrinter.wiki` (master at a8c5574, with the uncommitted 3.0.2 edits).
