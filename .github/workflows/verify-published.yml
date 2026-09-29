@@ -39,7 +39,7 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
           dotnet-version: 10.0.x
-      - name: nuget.org lists the version in both indexes (the registration index lagged over 40 minutes on 2026-09-29; this waits up to 60)
+      - name: nuget.org lists the version in both indexes (the registration index can lag over 20 minutes; this waits up to 60)
         run: |
           for _ in $(seq 1 120); do
             # The flat container (downloads) updates first; the registration index, which restores read, can lag.

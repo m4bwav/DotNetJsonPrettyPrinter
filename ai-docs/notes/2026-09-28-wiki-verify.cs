@@ -1,4 +1,4 @@
-#:package JsonPrettyPrinter@3.0.1
+#:package JsonPrettyPrinter@3.0.2
 #:property PublishAot=false
 using System;
 using System.IO;

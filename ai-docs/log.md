@@ -90,5 +90,10 @@ Append-only. One line per operation: `## [YYYY-MM-DD] op | title` where op is on
 ## [2026-09-29] add | 3.0.2 released; the first verify-published timed out on nuget.org's registration index
 - Pull request #9 (Dependabot, global.json SDK 10.0.401) merged as 0833ee7; pull request #10 (3.0.2: version, dated CHANGELOG) merged as a87aae5 after ci; ci on master a87aae5 success; tag v3.0.2 pushed and read back.
 - Maintainer: "I approved do the rest". release run 36514934679: all five jobs success, push through Trusted Publishing, GitHub Release v3.0.2. gh attestation verify (--format json): .github/workflows/release.yml at refs/tags/v3.0.2, exit 0.
-- verify-published run 36516856747 failed on all three OSes at the index wait: the flat container listed 3.0.2, the registration index still did not after 40 minutes (skill L-122). The wait is now 60 minutes (verify-published.yml in this repository and the template); rerun after the index lists it.
+- verify-published run 36516856747 failed on all three OSes at the index wait: the flat container listed 3.0.2, the registration index listed 3.0.2 only at 03:44Z, about 23 minutes after the push, just past the 20-minute wait (skill L-122; an earlier message in the session said over 40 minutes, which was wrong). The wait is now 60 minutes (verify-published.yml in this repository and the template); rerun after the index lists it.
 - Baseline raised to 3.0.2 on branch docs-after-3.0.2 (pack needs the registration index too).
+
+## [2026-09-29] verify | 3.0.2 verified from nuget.org; wiki updated for 3.0.2
+- The registration index listed 3.0.2 at 03:44Z. verify-published run 36518499591: ubuntu-24.04, macos-latest, windows-latest success.
+- check-readme-images.mjs --registry nuget on the README inside the nuget.org 3.0.2 package: 3 images ok; the file equals the repository's README.
+- Wiki: program bumped to 3.0.2, two identical runs equal to the saved 3.0.1 output (446 lines); outputs 21 checked, 0 missing; check 0 errors; pushed as wiki cce45ce; live 11 pages, 0 failures. Details in notes/2026-09-28-github-wiki.md.

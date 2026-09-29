@@ -24,6 +24,10 @@ Pages: Home, Getting started, API reference, Output format, Not a validator, Ser
 
 Unlike the RandomNameGenerator wiki, the `.wiki.git` repository already existed (Mark had saved GitHub's placeholder Home page, commit `3542d9a`), so `git ls-remote` answered at once, a normal clone worked and the pages went up with a plain `git push`. The rule stands for any other repository: run `git ls-remote https://github.com/<owner>/<repo>.wiki.git` first; if it fails, the first page has to be saved in the web UI (no API), so ask for that click early.
 
+## Updated for 3.0.2 (2026-09-29)
+
+wikiwright Update mode, wiki commit cce45ce. The program (`2026-09-28-wiki-verify.cs`, bumped to `JsonPrettyPrinter@3.0.2`) ran twice against the published 3.0.2 from a scratch folder, identical, and its 446 lines equal the saved 3.0.1 output byte for byte (no library change). `wikiwright.py outputs`: 21 outputs checked, 0 missing; `check`: 0 errors; `live`: 11 pages, 0 failures. Pages changed: Versions and upgrading (the 3.0.2 row and the measured upgrade story from `tests/Golden/upgrade/`), Serialisation helpers (numbers on .NET Framework, from the golden recordings), Development (the gated release path, the golden replay, layout), and the version lines on Home, Getting started, Recipes, API reference, Not a validator and the footer. The first restore of 3.0.2 failed with NU1102 while nuget.org's registration index lagged; after the index listed it, `dotnet nuget locals http-cache --clear` was needed before the program restored it.
+
 ## Updating the wiki later
 
 1. Edit the markdown in the working copy above. Page names are the file names with hyphens; links between pages are `[Text](Page-Name)`.

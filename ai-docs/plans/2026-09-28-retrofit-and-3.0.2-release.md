@@ -1,7 +1,7 @@
 ---
 title: Retrofit and 3.0.2 release
 kind: plan
-status: active
+status: done
 date: 2026-09-28
 verified: 2026-09-28
 stale_after: never
@@ -15,7 +15,7 @@ The package-modernize skill's retrofit path (its references/retrofit.md, second 
 
 ## Status
 
-Active. At the pull-request stop (2026-09-28): pull request #8 open, CI green, review findings fixed; waiting for the maintainer's review and merge. Branch `v3-retrofit` holds the Phase 0 commits (golden capture 08b777a, everlast 366b93a) and this plan.
+Done (2026-09-29): 3.0.2 released and verified from nuget.org on three OSes; baseline 3.0.2; wiki updated (cce45ce). Owed by the maintainer: the deprecations of D16.
 
 ## Goal
 
