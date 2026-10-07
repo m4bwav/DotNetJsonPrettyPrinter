@@ -1,6 +1,8 @@
 DotNetJsonPrettyPrinter
 =======================
 
+![An old printing machine turning out neat pages with ornate borders beside a stack of printed sheets](https://raw.githubusercontent.com/m4bwav/DotNetJsonPrettyPrinter/master/.github/images/banner.jpg)
+
 Json Pretty Printer/Beautifier Library For .Net
 
 [![NuGet](https://img.shields.io/nuget/v/JsonPrettyPrinter.svg)](https://www.nuget.org/packages/JsonPrettyPrinter/) [![CI](https://github.com/m4bwav/DotNetJsonPrettyPrinter/actions/workflows/ci.yml/badge.svg)](https://github.com/m4bwav/DotNetJsonPrettyPrinter/actions/workflows/ci.yml) [![Downloads](https://img.shields.io/nuget/dt/JsonPrettyPrinter.svg)](https://www.nuget.org/packages/JsonPrettyPrinter/)
