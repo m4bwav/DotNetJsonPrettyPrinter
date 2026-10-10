@@ -111,6 +111,10 @@ dotnet run -c Release --project benchmarks/JsonPrettyPrinterPlus.Benchmarks   # 
 
 CI (`.github/workflows/ci.yml`) restores in locked mode, checks formatting, builds, audits the packages, runs the unit tests and the golden replay of 3.0.1's recorded answers (net10.0 on Ubuntu and Windows, net48 on Windows), packs, checks the package's contents and runs fresh consumers of it. To publish: add the version to `CHANGELOG.md`, set `<Version>` in `JsonPrettyPrinterPlus.csproj`, merge, wait for CI on master, then tag the commit `v<version>` and push the tag. `release.yml` refuses a tag that does not match the version or is not on master, builds and tests on Linux and Windows, attests the package, and waits for the maintainer's approval of the `nuget` environment before it pushes through Trusted Publishing (GitHub OIDC, no stored API key) and creates the GitHub Release. `verify-published.yml` then checks the version from nuget.org on Linux, macOS and Windows.
 
+## Package page
+
+- NuGet: [JsonPrettyPrinter](https://www.nuget.org/packages/JsonPrettyPrinter)
+
 ## License
 
 MIT, see `LICENSE`.
