@@ -1,0 +1,11 @@
+<Project>
+
+  <!-- IsAotCompatible makes the SDK add Microsoft.NET.ILLink.Tasks at the SDK's own patch version, so each SDK patch on a
+       runner or laptop changed packages.lock.json and failed the locked restore with nothing really changed. Pin it here
+       (a .targets file, so the SDK's KnownILLinkPack items exist); bump it on purpose and re-run restore with
+       force-evaluate when a newer ILLink is wanted. -->
+  <ItemGroup>
+    <KnownILLinkPack Update="@(KnownILLinkPack->WithMetadataValue('TargetFramework', 'net10.0'))" ILLinkPackVersion="10.0.15" />
+  </ItemGroup>
+
+</Project>
